@@ -378,23 +378,6 @@ if selected_category == "Explore The Data":
     st.plotly_chart(fig_heatmap)
     
 
-    st.subheader("How does mental health vary across age?")
-
-
-    bins = [18, 25, 31, 36, 41, 46, 51, 58, 64]  
-    labels = ['18-24', '25-30', '31-35', '36-40', '41-45', '46-50', '51-57', '58-64']  # Labels for the bins
-
-    # Create the binned column
-    cleaned_data['age_binned'] = pd.cut(cleaned_data['Age'], bins=bins, labels=labels, right=False)
-
-
-    #now plot it 
-    fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
-                           labels={'Age':'Age', 'Anxiety':'Anxiety'},
-                           title="Interactive Violin Plot of Age vs Anxiety")
-
-    st.plotly_chart(fig_violin)
-
     #hours and mh
     st.subheader("Is hours spent listening per day correlated with reported MH scores? Not strongly.")
     selected_features = ['Hours per day', "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
@@ -413,6 +396,23 @@ if selected_category == "Explore The Data":
         yaxis_title="Features"
     )
     st.plotly_chart(fig_heatmap)
+    
+
+    st.subheader("How does mental health vary across age?")
+
+    bins = [18, 25, 31, 36, 41, 46, 51, 58, 64]  
+    labels = ['18-24', '25-30', '31-35', '36-40', '41-45', '46-50', '51-57', '58-64']  # Labels for the bins
+
+    # Create the binned column
+    cleaned_data['age_binned'] = pd.cut(cleaned_data['Age'], bins=bins, labels=labels, right=False)
+
+
+    #now plot it 
+    fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
+                           labels={'Age':'Age', 'Anxiety':'Anxiety'},
+                           title="Interactive Violin Plot of Age vs Anxiety")
+
+    st.plotly_chart(fig_violin)
 
     #fav genre and MH
     st.subheader("Is fav genre associated with MH scores?")
@@ -476,7 +476,8 @@ if selected_category == "Explore The Data":
     plot_boxplot(selected_genre, selected_score)
 
     #feature engineering
-    st.subheader("Create a dataset with final mental health scores based on frequency of genre consumption")
+    st.subheader("Feature Engineering:")
+    st.markdown("Create a dataset with final mental health scores based on frequency of genre consumption")
 
     #group average MH scores by highest frequency genre
     st.markdown("Group average MH scores by all Very Frequent genre responses")
@@ -980,8 +981,23 @@ if selected_category == "Explore The Data":
     mh_by_genre["Insomnia"] = average_insomnia
     mh_by_genre["OCD"] = average_ocd
     
-    
-    
     st.write(mh_by_genre)  
-        
-           
+
+
+    st.subheader("Heatmap of Genre and Average Mental Health Stat (based only on Very Frequent responses)")
+    fig = px.imshow(mh_by_genre.T, labels=dict(x="MH Score", y="Genre", color="Score"), color_continuous_scale="Viridis", 
+    title="Interactive Heatmap of Mental Health Scores by Genre",)
+    # Show the heatmap
+    st.plotly_chart(fig)
+
+
+    st.markdown("I used mh_by_genre.describe() to identify the MH category with the highest variability (SD) so I could capture more unique responses. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
+    st.markdown("I then created a binary feature that expressed whether the avergae depression score for a given genre was above or below 5. This is how I will recommend genres to users.")
+
+    for i, val in enumerate(mh_by_genre["Depression"]):
+        if val >= 5:
+            mh_by_genre["Effect"] = 1
+        else:
+            mh_by_genre["Effect"] = 0
+
+    mh_by_genre
