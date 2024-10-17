@@ -414,7 +414,30 @@ if selected_category == "Explore The Data":
     )
     st.plotly_chart(fig_heatmap)
 
+    #fav genre and MH
+    st.subheader("Is fav genre associated with MH scores?")
+    fig_violin = px.violin(cleaned_data, x='Fav genre', y='Anxiety', box=True, points='all',
+                           labels={'Fav genre':'Favorite Genre', 'Anxiety':'Anxiety'},
+                           title="Interactive Violin Plot of Fav Genre vs Anxiety")
     
+    st.plotly_chart(fig_violin)
+
+    fig_violin = px.violin(cleaned_data, x='Fav genre', y='Depression', box=True, points='all',
+                           labels={'Fav genre':'Favorite Genre', 'Depression':'Depression'},
+                           title="Interactive Violin Plot of Fav Genre vs Depression ")
+
+    st.plotly_chart(fig_violin)
+
+    fig_violin = px.violin(cleaned_data, x='Fav genre', y='OCD', box=True, points='all',
+                           labels={'Fav genre':'Favorite Genre', 'OCD':'OCD'},
+                           title="Interactive Violin Plot of Fav Genre vs OCD")
+    st.plotly_chart(fig_violin)
+
+    fig_violin = px.violin(cleaned_data, x='Fav genre', y='Insomnia', box=True, points='all',
+                           labels={'Fav genre':'Favorite Genre', 'Insomnia':'Insomnia'},
+                           title="Interactive Violin Plot of Fav Genre vs Insomnia")
+    st.plotly_chart(fig_violin)
+
 
 
    
