@@ -212,5 +212,67 @@ if selected_category == "Clean The Data":
     filtered_data = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]
     st.write(filtered_data.head())  
 
+    #see that BPM has no missing values
+    #missing vals
+    st.subheader("No More Missing BPM Vals")
+    #make a heatmap of the missing data
+    nan_mask = mxmh_survey_results.isna()
+    nan_array = nan_mask.astype(int).to_numpy()
+    
+    plt.figure(figsize=(12, 6))
+    plt.imshow(nan_array.T, interpolation='nearest', aspect='auto', cmap='viridis')
+    plt.xlabel('mxmh_survey_results Index')
+    plt.ylabel('Features')
+    plt.title('Visualizing Missing Values in mxmh_survey_results Dataset')
+    plt.yticks(range(len(mxmh_survey_results.columns)), mxmh_survey_results.columns)
+    num_participants = nan_array.shape[0]
+    plt.xticks(np.linspace(0, num_participants-1, min(10, num_participants)).astype(int))
+    plt.grid(True, axis='y', linestyle='--', alpha=0.7)
+    st.pyplot(plt)
+
+    st.subheader("Handle Outliers")
+    #I don't trust the participants who say they listen to music 24hrs/day
+    cleaned_data = mxmh_survey_results.copy()
+    #I will say the max they could realistically listen to is 16 hrs
+    cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
+    cleaned_data.shape
+    #deleted 6 rows
+    st.markdown("Deleted all instances of Hours Per Day above 16")
+
+    #take away age outliers 
+    cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+    st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile)")
+
+    #recode frequency genre
+    st.subheader("Recode Categorical Data")
+    st.markdown("Genre Frequencies")
+
+    frequency_mapping = {
+    "Never": 1,
+    "Rarely": 2,
+    "Sometimes": 3,
+    "Very frequently": 4 }
+
+    # Replace the values in the "Frequency [Country]" column
+    cleaned_data["Frequency [Latin]"] = cleaned_data["Frequency [Latin]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Rock]"] = cleaned_data["Frequency [Rock]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Video game music]"] = cleaned_data["Frequency [Video game music]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Jazz]"] = cleaned_data["Frequency [Jazz]"].replace(frequency_mapping)
+    cleaned_data["Frequency [R&B]"] = cleaned_data["Frequency [R&B]"].replace(frequency_mapping)
+    cleaned_data["Frequency [K pop]"] = cleaned_data["Frequency [K pop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Country]"] = cleaned_data["Frequency [Country]"].replace(frequency_mapping)
+    cleaned_data["Frequency [EDM]"] = cleaned_data["Frequency [EDM]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Hip hop]"] = cleaned_data["Frequency [Hip hop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Pop]"] = cleaned_data["Frequency [Pop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Rap]"] = cleaned_data["Frequency [Rap]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Classical]"] = cleaned_data["Frequency [Classical]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Metal]"] = cleaned_data["Frequency [Metal]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Folk]"] = cleaned_data["Frequency [Folk]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Lofi]"] = cleaned_data["Frequency [Lofi]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Gospel]"] = cleaned_data["Frequency [Gospel]"].replace(frequency_mapping)
+
+    #see the changes
+    st.write(cleaned_data.head())  
+
 if selected_category == "Explore The Data":
     st.write("hi")
