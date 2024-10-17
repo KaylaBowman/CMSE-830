@@ -444,15 +444,16 @@ if selected_category == "Explore The Data":
     #plt.title('Anxiety Scores of Latin Listeners')
 
     #function to create and display a box plot for a specific genre
-    def plot_boxplot(genre):
-        plt.figure(figsize=(10, 6))  # Set the figure size
-        sns.boxplot(data=cleaned_data, x=genre, y="Anxiety")
-        plt.title(f'Anxiety Scores of {genre} Listeners')
-        plt.xlabel(genre)  # Set x-axis label
-        plt.ylabel('Anxiety')  # Set y-axis label
-        st.pyplot(plt)  # Display the plot in Streamlit
-        plt.clf()  # Clear the figure to prevent overlapping in future plots
-    
+    def plot_boxplot(genre, score):
+    plt.figure(figsize=(10, 6))  
+    sns.boxplot(data=cleaned_data, x=genre, y=score)
+    #make it so user can choose MH stat and genre
+    plt.title(f'{score} Scores of {genre} Listeners')
+    plt.xlabel(genre)  
+    plt.ylabel(score)  
+    st.pyplot(plt)  
+    plt.clf()  
+
     #dropdown menu for selecting a genre
     genre_options = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Classical]", 
                      "Frequency [Pop]", "Frequency [Jazz]", "Frequency [Hip-Hop]", 
@@ -462,11 +463,14 @@ if selected_category == "Explore The Data":
                      "Frequency [Punk]", "Frequency [Blues]", 
                      "Frequency [Metal]", "Frequency [Soul]"]
     
-    selected_genre = st.selectbox("Choose a genre to view anxiety scores:", genre_options)
+    selected_genre = st.selectbox("Choose a genre to view mental health scores:", genre_options)
     
-    #call the plot function with the selected genre
-    plot_boxplot(selected_genre)
+    #dropdown menu for selecting a mental health score
+    score_options = ["Anxiety", "Depression"]
+    selected_score = st.selectbox("Choose a mental health score to view:", score_options)
     
-    
-    
-       
+    #call the plot function with the selected genre and score
+    plot_boxplot(selected_genre, selected_score)
+        
+        
+           
