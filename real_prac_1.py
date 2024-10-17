@@ -135,3 +135,19 @@ ax.legend()
 ax.set_title("Distribution of Perceived Music Effects")
 st.pyplot(fig)
 
+#look at outliers
+st.subheader("Any Outliers?")
+
+fig, ax = plt.subplots()
+sns.histplot(data=mxmh_survey_results, x='Hours per day')
+ax.legend()
+ax.set_title("Hours Per Day")
+st.pyplot(fig)
+
+#hour outliers
+num_24_hours = sum(mxmh_survey_results['Hours per day'] == 24)
+st.write(f"Number of participants reporting '24 hours per day': {num_24_hours}")
+
+#age outliers:
+age_outliers = sum((mxmh_survey_results['Age'] > 70) & (mxmh_survey_results['Age'] < 18))
+st.write(f"Number of participants younger than 18 and over 70': {age_outliers}")
