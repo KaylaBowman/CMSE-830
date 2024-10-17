@@ -10,7 +10,7 @@ import plotly.figure_factory as ff
 st.title("Welcome To My Music Therapy App")
 
 #dropdown menu
-categories = ["The Data", "Investigate The Data", "Clean The Data", "Explore The Data"]
+categories = ["The Data", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
 selected_category = st.selectbox("Choose one:", categories)
 
 
@@ -997,3 +997,609 @@ if selected_category == "Explore The Data":
     mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
     mh_by_genre
+
+
+if selected_category == "Get Recommendations":
+
+
+    ########################repeating so this dropdown option can use the same updated data
+
+    
+    #load the Data
+    mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
+
+    #group and replace
+    for i, val in enumerate(mxmh_survey_results["BPM"].isna()):
+        genre = mxmh_survey_results.loc[i, "Fav genre"]  # Get the genre for the current row
+        if genre == "Latin":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Latin"]["BPM"].median()
+        if genre == "Rock":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Rock"]["BPM"].median()
+        if genre == "Video game music":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Video game music"]["BPM"].median()
+        if genre == "Jazz":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Jazz"]["BPM"].median()
+        if genre == "R&B":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "R&B"]["BPM"].median()
+        if genre == "K pop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "K pop"]["BPM"].median()
+        if genre == "Country":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Country"]["BPM"].median()
+        if genre == "EDM":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "EDM"]["BPM"].median()
+        if genre == "Hip hop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Hip hop"]["BPM"].median()
+        if genre == "Pop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]["BPM"].median()
+        if genre == "Rap":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Rap"]["BPM"].median()
+        if genre == "Classical":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Classical"]["BPM"].median()
+        if genre == "Metal":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Metal"]["BPM"].median()
+        if genre == "Folk":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Folk"]["BPM"].median()
+        if genre == "Lofi":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Lofi"]["BPM"].median()
+        if genre == "Gospel":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Gospel"]["BPM"].median()
+
+  
+    cleaned_data = mxmh_survey_results.copy()
+    #I will say the max they could realistically listen to is 16 hrs
+    cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
+    #deleted 6 rows
+
+    #take away age outliers 
+    cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+    
+    #recode frequency genre
+
+    frequency_mapping = {
+    "Never": 1,
+    "Rarely": 2,
+    "Sometimes": 3,
+    "Very frequently": 4 }
+
+    # Replace the values in the "Frequency [Country]" column
+    cleaned_data["Frequency [Latin]"] = cleaned_data["Frequency [Latin]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Rock]"] = cleaned_data["Frequency [Rock]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Video game music]"] = cleaned_data["Frequency [Video game music]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Jazz]"] = cleaned_data["Frequency [Jazz]"].replace(frequency_mapping)
+    cleaned_data["Frequency [R&B]"] = cleaned_data["Frequency [R&B]"].replace(frequency_mapping)
+    cleaned_data["Frequency [K pop]"] = cleaned_data["Frequency [K pop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Country]"] = cleaned_data["Frequency [Country]"].replace(frequency_mapping)
+    cleaned_data["Frequency [EDM]"] = cleaned_data["Frequency [EDM]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Hip hop]"] = cleaned_data["Frequency [Hip hop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Pop]"] = cleaned_data["Frequency [Pop]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Rap]"] = cleaned_data["Frequency [Rap]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Classical]"] = cleaned_data["Frequency [Classical]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Metal]"] = cleaned_data["Frequency [Metal]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Folk]"] = cleaned_data["Frequency [Folk]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Lofi]"] = cleaned_data["Frequency [Lofi]"].replace(frequency_mapping)
+    cleaned_data["Frequency [Gospel]"] = cleaned_data["Frequency [Gospel]"].replace(frequency_mapping)
+
+   
+    #make aged binned
+
+    bins = [18, 25, 31, 36, 41, 46, 51, 58, 64]  
+    labels = ['18-24', '25-30', '31-35', '36-40', '41-45', '46-50', '51-57', '58-64']  # Labels for the bins
+
+    # Create the binned column
+    cleaned_data['age_binned'] = pd.cut(cleaned_data['Age'], bins=bins, labels=labels, right=False)
+
+
+    
+
+    #feature engineering
+    
+    #making latin subsets based on frequency
+    cleaned_data_latin1 = cleaned_data[cleaned_data["Frequency [Latin]"] == 1]
+    cleaned_data_latin2 = cleaned_data[cleaned_data["Frequency [Latin]"] == 2]
+    cleaned_data_latin3 = cleaned_data[cleaned_data["Frequency [Latin]"] == 3]
+    cleaned_data_latin4 = cleaned_data[cleaned_data["Frequency [Latin]"] == 4]
+    
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_latin1 = cleaned_data_latin1["Anxiety"].mean()
+    ave_dep_latin1 = cleaned_data_latin1["Depression"].mean()
+    ave_insom_latin1 = cleaned_data_latin1["Insomnia"].mean()
+    ave_ocd_latin1 = cleaned_data_latin1["OCD"].mean()
+    
+    ave_anxiety_latin2 = cleaned_data_latin2["Anxiety"].mean()
+    ave_dep_latin2 = cleaned_data_latin2["Depression"].mean()
+    ave_insom_latin2 = cleaned_data_latin2["Insomnia"].mean()
+    ave_ocd_latin2 = cleaned_data_latin2["OCD"].mean()
+    
+    ave_anxiety_latin3 = cleaned_data_latin3["Anxiety"].mean()
+    ave_dep_latin3 = cleaned_data_latin3["Depression"].mean()
+    ave_insom_latin3 = cleaned_data_latin3["Insomnia"].mean()
+    ave_ocd_latin3 = cleaned_data_latin3["OCD"].mean()
+    
+    ave_anxiety_latin4 = cleaned_data_latin4["Anxiety"].mean()
+    ave_dep_latin4 = cleaned_data_latin4["Depression"].mean()
+    ave_insom_latin4 = cleaned_data_latin4["Insomnia"].mean()
+    ave_ocd_latin4 = cleaned_data_latin4["OCD"].mean()
+    
+    
+    
+    #making rock subsets based on frequency
+    cleaned_data_rock1 = cleaned_data[cleaned_data["Frequency [Rock]"] == 1]
+    cleaned_data_rock2 = cleaned_data[cleaned_data["Frequency [Rock]"] == 2]
+    cleaned_data_rock3 = cleaned_data[cleaned_data["Frequency [Rock]"] == 3]
+    cleaned_data_rock4 = cleaned_data[cleaned_data["Frequency [Rock]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_rock1 = cleaned_data_rock1["Anxiety"].mean()
+    ave_dep_rock1 = cleaned_data_rock1["Depression"].mean()
+    ave_insom_rock1 = cleaned_data_rock1["Insomnia"].mean()
+    ave_ocd_rock1 = cleaned_data_rock1["OCD"].mean()
+    
+    ave_anxiety_rock2 = cleaned_data_rock2["Anxiety"].mean()
+    ave_dep_rock2 = cleaned_data_rock2["Depression"].mean()
+    ave_insom_rock2 = cleaned_data_rock2["Insomnia"].mean()
+    ave_ocd_rock2 = cleaned_data_rock2["OCD"].mean()
+    
+    ave_anxiety_rock3 = cleaned_data_rock3["Anxiety"].mean()
+    ave_dep_rock3 = cleaned_data_rock3["Depression"].mean()
+    ave_insom_rock3 = cleaned_data_rock3["Insomnia"].mean()
+    ave_ocd_rock3 = cleaned_data_rock3["OCD"].mean()
+    
+    ave_anxiety_rock4 = cleaned_data_rock4["Anxiety"].mean()
+    ave_dep_rock4 = cleaned_data_rock4["Depression"].mean()
+    ave_insom_rock4 = cleaned_data_rock4["Insomnia"].mean()
+    ave_ocd_rock4 = cleaned_data_rock4["OCD"].mean()
+    
+    
+    
+    
+    #making Video game music subsets based on frequency
+    cleaned_data_vgm1 = cleaned_data[cleaned_data["Frequency [Video game music]"] == 1]
+    cleaned_data_vgm2 = cleaned_data[cleaned_data["Frequency [Video game music]"] == 2]
+    cleaned_data_vgm3 = cleaned_data[cleaned_data["Frequency [Video game music]"] == 3]
+    cleaned_data_vgm4 = cleaned_data[cleaned_data["Frequency [Video game music]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_vgm1 = cleaned_data_vgm1["Anxiety"].mean()
+    ave_dep_vgm1 = cleaned_data_vgm1["Depression"].mean()
+    ave_insom_vgm1 = cleaned_data_vgm1["Insomnia"].mean()
+    ave_ocd_vgm1 = cleaned_data_vgm1["OCD"].mean()
+    
+    ave_anxiety_vgm2 = cleaned_data_vgm2["Anxiety"].mean()
+    ave_dep_vgm2 = cleaned_data_vgm2["Depression"].mean()
+    ave_insom_vgm2 = cleaned_data_vgm2["Insomnia"].mean()
+    ave_ocd_vgm2 = cleaned_data_vgm2["OCD"].mean()
+    
+    ave_anxiety_vgm3 = cleaned_data_vgm3["Anxiety"].mean()
+    ave_dep_vgm3 = cleaned_data_vgm3["Depression"].mean()
+    ave_insom_vgm3 = cleaned_data_vgm3["Insomnia"].mean()
+    ave_ocd_vgm3 = cleaned_data_vgm3["OCD"].mean()
+    
+    ave_anxiety_vgm4 = cleaned_data_vgm4["Anxiety"].mean()
+    ave_dep_vgm4 = cleaned_data_vgm4["Depression"].mean()
+    ave_insom_vgm4 = cleaned_data_vgm4["Insomnia"].mean()
+    ave_ocd_vgm4 = cleaned_data_vgm4["OCD"].mean()
+    
+    
+    
+    #making Jazz subsets based on frequency
+    cleaned_data_jazz1 = cleaned_data[cleaned_data["Frequency [Jazz]"] == 1]
+    cleaned_data_jazz2 = cleaned_data[cleaned_data["Frequency [Jazz]"] == 2]
+    cleaned_data_jazz3 = cleaned_data[cleaned_data["Frequency [Jazz]"] == 3]
+    cleaned_data_jazz4 = cleaned_data[cleaned_data["Frequency [Jazz]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_jazz1 = cleaned_data_jazz1["Anxiety"].mean()
+    ave_dep_jazz1 = cleaned_data_jazz1["Depression"].mean()
+    ave_insom_jazz1 = cleaned_data_jazz1["Insomnia"].mean()
+    ave_ocd_jazz1 = cleaned_data_jazz1["OCD"].mean()
+    
+    ave_anxiety_jazz2 = cleaned_data_jazz2["Anxiety"].mean()
+    ave_dep_jazz2 = cleaned_data_jazz2["Depression"].mean()
+    ave_insom_jazz2 = cleaned_data_jazz2["Insomnia"].mean()
+    ave_ocd_jazz2 = cleaned_data_jazz2["OCD"].mean()
+    
+    ave_anxiety_jazz3 = cleaned_data_jazz3["Anxiety"].mean()
+    ave_dep_jazz3 = cleaned_data_jazz3["Depression"].mean()
+    ave_insom_jazz3 = cleaned_data_jazz3["Insomnia"].mean()
+    ave_ocd_jazz3 = cleaned_data_jazz3["OCD"].mean()
+    
+    ave_anxiety_jazz4 = cleaned_data_jazz4["Anxiety"].mean()
+    ave_dep_jazz4 = cleaned_data_jazz4["Depression"].mean()
+    ave_insom_jazz4 = cleaned_data_jazz4["Insomnia"].mean()
+    ave_ocd_jazz4 = cleaned_data_jazz4["OCD"].mean()
+    
+    
+    
+    #making R&B subsets based on frequency
+    cleaned_data_rnb1 = cleaned_data[cleaned_data["Frequency [R&B]"] == 1]
+    cleaned_data_rnb2 = cleaned_data[cleaned_data["Frequency [R&B]"] == 2]
+    cleaned_data_rnb3 = cleaned_data[cleaned_data["Frequency [R&B]"] == 3]
+    cleaned_data_rnb4 = cleaned_data[cleaned_data["Frequency [R&B]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_rnb1 = cleaned_data_rnb1["Anxiety"].mean()
+    ave_dep_rnb1 = cleaned_data_rnb1["Depression"].mean()
+    ave_insom_rnb1 = cleaned_data_rnb1["Insomnia"].mean()
+    ave_ocd_rnb1 = cleaned_data_rnb1["OCD"].mean()
+    
+    ave_anxiety_rnb2 = cleaned_data_rnb2["Anxiety"].mean()
+    ave_dep_rnb2 = cleaned_data_rnb2["Depression"].mean()
+    ave_insom_rnb2 = cleaned_data_rnb2["Insomnia"].mean()
+    ave_ocd_rnb2 = cleaned_data_rnb2["OCD"].mean()
+    
+    ave_anxiety_rnb3 = cleaned_data_rnb3["Anxiety"].mean()
+    ave_dep_rnb3 = cleaned_data_rnb3["Depression"].mean()
+    ave_insom_rnb3 = cleaned_data_rnb3["Insomnia"].mean()
+    ave_ocd_rnb3 = cleaned_data_rnb3["OCD"].mean()
+    
+    ave_anxiety_rnb4 = cleaned_data_rnb4["Anxiety"].mean()
+    ave_dep_rnb4 = cleaned_data_rnb4["Depression"].mean()
+    ave_insom_rnb4 = cleaned_data_rnb4["Insomnia"].mean()
+    ave_ocd_rnb4 = cleaned_data_rnb4["OCD"].mean()
+    
+    
+    
+    #making K pop subsets based on frequency
+    cleaned_data_kpop1 = cleaned_data[cleaned_data["Frequency [K pop]"] == 1]
+    cleaned_data_kpop2 = cleaned_data[cleaned_data["Frequency [K pop]"] == 2]
+    cleaned_data_kpop3 = cleaned_data[cleaned_data["Frequency [K pop]"] == 3]
+    cleaned_data_kpop4 = cleaned_data[cleaned_data["Frequency [K pop]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_kpop1 = cleaned_data_kpop1["Anxiety"].mean()
+    ave_dep_kpop1 = cleaned_data_kpop1["Depression"].mean()
+    ave_insom_kpop1 = cleaned_data_kpop1["Insomnia"].mean()
+    ave_ocd_kpop1 = cleaned_data_kpop1["OCD"].mean()
+    
+    ave_anxiety_kpop2 = cleaned_data_kpop2["Anxiety"].mean()
+    ave_dep_kpop2 = cleaned_data_kpop2["Depression"].mean()
+    ave_insom_kpop2 = cleaned_data_kpop2["Insomnia"].mean()
+    ave_ocd_kpop2 = cleaned_data_kpop2["OCD"].mean()
+    
+    ave_anxiety_kpop3 = cleaned_data_kpop3["Anxiety"].mean()
+    ave_dep_kpop3 = cleaned_data_kpop3["Depression"].mean()
+    ave_insom_kpop3 = cleaned_data_kpop3["Insomnia"].mean()
+    ave_ocd_kpop3 = cleaned_data_kpop3["OCD"].mean()
+    
+    ave_anxiety_kpop4 = cleaned_data_kpop4["Anxiety"].mean()
+    ave_dep_kpop4 = cleaned_data_kpop4["Depression"].mean()
+    ave_insom_kpop4 = cleaned_data_kpop4["Insomnia"].mean()
+    ave_ocd_kpop4 = cleaned_data_kpop4["OCD"].mean()
+    
+    
+    
+    #making Country subsets based on frequency
+    cleaned_data_country1 = cleaned_data[cleaned_data["Frequency [Country]"] == 1]
+    cleaned_data_country2 = cleaned_data[cleaned_data["Frequency [Country]"] == 2]
+    cleaned_data_country3 = cleaned_data[cleaned_data["Frequency [Country]"] == 3]
+    cleaned_data_country4 = cleaned_data[cleaned_data["Frequency [Country]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_country1 = cleaned_data_country1["Anxiety"].mean()
+    ave_dep_country1 = cleaned_data_country1["Depression"].mean()
+    ave_insom_country1 = cleaned_data_country1["Insomnia"].mean()
+    ave_ocd_country1 = cleaned_data_country1["OCD"].mean()
+    
+    ave_anxiety_country2 = cleaned_data_country2["Anxiety"].mean()
+    ave_dep_country2 = cleaned_data_country2["Depression"].mean()
+    ave_insom_country2 = cleaned_data_country2["Insomnia"].mean()
+    ave_ocd_country2 = cleaned_data_country2["OCD"].mean()
+    
+    ave_anxiety_country3 = cleaned_data_country3["Anxiety"].mean()
+    ave_dep_country3 = cleaned_data_country3["Depression"].mean()
+    ave_insom_country3 = cleaned_data_country3["Insomnia"].mean()
+    ave_ocd_country3 = cleaned_data_country3["OCD"].mean()
+    
+    ave_anxiety_country4 = cleaned_data_country4["Anxiety"].mean()
+    ave_dep_country4 = cleaned_data_country4["Depression"].mean()
+    ave_insom_country4 = cleaned_data_country4["Insomnia"].mean()
+    ave_ocd_country4 = cleaned_data_country4["OCD"].mean()
+    
+    
+    
+    #making EDM subsets based on frequency
+    cleaned_data_edm1 = cleaned_data[cleaned_data["Frequency [EDM]"] == 1]
+    cleaned_data_edm2 = cleaned_data[cleaned_data["Frequency [EDM]"] == 2]
+    cleaned_data_edm3 = cleaned_data[cleaned_data["Frequency [EDM]"] == 3]
+    cleaned_data_edm4 = cleaned_data[cleaned_data["Frequency [EDM]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_edm1 = cleaned_data_edm1["Anxiety"].mean()
+    ave_dep_edm1 = cleaned_data_edm1["Depression"].mean()
+    ave_insom_edm1 = cleaned_data_edm1["Insomnia"].mean()
+    ave_ocd_edm1 = cleaned_data_edm1["OCD"].mean()
+    
+    ave_anxiety_edm2 = cleaned_data_edm2["Anxiety"].mean()
+    ave_dep_edm2 = cleaned_data_edm2["Depression"].mean()
+    ave_insom_edm2 = cleaned_data_edm2["Insomnia"].mean()
+    ave_ocd_edm2 = cleaned_data_edm2["OCD"].mean()
+    
+    ave_anxiety_edm3 = cleaned_data_edm3["Anxiety"].mean()
+    ave_dep_edm3 = cleaned_data_edm3["Depression"].mean()
+    ave_insom_edm3 = cleaned_data_edm3["Insomnia"].mean()
+    ave_ocd_edm3 = cleaned_data_edm3["OCD"].mean()
+    
+    ave_anxiety_edm4 = cleaned_data_edm4["Anxiety"].mean()
+    ave_dep_edm4 = cleaned_data_edm4["Depression"].mean()
+    ave_insom_edm4 = cleaned_data_edm4["Insomnia"].mean()
+    ave_ocd_edm4 = cleaned_data_edm4["OCD"].mean()
+    
+    
+    
+    #making Hip hop subsets based on frequency
+    cleaned_data_hiphop1 = cleaned_data[cleaned_data["Frequency [Hip hop]"] == 1]
+    cleaned_data_hiphop2 = cleaned_data[cleaned_data["Frequency [Hip hop]"] == 2]
+    cleaned_data_hiphop3 = cleaned_data[cleaned_data["Frequency [Hip hop]"] == 3]
+    cleaned_data_hiphop4 = cleaned_data[cleaned_data["Frequency [Hip hop]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_hiphop1 = cleaned_data_hiphop1["Anxiety"].mean()
+    ave_dep_hiphop1 = cleaned_data_hiphop1["Depression"].mean()
+    ave_insom_hiphop1 = cleaned_data_hiphop1["Insomnia"].mean()
+    ave_ocd_hiphop1 = cleaned_data_hiphop1["OCD"].mean()
+    
+    ave_anxiety_hiphop2 = cleaned_data_hiphop2["Anxiety"].mean()
+    ave_dep_hiphop2 = cleaned_data_hiphop2["Depression"].mean()
+    ave_insom_hiphop2 = cleaned_data_hiphop2["Insomnia"].mean()
+    ave_ocd_hiphop2 = cleaned_data_hiphop2["OCD"].mean()
+    
+    ave_anxiety_hiphop3 = cleaned_data_hiphop3["Anxiety"].mean()
+    ave_dep_hiphop3 = cleaned_data_hiphop3["Depression"].mean()
+    ave_insom_hiphop3 = cleaned_data_hiphop3["Insomnia"].mean()
+    ave_ocd_hiphop3 = cleaned_data_hiphop3["OCD"].mean()
+    
+    ave_anxiety_hiphop4 = cleaned_data_hiphop4["Anxiety"].mean()
+    ave_dep_hiphop4 = cleaned_data_hiphop4["Depression"].mean()
+    ave_insom_hiphop4 = cleaned_data_hiphop4["Insomnia"].mean()
+    ave_ocd_hiphop4 = cleaned_data_hiphop4["OCD"].mean()
+    
+    
+    
+    
+    #making Pop subsets based on frequency
+    cleaned_data_pop1 = cleaned_data[cleaned_data["Frequency [Pop]"] == 1]
+    cleaned_data_pop2 = cleaned_data[cleaned_data["Frequency [Pop]"] == 2]
+    cleaned_data_pop3 = cleaned_data[cleaned_data["Frequency [Pop]"] == 3]
+    cleaned_data_pop4 = cleaned_data[cleaned_data["Frequency [Pop]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_pop1 = cleaned_data_pop1["Anxiety"].mean()
+    ave_dep_pop1 = cleaned_data_pop1["Depression"].mean()
+    ave_insom_pop1 = cleaned_data_pop1["Insomnia"].mean()
+    ave_ocd_pop1 = cleaned_data_pop1["OCD"].mean()
+    
+    ave_anxiety_pop2 = cleaned_data_pop2["Anxiety"].mean()
+    ave_dep_pop2 = cleaned_data_pop2["Depression"].mean()
+    ave_insom_pop2 = cleaned_data_pop2["Insomnia"].mean()
+    ave_ocd_pop2 = cleaned_data_pop2["OCD"].mean()
+    
+    ave_anxiety_pop3 = cleaned_data_pop3["Anxiety"].mean()
+    ave_dep_pop3 = cleaned_data_pop3["Depression"].mean()
+    ave_insom_pop3 = cleaned_data_pop3["Insomnia"].mean()
+    ave_ocd_pop3 = cleaned_data_pop3["OCD"].mean()
+    
+    ave_anxiety_pop4 = cleaned_data_pop4["Anxiety"].mean()
+    ave_dep_pop4 = cleaned_data_pop4["Depression"].mean()
+    ave_insom_pop4 = cleaned_data_pop4["Insomnia"].mean()
+    ave_ocd_pop4 = cleaned_data_pop4["OCD"].mean()
+    
+    
+    
+    
+    #making Rap subsets based on frequency
+    cleaned_data_rap1 = cleaned_data[cleaned_data["Frequency [Rap]"] == 1]
+    cleaned_data_rap2 = cleaned_data[cleaned_data["Frequency [Rap]"] == 2]
+    cleaned_data_rap3 = cleaned_data[cleaned_data["Frequency [Rap]"] == 3]
+    cleaned_data_rap4 = cleaned_data[cleaned_data["Frequency [Rap]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_rap1 = cleaned_data_rap1["Anxiety"].mean()
+    ave_dep_rap1 = cleaned_data_rap1["Depression"].mean()
+    ave_insom_rap1 = cleaned_data_rap1["Insomnia"].mean()
+    ave_ocd_rap1 = cleaned_data_rap1["OCD"].mean()
+    
+    ave_anxiety_rap2 = cleaned_data_rap2["Anxiety"].mean()
+    ave_dep_rap2 = cleaned_data_rap2["Depression"].mean()
+    ave_insom_rap2 = cleaned_data_rap2["Insomnia"].mean()
+    ave_ocd_rap2 = cleaned_data_rap2["OCD"].mean()
+    
+    ave_anxiety_rap3 = cleaned_data_rap3["Anxiety"].mean()
+    ave_dep_rap3 = cleaned_data_rap3["Depression"].mean()
+    ave_insom_rap3 = cleaned_data_rap3["Insomnia"].mean()
+    ave_ocd_rap3 = cleaned_data_rap3["OCD"].mean()
+    
+    ave_anxiety_rap4 = cleaned_data_rap4["Anxiety"].mean()
+    ave_dep_rap4 = cleaned_data_rap4["Depression"].mean()
+    ave_insom_rap4 = cleaned_data_rap4["Insomnia"].mean()
+    ave_ocd_rap4 = cleaned_data_rap4["OCD"].mean()
+    
+    
+    
+    #making Classical subsets based on frequency
+    cleaned_data_classical1 = cleaned_data[cleaned_data["Frequency [Classical]"] == 1]
+    cleaned_data_classical2 = cleaned_data[cleaned_data["Frequency [Classical]"] == 2]
+    cleaned_data_classical3 = cleaned_data[cleaned_data["Frequency [Classical]"] == 3]
+    cleaned_data_classical4 = cleaned_data[cleaned_data["Frequency [Classical]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_classical1 = cleaned_data_classical1["Anxiety"].mean()
+    ave_dep_classical1 = cleaned_data_classical1["Depression"].mean()
+    ave_insom_classical1 = cleaned_data_classical1["Insomnia"].mean()
+    ave_ocd_classical1 = cleaned_data_classical1["OCD"].mean()
+    
+    ave_anxiety_classical2 = cleaned_data_classical2["Anxiety"].mean()
+    ave_dep_classical2 = cleaned_data_classical2["Depression"].mean()
+    ave_insom_classical2 = cleaned_data_classical2["Insomnia"].mean()
+    ave_ocd_classical2 = cleaned_data_classical2["OCD"].mean()
+    
+    ave_anxiety_classical3 = cleaned_data_classical3["Anxiety"].mean()
+    ave_dep_classical3 = cleaned_data_classical3["Depression"].mean()
+    ave_insom_classical3 = cleaned_data_classical3["Insomnia"].mean()
+    ave_ocd_classical3 = cleaned_data_classical3["OCD"].mean()
+    
+    ave_anxiety_classical4 = cleaned_data_classical4["Anxiety"].mean()
+    ave_dep_classical4 = cleaned_data_classical4["Depression"].mean()
+    ave_insom_classical4 = cleaned_data_classical4["Insomnia"].mean()
+    ave_ocd_classical4 = cleaned_data_classical4["OCD"].mean()
+    
+    
+    
+    #making Metal subsets based on frequency
+    cleaned_data_metal1 = cleaned_data[cleaned_data["Frequency [Metal]"] == 1]
+    cleaned_data_metal2 = cleaned_data[cleaned_data["Frequency [Metal]"] == 2]
+    cleaned_data_metal3 = cleaned_data[cleaned_data["Frequency [Metal]"] == 3]
+    cleaned_data_metal4 = cleaned_data[cleaned_data["Frequency [Metal]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_metal1 = cleaned_data_metal1["Anxiety"].mean()
+    ave_dep_metal1 = cleaned_data_metal1["Depression"].mean()
+    ave_insom_metal1 = cleaned_data_metal1["Insomnia"].mean()
+    ave_ocd_metal1 = cleaned_data_metal1["OCD"].mean()
+    
+    ave_anxiety_metal2 = cleaned_data_metal2["Anxiety"].mean()
+    ave_dep_metal2 = cleaned_data_metal2["Depression"].mean()
+    ave_insom_metal2 = cleaned_data_metal2["Insomnia"].mean()
+    ave_ocd_metal2 = cleaned_data_metal2["OCD"].mean()
+    
+    ave_anxiety_metal3 = cleaned_data_metal3["Anxiety"].mean()
+    ave_dep_metal3 = cleaned_data_metal3["Depression"].mean()
+    ave_insom_metal3 = cleaned_data_metal3["Insomnia"].mean()
+    ave_ocd_metal3 = cleaned_data_metal3["OCD"].mean()
+    
+    ave_anxiety_metal4 = cleaned_data_metal4["Anxiety"].mean()
+    ave_dep_metal4 = cleaned_data_metal4["Depression"].mean()
+    ave_insom_metal4 = cleaned_data_metal4["Insomnia"].mean()
+    ave_ocd_metal4 = cleaned_data_metal4["OCD"].mean()
+    
+    
+    
+    
+    #making Folk subsets based on frequency
+    cleaned_data_folk1 = cleaned_data[cleaned_data["Frequency [Folk]"] == 1]
+    cleaned_data_folk2 = cleaned_data[cleaned_data["Frequency [Folk]"] == 2]
+    cleaned_data_folk3 = cleaned_data[cleaned_data["Frequency [Folk]"] == 3]
+    cleaned_data_folk4 = cleaned_data[cleaned_data["Frequency [Folk]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_folk1 = cleaned_data_folk1["Anxiety"].mean()
+    ave_dep_folk1 = cleaned_data_folk1["Depression"].mean()
+    ave_insom_folk1 = cleaned_data_folk1["Insomnia"].mean()
+    ave_ocd_folk1 = cleaned_data_folk1["OCD"].mean()
+    
+    ave_anxiety_folk2 = cleaned_data_folk2["Anxiety"].mean()
+    ave_dep_folk2 = cleaned_data_folk2["Depression"].mean()
+    ave_insom_folk2 = cleaned_data_folk2["Insomnia"].mean()
+    ave_ocd_folk2 = cleaned_data_folk2["OCD"].mean()
+    
+    ave_anxiety_folk3 = cleaned_data_folk3["Anxiety"].mean()
+    ave_dep_folk3 = cleaned_data_folk3["Depression"].mean()
+    ave_insom_folk3 = cleaned_data_folk3["Insomnia"].mean()
+    ave_ocd_folk3 = cleaned_data_folk3["OCD"].mean()
+    
+    ave_anxiety_folk4 = cleaned_data_folk4["Anxiety"].mean()
+    ave_dep_folk4 = cleaned_data_folk4["Depression"].mean()
+    ave_insom_folk4 = cleaned_data_folk4["Insomnia"].mean()
+    ave_ocd_folk4 = cleaned_data_folk4["OCD"].mean()
+    
+    
+    
+    
+    
+    #making Lofi subsets based on frequency
+    cleaned_data_lofi1 = cleaned_data[cleaned_data["Frequency [Lofi]"] == 1]
+    cleaned_data_lofi2 = cleaned_data[cleaned_data["Frequency [Lofi]"] == 2]
+    cleaned_data_lofi3 = cleaned_data[cleaned_data["Frequency [Lofi]"] == 3]
+    cleaned_data_lofi4 = cleaned_data[cleaned_data["Frequency [Lofi]"] == 4]
+    
+    #Now get the average MH scores for each frequency
+    ave_anxiety_lofi1 = cleaned_data_lofi1["Anxiety"].mean()
+    ave_dep_lofi1 = cleaned_data_lofi1["Depression"].mean()
+    ave_insom_lofi1 = cleaned_data_lofi1["Insomnia"].mean()
+    ave_ocd_lofi1 = cleaned_data_lofi1["OCD"].mean()
+    
+    ave_anxiety_lofi2 = cleaned_data_lofi2["Anxiety"].mean()
+    ave_dep_lofi2 = cleaned_data_lofi2["Depression"].mean()
+    ave_insom_lofi2 = cleaned_data_lofi2["Insomnia"].mean()
+    ave_ocd_lofi2 = cleaned_data_lofi2["OCD"].mean()
+    
+    ave_anxiety_lofi3 = cleaned_data_lofi3["Anxiety"].mean()
+    ave_dep_lofi3 = cleaned_data_lofi3["Depression"].mean()
+    ave_insom_lofi3 = cleaned_data_lofi3["Insomnia"].mean()
+    ave_ocd_lofi3 = cleaned_data_lofi3["OCD"].mean()
+    
+    ave_anxiety_lofi4 = cleaned_data_lofi4["Anxiety"].mean()
+    ave_dep_lofi4 = cleaned_data_lofi4["Depression"].mean()
+    ave_insom_lofi4 = cleaned_data_lofi4["Insomnia"].mean()
+    ave_ocd_lofi4 = cleaned_data_lofi4["OCD"].mean()
+    
+    
+    
+    
+    #making Gospel subsets based on frequency
+    cleaned_data_gospel1 = cleaned_data[cleaned_data["Frequency [Gospel]"] == 1]
+    cleaned_data_gospel2 = cleaned_data[cleaned_data["Frequency [Gospel]"] == 2]
+    cleaned_data_gospel3 = cleaned_data[cleaned_data["Frequency [Gospel]"] == 3]
+    cleaned_data_gospel4 = cleaned_data[cleaned_data["Frequency [Gospel]"] == 4]
+    
+    #now get the average MH scores for each frequency
+    ave_anxiety_gospel1 = cleaned_data_gospel1["Anxiety"].mean()
+    ave_dep_gospel1 = cleaned_data_gospel1["Depression"].mean()
+    ave_insom_gospel1 = cleaned_data_gospel1["Insomnia"].mean()
+    ave_ocd_gospel1 = cleaned_data_gospel1["OCD"].mean()
+    
+    ave_anxiety_gospel2 = cleaned_data_gospel2["Anxiety"].mean()
+    ave_dep_gospel2 = cleaned_data_gospel2["Depression"].mean()
+    ave_insom_gospel2 = cleaned_data_gospel2["Insomnia"].mean()
+    ave_ocd_gospel2 = cleaned_data_gospel2["OCD"].mean()
+    
+    ave_anxiety_gospel3 = cleaned_data_gospel3["Anxiety"].mean()
+    ave_dep_gospel3 = cleaned_data_gospel3["Depression"].mean()
+    ave_insom_gospel3 = cleaned_data_gospel3["Insomnia"].mean()
+    ave_ocd_gospel3 = cleaned_data_gospel3["OCD"].mean()
+    
+    ave_anxiety_gospel4 = cleaned_data_gospel4["Anxiety"].mean()
+    ave_dep_gospel4 = cleaned_data_gospel4["Depression"].mean()
+    ave_insom_gospel4 = cleaned_data_gospel4["Insomnia"].mean()
+    ave_ocd_gospel4 = cleaned_data_gospel4["OCD"].mean()
+    
+    st.markdown("Create a dataframe with the average score for all level 4 responses")
+    #create a dataframe for these values
+    index = ["Classical", "Country", "EDM", "Folk", "Gospel", "Hip hop", "Jazz", "K pop", "Latin", "Lofi", 
+             "Metal", "Pop", "R&B", "Rap", "Rock", "Video game music"]
+    columns = ["Anxiety", "Depression", "Insomnia", "OCD"]
+    
+    mh_by_genre = pd.DataFrame(index=index, columns=columns)
+    
+
+    #add values
+    average_anxiety = [ave_anxiety_classical4, ave_anxiety_country4, ave_anxiety_edm4,  ave_anxiety_folk4, ave_anxiety_gospel4, ave_anxiety_hiphop4, 
+        ave_anxiety_jazz4, ave_anxiety_kpop4, ave_anxiety_latin4, ave_anxiety_lofi4, ave_anxiety_metal4, ave_anxiety_pop4, ave_anxiety_rnb4, 
+        ave_anxiety_rap4, ave_anxiety_rock4, ave_anxiety_vgm4]
+    
+    average_depression = [ave_dep_classical4, ave_dep_country4, ave_dep_edm4, ave_dep_folk4, ave_dep_gospel4, ave_dep_hiphop4, ave_dep_jazz4, 
+            ave_dep_kpop4, ave_dep_latin4, ave_dep_lofi4, ave_dep_metal4, ave_dep_pop4, ave_dep_rnb4, ave_dep_rap4, ave_dep_rock4, ave_dep_vgm4]
+    
+    average_ocd = [ave_ocd_classical4, ave_ocd_country4, ave_ocd_edm4, ave_ocd_folk4, ave_ocd_gospel4, ave_ocd_hiphop4, ave_ocd_jazz4, ave_ocd_kpop4, 
+        ave_ocd_latin4, ave_ocd_lofi4, ave_ocd_metal4, ave_ocd_pop4, ave_ocd_rnb4, ave_ocd_rap4, ave_ocd_rock4, ave_ocd_vgm4]
+    
+    average_insomnia = [ave_insom_classical4, ave_insom_country4, ave_insom_edm4, ave_insom_folk4, ave_insom_gospel4, ave_insom_hiphop4, ave_insom_jazz4, 
+            ave_insom_kpop4, ave_insom_latin4, ave_insom_lofi4, ave_insom_metal4, ave_insom_pop4, ave_insom_rnb4, ave_insom_rap4, ave_insom_rock4, 
+            ave_insom_vgm4]
+    
+    mh_by_genre["Anxiety"] = average_anxiety
+    mh_by_genre["Depression"] = average_depression
+    mh_by_genre["Insomnia"] = average_insomnia
+    mh_by_genre["OCD"] = average_ocd
+
+    mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
+
+
+
+    ####################### done replicating the filtering done above
+
+
+    st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
+    #dropdown menu
+    categories = ["Mood Increase", "Mood Decrease"]
+    selected_category = st.selectbox("Choose one:", categories)
