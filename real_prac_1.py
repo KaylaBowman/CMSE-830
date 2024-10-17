@@ -438,7 +438,8 @@ if selected_category == "Explore The Data":
                            title="Interactive Violin Plot of Fav Genre vs Insomnia")
     st.plotly_chart(fig_violin)
 
-
+    
+    #look at mental health stat by genre
     st.subheader("Anxiety Score by Genre")
     #sns.boxplot(data=cleaned_data, x="Frequency [Latin]", y = "Anxiety")
     #plt.title('Anxiety Scores of Latin Listeners')
@@ -454,6 +455,11 @@ if selected_category == "Explore The Data":
         st.pyplot(plt)  
         plt.clf()  
 
+
+    #dropdown menu for selecting a mental health score
+    score_options = ["Anxiety", "Depression"]
+    selected_score = st.selectbox("Choose a mental health category to consider:", score_options)
+    
     #dropdown menu for selecting a genre
     genre_options = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Classical]", 
                      "Frequency [Pop]", "Frequency [Jazz]", "Frequency [Hip-Hop]", 
@@ -463,12 +469,9 @@ if selected_category == "Explore The Data":
                      "Frequency [Punk]", "Frequency [Blues]", 
                      "Frequency [Metal]", "Frequency [Soul]"]
     
-    selected_genre = st.selectbox("Choose a genre to view mental health scores:", genre_options)
+    selected_genre = st.selectbox("Choose a genre to consider:", genre_options)
     
-    #dropdown menu for selecting a mental health score
-    score_options = ["Anxiety", "Depression"]
-    selected_score = st.selectbox("Choose a mental health score to view:", score_options)
-    
+
     #call the plot function with the selected genre and score
     plot_boxplot(selected_genre, selected_score)
         
