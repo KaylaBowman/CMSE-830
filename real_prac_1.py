@@ -159,7 +159,7 @@ if selected_category == "Investigate The Data":
     age_outliers = sum((mxmh_survey_results['Age'] > 70) | (mxmh_survey_results['Age'] < 18))
     st.write(f"Number of participants younger than 18 or older than 70: {age_outliers}")
 
-if selected_category == "Clean  The Data":
+if selected_category == "Clean The Data":
 
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
