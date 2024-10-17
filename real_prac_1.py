@@ -22,42 +22,19 @@ mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
 #display the data
 st.write(mxmh_survey_results.head())  
 
-#markdown section
-st.subheader("Data Types")
-st.write(Data Types:
+#missing vals
+st.subheader("Any missing vals?")
+#make a heatmap of the missing data
+nan_mask = mxmh_survey_results.isna()
+nan_array = nan_mask.astype(int).to_numpy()
 
-* Timestamp: Interval 
-* Age: Ratio
-* Primary streaming service: Nominal
-* Hours per day: Ratio
-* While working: Binary (Yes, No)
-* Instrumentalist: Binary (Yes, No)
-* Composer: Binary (Yes, No)
-* Fav genre: Nominal
-* Exploratory: Binary (Yes, No)
-* Foreign languages: Binary (Yes, No)
-* BPM: Ratio 
-* Frequency [Classical]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Country]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [EDM]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Folk]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Gospel]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Hip hop]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Jazz]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [K pop]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Latin]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Lofi]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Metal]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Pop]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [R&B]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Rap]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Rock]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Frequency [Video game music]: Ordinal (Never, Rarely, Sometimes, Very Frequently)
-* Anxiety: Ordinal (Likert scale, 1-10)
-* Depression: Ordinal (Likert scale, 1-10)
-* Insomnia: Ordinal (Likert scale, 1-10)
-* OCD: Ordinal (Likert scale, 1-10)
-* Music effects: Ordinal (No effect, Improve, Worsen)
-* Permissions: Binary (Yes, No) )  
-
-
+plt.figure(figsize=(12, 6))
+plt.imshow(nan_array.T, interpolation='nearest', aspect='auto', cmap='viridis')
+plt.xlabel('mxmh_survey_results Index')
+plt.ylabel('Features')
+plt.title('Visualizing Missing Values in mxmh_survey_results Dataset')
+plt.yticks(range(len(mxmh_survey_results.columns)), mxmh_survey_results.columns)
+num_participants = nan_array.shape[0]
+plt.xticks(np.linspace(0, num_participants-1, min(10, num_participants)).astype(int))
+plt.grid(True, axis='y', linestyle='--', alpha=0.7)
+st.pyplot(plt)
