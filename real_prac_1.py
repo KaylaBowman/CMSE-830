@@ -439,5 +439,34 @@ if selected_category == "Explore The Data":
     st.plotly_chart(fig_violin)
 
 
+    st.subheader("Anxiety Score by Genre")
+    #sns.boxplot(data=cleaned_data, x="Frequency [Latin]", y = "Anxiety")
+    #plt.title('Anxiety Scores of Latin Listeners')
 
-   
+    #function to create and display a box plot for a specific genre
+    def plot_boxplot(genre):
+        plt.figure(figsize=(10, 6))  # Set the figure size
+        sns.boxplot(data=cleaned_data, x=genre, y="Anxiety")
+        plt.title(f'Anxiety Scores of {genre} Listeners')
+        plt.xlabel(genre)  # Set x-axis label
+        plt.ylabel('Anxiety')  # Set y-axis label
+        st.pyplot(plt)  # Display the plot in Streamlit
+        plt.clf()  # Clear the figure to prevent overlapping in future plots
+    
+    #dropdown menu for selecting a genre
+    genre_options = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Classical]", 
+                     "Frequency [Pop]", "Frequency [Jazz]", "Frequency [Hip-Hop]", 
+                     "Frequency [Electronic]", "Frequency [Reggae]", 
+                     "Frequency [Country]", "Frequency [R&B]", 
+                     "Frequency [Indie]", "Frequency [Folk]", 
+                     "Frequency [Punk]", "Frequency [Blues]", 
+                     "Frequency [Metal]", "Frequency [Soul]"]
+    
+    selected_genre = st.selectbox("Choose a genre to view anxiety scores:", genre_options)
+    
+    #call the plot function with the selected genre
+    plot_boxplot(selected_genre)
+    
+    
+    
+       
