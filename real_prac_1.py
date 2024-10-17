@@ -208,9 +208,9 @@ if selected_category == "Clean  The Data":
         if genre == "Gospel":
             mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Gospel"]["BPM"].median()
 
-#see that the values were replaced
-mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]
-    
+    #see that the values were replaced
+    filtered_data = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]
+    st.write(filtered_data.head())  
 
 if selected_category == "Explore The Data":
     st.write("hi")
