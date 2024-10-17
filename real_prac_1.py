@@ -994,11 +994,6 @@ if selected_category == "Explore The Data":
     st.markdown("I used mh_by_genre.describe() to identify the MH category with the highest variability (SD) so I could capture more unique responses. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
     st.markdown("I then created a binary feature that expressed whether the avergae depression score for a given genre was above or below 5. This is how I will recommend genres to users.")
 
-    for i, val in enumerate(mh_by_genre["Depression"]):
-        if val >= 5:
-            mh_by_genre.at[i, "Effect"] = 1  
-        else:
-            mh_by_genre.at[i, "Effect"] = 0  
-
+    mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
     mh_by_genre
