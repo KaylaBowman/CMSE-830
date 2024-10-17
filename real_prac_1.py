@@ -395,5 +395,26 @@ if selected_category == "Explore The Data":
 
     st.plotly_chart(fig_violin)
 
+    #hours and mh
+    st.subheader("Is hours spent listening per day correlated with reported MH scores? Not strongly.")
+    selected_features = ['Hours per day', "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
+
+    # Correlation Heatmap (Interactive)
+    correlation_matrix = cleaned_data[selected_features].corr().values
+    fig_heatmap = ff.create_annotated_heatmap(
+         z=correlation_matrix,
+         x=selected_features,
+         y=selected_features,
+         colorscale='Viridis'
+     )
+    fig_heatmap.update_layout(
+        title="Correlation Heatmap (Interactive)",
+        xaxis_title="Features",
+        yaxis_title="Features"
+    )
+    st.plotly_chart(fig_heatmap)
+
+    
+
 
    
