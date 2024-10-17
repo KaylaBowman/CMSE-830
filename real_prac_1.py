@@ -982,6 +982,6 @@ if selected_category == "Explore The Data":
     
     
     
-    st.write(mh_by_genre.head())  
+    st.write(mh_by_genre.head)  
         
            
