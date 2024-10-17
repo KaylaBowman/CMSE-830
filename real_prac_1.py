@@ -276,4 +276,44 @@ if selected_category == "Clean The Data":
     st.write(cleaned_data.head())  
 
 if selected_category == "Explore The Data":
-    st.write("hi")
+    st.subheader("Any correlations between frequency and mental health?")
+
+    selected_features = ['Frequency [Classical]', "Frequency [Country]", "Frequency [EDM]", "Frequency [Folk]", 
+                     "Frequency [Gospel]", "Frequency [Hip hop]", "Frequency [Jazz]", "Frequency [K pop]", "Frequency [Latin]", "Frequency [Lofi]",
+                     "Frequency [Metal]", "Frequency [Pop]", "Frequency [R&B]", "Frequency [Rap]", "Frequency [Rock]",  "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
+
+    # Correlation Heatmap (Interactive)
+    correlation_matrix = cleaned_data[selected_features].corr().values
+    fig_heatmap = ff.create_annotated_heatmap(
+         z=correlation_matrix,
+         x=selected_features,
+         y=selected_features,
+         colorscale='Viridis'
+     )
+    fig_heatmap.update_layout(
+        title="Correlation Heatmap (Interactive)",
+        xaxis_title="Features",
+        yaxis_title="Features"
+    )
+    st.plotly_chart(fig_heatmap)
+    
+
+    st.subheader("How does mental health vary across age?")
+
+
+    bins = [18, 25, 31, 36, 41, 46, 51, 58, 64]  
+    labels = ['18-24', '25-30', '31-35', '36-40', '41-45', '46-50', '51-57', '58-64']  # Labels for the bins
+
+    # Create the binned column
+    cleaned_data['age_binned'] = pd.cut(cleaned_data['Age'], bins=bins, labels=labels, right=False)
+
+
+    #now plot it 
+    fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
+                           labels={'Age':'Age', 'Anxiety':'Anxiety'},
+                           title="Interactive Violin Plot of Age vs Anxiety")
+
+    st.plotly_chart(fig_violin)
+
+
+   
