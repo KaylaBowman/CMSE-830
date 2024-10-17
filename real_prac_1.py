@@ -160,7 +160,57 @@ if selected_category == "Investigate The Data":
     st.write(f"Number of participants younger than 18 or older than 70: {age_outliers}")
 
 if selected_category == "Clean  The Data":
-    st.write("hi")
+
+    #load the Data
+    mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
+    
+    #handle missing vals 
+    st.subheader("Handle BPM Missing Values")
+    st.markdown("Group by genre, then replace with median of genre")
+
+    #get pop median so we can test our replacement worked
+    pop_median = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]["BPM"].median()
+    st.write(f"The median BPM of Pop: {pop_median}")
+
+    #group and replace
+    for i, val in enumerate(mxmh_survey_results["BPM"].isna()):
+        genre = mxmh_survey_results.loc[i, "Fav genre"]  # Get the genre for the current row
+        if genre == "Latin":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Latin"]["BPM"].median()
+        if genre == "Rock":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Rock"]["BPM"].median()
+        if genre == "Video game music":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Video game music"]["BPM"].median()
+        if genre == "Jazz":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Jazz"]["BPM"].median()
+        if genre == "R&B":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "R&B"]["BPM"].median()
+        if genre == "K pop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "K pop"]["BPM"].median()
+        if genre == "Country":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Country"]["BPM"].median()
+        if genre == "EDM":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "EDM"]["BPM"].median()
+        if genre == "Hip hop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Hip hop"]["BPM"].median()
+        if genre == "Pop":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]["BPM"].median()
+        if genre == "Rap":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Rap"]["BPM"].median()
+        if genre == "Classical":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Classical"]["BPM"].median()
+        if genre == "Metal":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Metal"]["BPM"].median()
+        if genre == "Folk":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Folk"]["BPM"].median()
+        if genre == "Lofi":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Lofi"]["BPM"].median()
+        if genre == "Gospel":
+            mxmh_survey_results.loc[i, "BPM"] = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Gospel"]["BPM"].median()
+
+#see that the values were replaced
+mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]
+    
 
 if selected_category == "Explore The Data":
     st.write("hi")
