@@ -44,6 +44,72 @@ st.pyplot(plt)
 
 #distribution 
 st.subheader("Distribution of Features")
+
+st.markdown("Age")
 #age 
 fig = px.histogram(mxmh_survey_results, x="Age", title="Age Distribution")
 st.plotly_chart(fig)
+
+st.markdown("Streaming Service")
+#streaming service
+platforms = ['Spotify', 'Pandora', 'YouTube Music', 
+             'I do not use a streaming service.', 
+             'Apple Music', 'Other streaming service']
+popularity = [458, 11, 94, 71, 51, 0]
+
+#create a horizontal bar plot
+plt.figure(figsize=(10, 6))  # Set the figure size
+plt.barh(platforms, popularity, color='skyblue')
+plt.title('Distribution of Primary Streaming Service')
+plt.xlabel('Popularity')
+plt.ylabel('Streaming Service')
+
+st.pyplot(plt)
+
+st.markdown("Favorite Genre")
+#fav genre
+plt.figure(figsize=(10, 6))  
+plt.hist(mxmh_survey_results["Fav genre"], bins=16, edgecolor='black')
+
+#set the title of the plot
+plt.title('Distribution of Fav Genre', fontsize=16)
+
+#set the x-axis title
+plt.xlabel('Fav Genre', fontsize=12)
+plt.xticks(rotation=45) 
+
+st.pyplot(plt)
+
+st.markdown("Mental Health Stats")
+#anxiety 
+fig = px.histogram(mxmh_survey_results, x="Anxiety", title="Anxiety Distribution")
+st.plotly_chart(fig)
+
+#depression
+fig = px.histogram(mxmh_survey_results, x="Depression", title="Depression Distribution")
+st.plotly_chart(fig)
+
+#insomnia
+fig = px.histogram(mxmh_survey_results, x="Insomnia", title="Insomnia Distribution")
+st.plotly_chart(fig)
+
+#OCD
+fig = px.histogram(mxmh_survey_results, x="OCD", title="OCD Distribution")
+st.plotly_chart(fig)
+
+
+#frequency
+st.markdown("Genre Frequency")
+
+fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Latin Listeners")
+st.plotly_chart(fig)
+
+fig = px.histogram(mxmh_survey_results, x=('Frequency [Rock]'), title="Frequency of Rock Listeners")
+st.plotly_chart(fig)
+
+fig = px.histogram(mxmh_survey_results, x=('Frequency [Classical]'), title="Frequency of Latin Listeners")
+st.plotly_chart(fig)
+
+fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Pop Listeners")
+st.plotly_chart(fig)
+
