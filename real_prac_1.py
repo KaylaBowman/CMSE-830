@@ -114,7 +114,7 @@ st.plotly_chart(fig)
 fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Pop Listeners")
 st.plotly_chart(fig)
 
-
+#Experts
 st.subheader("Experts")
 
 fig, ax = plt.subplots()
@@ -125,5 +125,12 @@ ax.legend()
 
 ax.set_title("Distribution of Composers and Instrumentalists")
 
+st.pyplot(fig)
+
+#Music Effects
+st.subheader("Music Effects")
+sns.histplot(data=mxmh_survey_results, x='Music effects', hue='Music effects', palette=['red', 'blue', 'green'])
+ax.legend()
+ax.set_title("Distribution of Perceived Music Effects")
 st.pyplot(fig)
 
