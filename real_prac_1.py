@@ -476,7 +476,7 @@ if selected_category == "Explore The Data":
     plot_boxplot(selected_genre, selected_score)
 
     #feature engineering
-    st.subheader("Feature Engineering")
+    st.subheader("Create a dataset with final mental health scores based on frequency of genre consumption")
 
     #group average MH scores by highest frequency genre
     st.markdown("Group average MH scores by all Very Frequent genre responses")
@@ -958,11 +958,8 @@ if selected_category == "Explore The Data":
     columns = ["Anxiety", "Depression", "Insomnia", "OCD"]
     
     mh_by_genre = pd.DataFrame(index=index, columns=columns)
-    mh_by_genre
-    #mh_by_genre.index = index
-    #mh_by_genre.columns = columns
     
-    
+
     #add values
     average_anxiety = [ave_anxiety_classical4, ave_anxiety_country4, ave_anxiety_edm4,  ave_anxiety_folk4, ave_anxiety_gospel4, ave_anxiety_hiphop4, 
         ave_anxiety_jazz4, ave_anxiety_kpop4, ave_anxiety_latin4, ave_anxiety_lofi4, ave_anxiety_metal4, ave_anxiety_pop4, ave_anxiety_rnb4, 
