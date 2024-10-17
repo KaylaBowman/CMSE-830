@@ -235,14 +235,15 @@ if selected_category == "Clean The Data":
     cleaned_data = mxmh_survey_results.copy()
     #I will say the max they could realistically listen to is 16 hrs
     cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
-    cleaned_data.shape
     #deleted 6 rows
     st.markdown("Deleted all instances of Hours Per Day above 16")
+    cleaned_data.shape
 
     #take away age outliers 
     cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
     st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile)")
-
+    cleaned_data.shape
+    
     #recode frequency genre
     st.subheader("Recode Categorical Data")
     st.markdown("Genre Frequencies")
