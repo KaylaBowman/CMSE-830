@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
+import seaborn as sns
 
 #title of the app
 st.title("Music Therapy App")
@@ -43,14 +44,14 @@ plt.grid(True, axis='y', linestyle='--', alpha=0.7)
 st.pyplot(plt)
 
 #distribution 
-st.subheader("Distribution of Features")
+st.header("Distribution of Features")
 
-st.markdown("Age")
+st.subheader("Age")
 #age 
 fig = px.histogram(mxmh_survey_results, x="Age", title="Age Distribution")
 st.plotly_chart(fig)
 
-st.markdown("Streaming Service")
+st.subheader("Streaming Service")
 #streaming service
 platforms = ['Spotify', 'Pandora', 'YouTube Music', 
              'I do not use a streaming service.', 
@@ -66,7 +67,7 @@ plt.ylabel('Streaming Service')
 
 st.pyplot(plt)
 
-st.markdown("Favorite Genre")
+st.subheader("Favorite Genre")
 #fav genre
 plt.figure(figsize=(10, 6))  
 plt.hist(mxmh_survey_results["Fav genre"], bins=16, edgecolor='black')
@@ -80,7 +81,7 @@ plt.xticks(rotation=45)
 
 st.pyplot(plt)
 
-st.markdown("Mental Health Stats")
+st.subheader("Mental Health Stats")
 #anxiety 
 fig = px.histogram(mxmh_survey_results, x="Anxiety", title="Anxiety Distribution")
 st.plotly_chart(fig)
@@ -112,4 +113,17 @@ st.plotly_chart(fig)
 
 fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Pop Listeners")
 st.plotly_chart(fig)
+
+
+st.subheader("Experts")
+
+fig, ax = plt.subplots()
+sns.histplot(data=mxmh_survey_results, x="Composer", bins=2, label="Composers", multiple="stack", ax=ax)
+sns.histplot(data=mxmh_survey_results, x="Instrumentalist", bins=2, label="Instrumentalists", ax=ax)
+
+ax.legend()
+
+ax.set_title("Distribution of Composers and Instrumentalists")
+
+st.pyplot(fig)
 
