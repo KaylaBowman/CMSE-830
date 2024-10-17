@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
+import plotly.figure_factory as ff
 
 #title of the app
 st.title("Welcome To My Music Therapy App")
