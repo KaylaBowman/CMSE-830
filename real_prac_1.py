@@ -10,7 +10,7 @@ import plotly.figure_factory as ff
 st.title("Welcome To My Music Therapy App")
 
 #dropdown menu
-categories = ["The Data", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
+categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
 selected_category = st.selectbox("Choose one:", categories)
 
 
