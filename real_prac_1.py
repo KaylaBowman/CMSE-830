@@ -9,6 +9,7 @@ st.title("Music Therapy App")
 categories = ["The Data", "Investigate The Data", "Clean The Data", "Explore The Data"]
 selected_category = st.selectbox("Choose one:", categories)
 
+
 #display the selected category
 st.write(f"You selected: {selected_category}")
 
