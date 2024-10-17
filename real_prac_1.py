@@ -14,7 +14,7 @@ categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explor
 selected_category = st.selectbox("Choose one:", categories)
 
 
-if selected_category == "The Data":
+if selected_category == "Data Overview":
     
     #display the selected category
     st.write(f"You selected: {selected_category}")
