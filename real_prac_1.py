@@ -445,14 +445,14 @@ if selected_category == "Explore The Data":
 
     #function to create and display a box plot for a specific genre
     def plot_boxplot(genre, score):
-    plt.figure(figsize=(10, 6))  
-    sns.boxplot(data=cleaned_data, x=genre, y=score)
-    #make it so user can choose MH stat and genre
-    plt.title(f'{score} Scores of {genre} Listeners')
-    plt.xlabel(genre)  
-    plt.ylabel(score)  
-    st.pyplot(plt)  
-    plt.clf()  
+        plt.figure(figsize=(10, 6))  
+        sns.boxplot(data=cleaned_data, x=genre, y=score)
+        #make it so user can choose MH stat and genre
+        plt.title(f'{score} Scores of {genre} Listeners')
+        plt.xlabel(genre)  
+        plt.ylabel(score)  
+        st.pyplot(plt)  
+        plt.clf()  
 
     #dropdown menu for selecting a genre
     genre_options = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Classical]", 
