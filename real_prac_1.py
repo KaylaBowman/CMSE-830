@@ -996,8 +996,9 @@ if selected_category == "Explore The Data":
 
     for i, val in enumerate(mh_by_genre["Depression"]):
         if val >= 5:
-            mh_by_genre["Effect"] = 1
+            mh_by_genre.at[i, "Effect"] = 1  
         else:
-            mh_by_genre["Effect"] = 0
+            mh_by_genre.at[i, "Effect"] = 0  
+
 
     mh_by_genre
