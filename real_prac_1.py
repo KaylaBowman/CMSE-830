@@ -479,7 +479,7 @@ if selected_category == "Explore The Data":
     st.subheader("Feature Engineering")
 
     #group average MH scores by highest frequency genre
-    st.markdown("Group average MH scores by all "Very Frequent" genre responses")
+    st.markdown("Group average MH scores by all Very Frequent genre responses")
 
     #making latin subsets based on frequency
     cleaned_data_latin1 = cleaned_data[cleaned_data["Frequency [Latin]"] == 1]
