@@ -30,6 +30,9 @@ if selected_category == "The Data":
 
 if selected_category == "Investigate The Data":
 
+    #load the Data
+    mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
+    
     #missing vals
     st.subheader("Any missing vals?")
     #make a heatmap of the missing data
