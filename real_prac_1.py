@@ -129,6 +129,7 @@ st.pyplot(fig)
 
 #Music Effects
 st.subheader("Music Effects")
+fig, ax = plt.subplots()
 sns.histplot(data=mxmh_survey_results, x='Music effects', hue='Music effects', palette=['red', 'blue', 'green'])
 ax.legend()
 ax.set_title("Distribution of Perceived Music Effects")
