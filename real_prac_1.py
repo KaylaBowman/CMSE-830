@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+import plotly.express as px
 
 #title of the app
 st.title("Music Therapy App")
@@ -41,3 +41,9 @@ num_participants = nan_array.shape[0]
 plt.xticks(np.linspace(0, num_participants-1, min(10, num_participants)).astype(int))
 plt.grid(True, axis='y', linestyle='--', alpha=0.7)
 st.pyplot(plt)
+
+#distribution 
+st.subheader("Distribution of Features")
+#age 
+fig = px.histogram(mxmh_survey_results, x="Age", title="Age Distribution")
+st.plotly_chart(fig)
