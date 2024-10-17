@@ -1644,8 +1644,6 @@ if selected_category == "Get Recommendations":
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
 
-        cbar = plt.colorbar(sm, ax=axes.ravel().tolist(), orientation='vertical')
-        cbar.set_label('Mental Health Score')
         plt.tight_layout()
             
         #show the plot
@@ -1688,8 +1686,6 @@ if selected_category == "Get Recommendations":
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
 
-        cbar = plt.colorbar(sm, ax=axes.ravel().tolist(), orientation='vertical')
-        cbar.set_label('Mental Health Score')
         plt.tight_layout()
             
         #show the plot
