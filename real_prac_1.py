@@ -1609,87 +1609,87 @@ if selected_category == "Get Recommendations":
     categories = ["Mood Increase", "Mood Decrease"]
     selected_category = st.selectbox("Choose a listening goal:", categories)
 
-        if selected_category == "Mood Increase":
+    if selected_category == "Mood Increase":
     
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
+        #display the selected category
+        st.write(f"You selected: {selected_category}")
 
-            st.markdown("Here are your recommended genres:")
-            st.write(increase_recommendations)
+        st.markdown("Here are your recommended genres:")
+        st.write(increase_recommendations)
 
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
+        #include a visualization
+        # Set the plot style
+        sns.set(style="whitegrid")
 
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        # Create a figure and axis
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
             
-            # Create a bar plot for each mental health measure
-            sns.barplot(x='Genre', y='Anxiety', data=df, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
+        # Create a bar plot for each mental health measure
+        sns.barplot(x='Genre', y='Anxiety', data=df, ax=axes[0, 0], palette='viridis')
+        axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 0].set_ylabel('Anxiety Level')
+        axes[0, 0].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='Depression', data=df, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='Depression', data=df, ax=axes[0, 1], palette='viridis')
+        axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_ylabel('Depression Level')
+        axes[0, 1].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='Insomnia', data=df, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='Insomnia', data=df, ax=axes[1, 0], palette='viridis')
+        axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_ylabel('Insomnia Level')
+        axes[1, 0].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='OCD', data=df, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='OCD', data=df, ax=axes[1, 1], palette='viridis')
+        axes[1, 1].set_title('OCD Levels by Genre')
+        axes[1, 1].set_ylabel('OCD Level')
+        axes[1, 1].tick_params(axis='x', rotation=45)
          
-            plt.tight_layout()
+        plt.tight_layout()
             
-            #show the plot
-            st.pyplot(plt)
+        #show the plot
+        st.pyplot(plt)
 
 
-        if selected_category == "Mood Decrease":
+    if selected_category == "Mood Decrease":
     
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
+        #display the selected category
+        st.write(f"You selected: {selected_category}")
 
-            st.markdown("Here are your recommended genres:")
-            st.write(decrease_recommendations)
+        st.markdown("Here are your recommended genres:")
+        st.write(decrease_recommendations)
 
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
+        #include a visualization
+        # Set the plot style
+        sns.set(style="whitegrid")
 
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        # Create a figure and axis
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
             
-            # Create a bar plot for each mental health measure
-            sns.barplot(x='Genre', y='Anxiety', data=df, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
+        # Create a bar plot for each mental health measure
+        sns.barplot(x='Genre', y='Anxiety', data=df, ax=axes[0, 0], palette='viridis')
+        axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 0].set_ylabel('Anxiety Level')
+        axes[0, 0].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='Depression', data=df, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='Depression', data=df, ax=axes[0, 1], palette='viridis')
+        axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_ylabel('Depression Level')
+        axes[0, 1].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='Insomnia', data=df, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='Insomnia', data=df, ax=axes[1, 0], palette='viridis')
+        axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_ylabel('Insomnia Level')
+        axes[1, 0].tick_params(axis='x', rotation=45)
             
-            sns.barplot(x='Genre', y='OCD', data=df, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
+        sns.barplot(x='Genre', y='OCD', data=df, ax=axes[1, 1], palette='viridis')
+        axes[1, 1].set_title('OCD Levels by Genre')
+        axes[1, 1].set_ylabel('OCD Level')
+        axes[1, 1].tick_params(axis='x', rotation=45)
          
-            plt.tight_layout()
+        plt.tight_layout()
             
-            #show the plot
-            st.pyplot(plt)
+        #show the plot
+        st.pyplot(plt)
     
         
