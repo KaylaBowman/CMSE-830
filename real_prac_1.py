@@ -23,7 +23,7 @@ if selected_category == "Data Overview":
     st.subheader("What does the first dataset look like?")
     st.markdown("* found this dataset on [Kaggle](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results)")
     st.markdown("* this one will build our recommendation system by providing info on the relationships between listening habits and mental health")
-    st.markdown("* mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary)
+    st.markdown("* mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary")
     st.markdown("Feature description:")
     st.write("* all observations are self-reported")
     st.write("* 16 unique genres are considered")
