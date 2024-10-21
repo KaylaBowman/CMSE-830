@@ -18,7 +18,7 @@ if selected_category == "Data Overview":
 
     
     #display the selected category
-    st.write(f"You selected: {selected_category}")
+    #st.write(f"You selected: {selected_category}")
     
     #markdown section
     st.subheader("What does the first [dataset](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results) look like?")
@@ -55,7 +55,7 @@ if selected_category == "Data Overview":
 
 if selected_category == "Investigate The Data":
     
-    st.title("Investigate The Data")
+    st.title("Music Therapy: Investigate The Data")
 
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
@@ -306,7 +306,7 @@ if selected_category == "Clean The Data":
 
 if selected_category == "Explore The Data":
     
-    st.title("Explore The Data")
+    st.title("Music Therapy: Explore The Data")
 
     ##########repeating the filtering so I can use the filtered_dataset here
     
@@ -1030,7 +1030,7 @@ if selected_category == "Explore The Data":
 
 if selected_category == "Get Recommendations":
 
-    st.title("Get Recommendations")
+    st.title("Music Therapy: Get Recommendations")
 
 
     ########################repeating data edits so this dropdown option can use the same updated data
