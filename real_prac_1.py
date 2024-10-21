@@ -392,6 +392,7 @@ if selected_category == "Clean The Data":
     genre_counts = cleaned_data["Fav genre"].value_counts()
     
     #create the bar chart
+    plt.figure(figsize=(10, 6))
     plt.bar(genre_counts.index, genre_counts.values, color='skyblue', edgecolor='black')
     
     #set the title and labels
@@ -447,6 +448,7 @@ if selected_category == "Clean The Data":
 
     st.write("Less imbalanced distribution after reducing outlier frequencies to the median frequency:")
 
+    plt.figure(figsize=(10, 6))
     plt.hist(cleaned_data["Fav genre"], bins=15, edgecolor='black')
 
     #set the title of the plot
