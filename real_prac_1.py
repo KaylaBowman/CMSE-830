@@ -365,6 +365,7 @@ if selected_category == "Clean The Data":
     frequency_subset = cleaned_data[frequency_columns]
     
     #see the changes
+    st.markdown("See these changes in the following subset:")
     st.write(frequency_subset.head())  
 
 if selected_category == "Explore The Data":
