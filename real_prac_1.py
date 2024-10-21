@@ -467,6 +467,7 @@ if selected_category == "Clean The Data":
     
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
     plt.xticks(rotation=45)
     st.pyplot(plt)
 
@@ -510,6 +511,7 @@ if selected_category == "Clean The Data":
     
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
     plt.xticks(rotation=45)
     st.pyplot(plt)
 
