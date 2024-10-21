@@ -368,6 +368,63 @@ if selected_category == "Clean The Data":
     st.markdown("See these changes in the following subset:")
     st.write(frequency_subset.head())  
 
+    st.subheader("Handle Imbalance")
+    st.markdown("Fav Genre")
+    st.write("When deleting Age outliers, one Fav Genre was deleted (Latin). Now the remaining participants represent 15 favorite genres. I made Fav Genre more balanced by reducing the three outliers (rock, metal, pop) to have the mean count of Fav Genre (21). Please see these changes below.")
+    st.write("Imbalanced distribution before reducing outlier frequencies to the median frequency:")
+    plt.hist(cleaned_data["Fav genre"], bins=15, edgecolor='black')
+
+    #set the title of the plot
+    plt.title('Distribution of Fav Genre')
+    
+    #set the x-axis title
+    plt.xlabel('Fav Genre')
+    plt.xticks(rotation=45)
+
+    st.pyplot(plt)
+
+
+    #get the median frequency
+    values = cleaned_data["Fav genre"].value_counts()
+    #values.median()
+
+    #make the changes to rock
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Rock"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Rock"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+    
+    #make the changes to metal
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Metal"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Metal"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+
+    #make the changes to pop
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Pop"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Pop"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+
+    st.write("Less imbalanced distribution after reducing outlier frequencies to the median frequency:")
+
+    plt.hist(cleaned_data["Fav genre"], bins=15, edgecolor='black')
+
+    #set the title of the plot
+    plt.title('Distribution of Fav Genre')
+    
+    #set the x-axis title
+    plt.xlabel('Fav Genre')
+    plt.xticks(rotation=45)
+
+    st.pyplot(plt)
+
 if selected_category == "Explore The Data":
     
     st.title("Music Therapy: Explore The Data")
