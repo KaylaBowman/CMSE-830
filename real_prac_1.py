@@ -445,7 +445,7 @@ if selected_category == "Clean The Data":
     st.write("I balanced anxiety by undersampling, considering two classes: values below 5 and above 5")
     st.write("Before:")
 
-    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    #original before plot
     plt.figure(figsize=(10, 6))
     plt.hist(cleaned_data["Anxiety"], bins=11, edgecolor='black')
     
@@ -455,8 +455,10 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Fav Genre')
     plt.xticks(rotation=45)
+    st.pyplot(plt)
 
     #plot of binary before
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
     plt.figure(figsize=(10, 6))
     plt.hist(cleaned_data["Anxiety_category"], bins=11, edgecolor='black')
     
@@ -466,6 +468,7 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
     plt.xticks(rotation=45)
+    st.pyplot(plt)
 
     ##############balance anxiety 
     #reset index
@@ -508,6 +511,7 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
     plt.xticks(rotation=45)
+    st.pyplot(plt)
 
     #drop that column again
     cleaned_data = cleaned_data.drop(["Anxiety_category"], axis=1) 
