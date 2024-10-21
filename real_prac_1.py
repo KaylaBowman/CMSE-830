@@ -440,7 +440,8 @@ if selected_category == "Clean The Data":
     
     #display the plot 
     st.pyplot(plt)
-    
+
+    #######now anxiety balance
     st.subheader("Handle imbalance of Anxiety")
     st.write("I balanced anxiety by undersampling, considering two classes: values below 5 and above 5")
     st.write("Before:")
@@ -453,8 +454,7 @@ if selected_category == "Clean The Data":
     plt.title('Distribution of Original Anxiety')
     
     #set the x-axis title
-    plt.xlabel('Fav Genre')
-    plt.xticks(rotation=45)
+    plt.xlabel('Anxiety Score')
     st.pyplot(plt)
 
     #plot of binary before
@@ -468,7 +468,6 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
     plt.xticks([0, 1])
-    plt.xticks(rotation=45)
     st.pyplot(plt)
 
     ##############balance anxiety 
@@ -512,7 +511,6 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
     plt.xticks([0, 1])
-    plt.xticks(rotation=45)
     st.pyplot(plt)
 
     #drop that column again
