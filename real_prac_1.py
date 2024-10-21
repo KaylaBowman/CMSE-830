@@ -21,10 +21,10 @@ if selected_category == "Data Overview":
     
     #markdown section
     st.subheader("What does the first [dataset](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results) look like?")
-    st.markdown("* this one will build our recommendation system by providing info on the relationships between listening habits and mental health")
-    st.markdown("* mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary")
+    st.markdown("* Purpose: this dataset will build our recommendation system by providing info on the relationships between listening habits and mental health")
+    st.markdown("* Mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary")
     st.markdown("Feature description:")
-    st.write("* all observations are self-reported")
+    st.write("* All observations are self-reported")
     st.write("* 16 unique genres are considered")
     st.write("* BMP = Beats per minute of favorite genre")
     st.write("* All feature descriptions are on the link above")
@@ -37,13 +37,12 @@ if selected_category == "Data Overview":
 
     #markdown section
     st.subheader("What does the second [dataset](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019) look like?")
-    st.markdown("* this one will provide a libary to pull songs from based on user input")
+    st.markdown("* Purpose: this dataset will provide a libary to pull songs from based on user input")
+    st.markdown("* Mixture of data types (ex: Artist: Nominal, Duration_ms: Ratio, Popularity: Ordinal, Explicit: Binary")
     st.markdown("Feature description:")
-    st.write("* valence: positivity of the track, 0 to 1")
-    st.write("* tempo: beats per minute")
-    st.write("* liveness: identifies probability of whether the song was performed live based on sounds of an auidence")
-    st.write("* danceability: considers tempo, beat strength, and rhythm stability")
-    st.write("* energy: intensity of song, 0 to 1")
+    st.write("* Valence: positivity of the track, 0 to 1")
+    st.write("* Danceability: considers tempo, beat strength, and rhythm stability")
+    st.write("* Energy: intensity of song, 0 to 1")
     st.write("* All feature descriptions are on the link above")
 
     
