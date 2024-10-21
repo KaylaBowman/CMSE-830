@@ -148,7 +148,7 @@ if selected_category == "Investigate The Data":
     
     
     #frequency
-    st.markdown("Genre Frequency")
+    st.subheader("Genre Frequency")
     
     fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Latin Listeners")
     st.plotly_chart(fig)
