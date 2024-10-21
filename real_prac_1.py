@@ -209,14 +209,15 @@ if selected_category == "Investigate The Data":
     ax.set_title("Distribution of Perceived Music Effects")
     st.pyplot(fig)
     
-    #look at outliers
-    st.subheader("Any Outliers?")
-    
+    st.subheader("Hours Per Day")
     fig, ax = plt.subplots()
     sns.histplot(data=mxmh_survey_results, x='Hours per day')
     ax.legend()
     ax.set_title("Hours Per Day")
     st.pyplot(fig)
+
+    #look at outliers
+    st.subheader("Any Outliers?")
     
     #hour outliers
     num_24_hours = sum(mxmh_survey_results['Hours per day'] == 24)
