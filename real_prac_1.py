@@ -436,6 +436,77 @@ if selected_category == "Clean The Data":
     #display the plot 
     st.pyplot(plt)
     
+    st.subheader("Handle imbalance of Anxiety")
+    st.write("I balanced anxiety by undersampling, considering two classes: values below 5 and above 5")
+    st.write("Before:")
+
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Anxiety"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Anxiety')
+    
+    #set the x-axis title
+    plt.xlabel('Fav Genre')
+    plt.xticks(rotation=45)
+
+    #plot of binary before
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Anxiety_category"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Anxiety as a Binary')
+    
+    #set the x-axis title
+    plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    plt.xticks(rotation=45)
+
+    ##############balance anxiety 
+    X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
+    y = cleaned_data["Anxiety_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    resampled_indices = rus.sample_indices_
+
+    anxiety_resampled = cleaned_data.loc[resampled_indices, "Anxiety"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Anxiety"] = anxiety_resampled.values  
+
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+
+
+    st.markdown("Binary Anxiety after handling imbalance:)
+    #plot of binary after
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Anxiety_category"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Anxiety as a Binary')
+    
+    #set the x-axis title
+    plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    plt.xticks(rotation=45)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if selected_category == "Explore The Data":
