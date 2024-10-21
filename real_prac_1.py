@@ -356,8 +356,16 @@ if selected_category == "Clean The Data":
     cleaned_data["Frequency [Lofi]"] = cleaned_data["Frequency [Lofi]"].replace(frequency_mapping)
     cleaned_data["Frequency [Gospel]"] = cleaned_data["Frequency [Gospel]"].replace(frequency_mapping)
 
+    #make a subset so users can see the changes
+    frequency_columns = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Video game music]", "Frequency [Jazz]",
+    "Frequency [R&B]", "Frequency [K pop]", "Frequency [Country]", "Frequency [EDM]", "Frequency [Hip hop]",
+    "Frequency [Pop]", "Frequency [Rap]", "Frequency [Classical]", "Frequency [Metal]", "Frequency [Folk]",
+    "Frequency [Lofi]", "Frequency [Gospel]"]
+
+    frequency_subset = cleaned_data[frequency_columns]
+    
     #see the changes
-    st.write(cleaned_data.head())  
+    st.write(frequency_subset.head())  
 
 if selected_category == "Explore The Data":
     
