@@ -142,6 +142,9 @@ if selected_category == "Investigate The Data":
         title='Frequency Distribution of Mental Health Scores'
     )
     
+    #remove x-axis gridlines
+    fig.update_layout(xaxis=dict(showgrid=False)
+    
     #show the plot 
     st.plotly_chart(fig)
 
@@ -176,6 +179,9 @@ if selected_category == "Investigate The Data":
                            'Frequency': ['never', 'rarely', 'sometimes', 'very frequently']  # Custom order
                        },
                        title='Frequency Distribution of Music Genres')
+    
+    #remove x-axis gridlines
+    fig.update_layout(xaxis=dict(showgrid=False)
     
     #show the plot 
     st.plotly_chart(fig)
