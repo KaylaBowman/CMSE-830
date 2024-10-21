@@ -6,13 +6,13 @@ import plotly.express as px
 import seaborn as sns
 import plotly.figure_factory as ff
 
-#title of the app
-st.title("Welcome To My Music Therapy App")
-
 #dropdown menu
 categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
 selected_category = st.selectbox("Choose one:", categories)
 
+#title of the app
+st.title("Welcome To My Music Therapy App")
+st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to cause changes in mood, but rather are associated with changes in mood.")
 
 if selected_category == "Data Overview":
     
