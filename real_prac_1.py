@@ -149,18 +149,37 @@ if selected_category == "Investigate The Data":
     
     #frequency
     st.subheader("Genre Frequency")
+
+    #make a subset so we're only focused on the frequency columns
+    frequency_subset = mxmh_survey_results[['Frequency [Classical]',
+           'Frequency [Country]', 'Frequency [EDM]', 'Frequency [Folk]',
+           'Frequency [Gospel]', 'Frequency [Hip hop]', 'Frequency [Jazz]',
+           'Frequency [K pop]', 'Frequency [Latin]', 'Frequency [Lofi]',
+           'Frequency [Metal]', 'Frequency [Pop]', 'Frequency [R&B]',
+           'Frequency [Rap]', 'Frequency [Rock]', 'Frequency [Video game music]']]
     
-    fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Latin Listeners")
+    
+    #rename the columns to keep only genre names using str.replace()
+    frequency_subset.columns = frequency_subset.columns.str.replace(r'Frequency \[(.*)\]', r'\1', regex=True)
+    
+    #convert the dataset from wide to long format
+    ##the melt function reshapes the dataframe so that all genre frequencies are in a single column, with an additional column indicating the genre.
+    long_format_df = frequency_subset.melt(var_name='Genre', value_name='Frequency')
+    
+    #create the histogram
+    fig = px.histogram(long_format_df, 
+                       x='Genre',  ######### x = frequency and color = genre will give you 4 sets of 16 bars
+                       color='Frequency',  ###########
+                      #this will give me 16 sets of 4 bars instead of 4 overlaid sets of bars
+                       barmode='group', 
+                       category_orders={
+                           'Frequency': ['never', 'rarely', 'sometimes', 'very frequently']  # Custom order
+                       },
+                       title='Frequency Distribution of Music Genres')
+    
+    #show the plot 
     st.plotly_chart(fig)
     
-    fig = px.histogram(mxmh_survey_results, x=('Frequency [Rock]'), title="Frequency of Rock Listeners")
-    st.plotly_chart(fig)
-    
-    fig = px.histogram(mxmh_survey_results, x=('Frequency [Classical]'), title="Frequency of Latin Listeners")
-    st.plotly_chart(fig)
-    
-    fig = px.histogram(mxmh_survey_results, x=('Frequency [Latin]'), title="Frequency of Pop Listeners")
-    st.plotly_chart(fig)
     
     #Experts
     st.subheader("Experts")
