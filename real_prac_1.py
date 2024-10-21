@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
 import plotly.figure_factory as ff
+import plotly.graph_objs as go 
+from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
+#import the undersampling package
+from imblearn.under_sampling import RandomUnderSampler
 
 #dropdown menu
 categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
