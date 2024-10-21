@@ -90,6 +90,7 @@ if selected_category == "Investigate The Data":
     #age 
     fig = px.histogram(mxmh_survey_results, x="Age", title="Age Distribution")
     st.plotly_chart(fig)
+    st.markdown("Most participants are in their 20s and 30s.")
     
     st.subheader("Streaming Service")
     #streaming service
@@ -97,6 +98,7 @@ if selected_category == "Investigate The Data":
                  'I do not use a streaming service.', 
                  'Apple Music', 'Other streaming service']
     popularity = [458, 11, 94, 71, 51, 0]
+    
     
     #create a horizontal bar plot
     plt.figure(figsize=(10, 6))  # Set the figure size
@@ -106,6 +108,7 @@ if selected_category == "Investigate The Data":
     plt.ylabel('Streaming Service')
     
     st.pyplot(plt)
+    st.markdown("Most participants stream music with Spotify.")
     
     st.subheader("Favorite Genre")
     #fav genre
@@ -120,6 +123,8 @@ if selected_category == "Investigate The Data":
     plt.xticks(rotation=45) 
     
     st.pyplot(plt)
+
+    st.markdown("Most participants are fans of rock.")
     
     st.subheader("Mental Health Stats")
 
@@ -149,7 +154,7 @@ if selected_category == "Investigate The Data":
     #show the plot 
     st.plotly_chart(fig)
 
-    
+    st.markdown("Most participants experience anxiety and depression but not OCD or insomnia as much.")
     
     #frequency
     st.subheader("Genre Frequency")
@@ -200,6 +205,8 @@ if selected_category == "Investigate The Data":
     ax.set_title("Distribution of Composers and Instrumentalists")
     
     st.pyplot(fig)
+
+    st.markdown("Most of the participants are not instrumentalists nor composers.")
     
     #Music Effects
     st.subheader("Music Effects")
@@ -208,6 +215,8 @@ if selected_category == "Investigate The Data":
     ax.legend()
     ax.set_title("Distribution of Perceived Music Effects")
     st.pyplot(fig)
+
+    st.markdown("Most of the participants say music does have a positive effect on their mental health.")
     
     st.subheader("Hours Per Day")
     fig, ax = plt.subplots()
