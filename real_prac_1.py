@@ -468,6 +468,9 @@ if selected_category == "Clean The Data":
     plt.xticks(rotation=45)
 
     ##############balance anxiety 
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+
     X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
     y = cleaned_data["Anxiety_category"] 
     
