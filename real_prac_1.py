@@ -141,9 +141,10 @@ if selected_category == "Investigate The Data":
         barmode='group', 
         title='Frequency Distribution of Mental Health Scores'
     )
-    
+
+    #trying to get rid of the gridlines to follow Tufte's rules
     #remove x-axis gridlines
-    fig.update_layout(xaxis=dict(showgrid=False))
+    fig.update_layout(plot_bgcolor='white')
     
     #show the plot 
     st.plotly_chart(fig)
