@@ -38,11 +38,11 @@ if selected_category == "Data Overview":
     #markdown section
     st.subheader("What does the second [dataset](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019) look like?")
     st.markdown("* Purpose: this dataset will provide a libary to pull songs from based on user input")
-    st.markdown("* Mixture of data types (ex: Artist: Nominal, Duration_ms: Ratio, Popularity: Ordinal, Explicit: Binary")
+    st.markdown("* Mixture of data types (ex: Artist: Nominal, Duration_ms: Ratio, Popularity: Ordinal, Explicit: Binary)")
     st.markdown("Feature description:")
-    st.write("* Valence: positivity of the track, 0 to 1")
+    st.write("* Valence: positivity of the track (0 to 1)")
     st.write("* Danceability: considers tempo, beat strength, and rhythm stability")
-    st.write("* Energy: intensity of song, 0 to 1")
+    st.write("* Energy: intensity of song, (0 to 1)")
     st.write("* All feature descriptions are on the link above")
 
     
