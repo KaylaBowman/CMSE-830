@@ -320,12 +320,12 @@ if selected_category == "Clean The Data":
     #I will say the max they could realistically listen to is 16 hrs
     cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
     #deleted 6 rows
-    st.markdown("Deleted all instances of Hours Per Day above 16")
+    st.markdown("Deleted all instances of Hours Per Day above 16. This deleted 6 rows of observations.")
     cleaned_data.shape
 
     #take away age outliers 
     cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
-    st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile)")
+    st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile). This deleted 50 rows of observations.")
     cleaned_data.shape
     
     #recode frequency genre
