@@ -174,6 +174,11 @@ if selected_category == "Investigate The Data":
     #convert the dataset from wide to long format
     ##the melt function reshapes the dataframe so that all genre frequencies are in a single column, with an additional column indicating the genre.
     long_format_df = frequency_subset.melt(var_name='Genre', value_name='Frequency')
+
+    #order 'Frequency' column chronologically 
+    order = ['Anxiety', 'Depression', 'OCD', 'Insomnia']
+    long_format_df['Score'] = pd.Categorical(long_format_df['Score'], categories=order, ordered=True)
+
     
     #create the histogram
     fig = px.histogram(long_format_df, 
