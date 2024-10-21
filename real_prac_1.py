@@ -20,14 +20,26 @@ if selected_category == "Data Overview":
     st.write(f"You selected: {selected_category}")
     
     #markdown section
-    st.subheader("What does the data look like?")
+    st.subheader("What does the first dataset look like?")
     st.markdown("* found this dataset on [Kaggle](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results)")
+     st.markdown("* this one will build our recommendation system by providing info on the relationships between listening habits and mental health")
     
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
         
     #display the data
     st.write(mxmh_survey_results.head())  
+
+    #markdown section
+    st.subheader("What does the second dataset look like?")
+    st.markdown("* also found this dataset on [Kaggle](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019)")
+    st.markdown("* this one will provide a libary to pull songs from based on user input")
+
+    #load the Data
+    songs = pd.read_csv("songs_normalize.csv")
+        
+    #display the data
+    st.write(songs.head())  
 
 if selected_category == "Investigate The Data":
 
