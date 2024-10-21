@@ -492,6 +492,11 @@ if selected_category == "Clean The Data":
 
 
     st.markdown("Binary Anxiety after handling imbalance:")
+
+    #remake this column so we can plot it
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+
+    
     #plot of binary after
 
     plt.figure(figsize=(10, 6))
@@ -503,6 +508,9 @@ if selected_category == "Clean The Data":
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
     plt.xticks(rotation=45)
+
+    #drop that column again
+    cleaned_data = cleaned_data.drop(["Anxiety_category"], axis=1) 
 
 
 
