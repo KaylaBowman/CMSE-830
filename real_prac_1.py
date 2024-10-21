@@ -127,19 +127,13 @@ if selected_category == "Investigate The Data":
     import pandas as pd
     import plotly.express as px
     
-    # Load your dataset (assuming it's available as a CSV)
-    # You can allow file upload or read directly if local:
-    # mxmh_survey_results = pd.read_csv('your_dataset.csv')
-    
-    st.title("Frequency Distribution of Mental Health Scores")
-    
-    # Make a subset so we're only focused on the frequency columns
+    #make a subset so we're only focused on the frequency columns
     mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
     
-    # Convert the dataset from wide to long format
+    #convert the dataset from wide to long format
     long_format_df = mh_subset.melt(var_name='Score', value_name='Frequency')
 
-    # Create the histogram
+    #create the histogram
     fig = px.histogram(
         long_format_df, 
         x='Score', 
@@ -148,7 +142,7 @@ if selected_category == "Investigate The Data":
         title='Frequency Distribution of Mental Health Scores'
     )
     
-    # Show the plot in Streamlit
+    #show the plot 
     st.plotly_chart(fig)
 
     
