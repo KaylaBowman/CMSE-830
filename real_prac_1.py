@@ -76,7 +76,13 @@ if selected_category == "Investigate The Data":
     plt.xticks(np.linspace(0, num_participants-1, min(10, num_participants)).astype(int))
     plt.grid(True, axis='y', linestyle='--', alpha=0.7)
     st.pyplot(plt)
-    
+
+    #plans for missing vals
+    st.markdown("Plans To Handle Missing Data")
+    st.write("* Age will not be included in main analysis (listening habits and mental health), so outliers will be handled, but missing age values will not be.")
+    st.write("* Missing BPM vals will be replaced by the median of the genre each missing BMP belongs to. Please choose the Clean The Data tab to see how this is done.")
+    st. write("* As for Primary Streaming Serive, While Working, Music Effects, Instrumentalist, and Foreign Language, these missing vals will not be handled because they don't impact the main analysis. The purpose of this is to retain the important info of those observations (mental health scores and listening frequencies).")
+
     #distribution 
     st.header("Distribution of Features")
     
@@ -116,21 +122,35 @@ if selected_category == "Investigate The Data":
     st.pyplot(plt)
     
     st.subheader("Mental Health Stats")
-    #anxiety 
-    fig = px.histogram(mxmh_survey_results, x="Anxiety", title="Anxiety Distribution")
-    st.plotly_chart(fig)
+
+    import streamlit as st
+    import pandas as pd
+    import plotly.express as px
     
-    #depression
-    fig = px.histogram(mxmh_survey_results, x="Depression", title="Depression Distribution")
-    st.plotly_chart(fig)
+    # Load your dataset (assuming it's available as a CSV)
+    # You can allow file upload or read directly if local:
+    # mxmh_survey_results = pd.read_csv('your_dataset.csv')
     
-    #insomnia
-    fig = px.histogram(mxmh_survey_results, x="Insomnia", title="Insomnia Distribution")
-    st.plotly_chart(fig)
+    st.title("Frequency Distribution of Mental Health Scores")
     
-    #OCD
-    fig = px.histogram(mxmh_survey_results, x="OCD", title="OCD Distribution")
+    # Make a subset so we're only focused on the frequency columns
+    mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
+    
+    # Convert the dataset from wide to long format
+    long_format_df = mh_subset.melt(var_name='Score', value_name='Frequency')
+
+    # Create the histogram
+    fig = px.histogram(
+        long_format_df, 
+        x='Score', 
+        color='Frequency', 
+        barmode='group', 
+        title='Frequency Distribution of Mental Health Scores'
+    )
+    
+    # Show the plot in Streamlit
     st.plotly_chart(fig)
+
     
     
     #frequency
