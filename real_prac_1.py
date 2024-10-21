@@ -506,7 +506,7 @@ if selected_category == "Clean The Data":
     plt.hist(cleaned_data["Anxiety_category"], bins=11, edgecolor='black')
     
     #set the title of the plot
-    plt.title('Distribution of Original Anxiety as a Binary')
+    plt.title('Distribution of Balanced Anxiety as a Binary')
     
     #set the x-axis title
     plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
@@ -586,7 +586,7 @@ if selected_category == "Clean The Data":
     plt.hist(cleaned_data["Depression_category"], bins=11, edgecolor='black')
     
     #set the title of the plot
-    plt.title('Distribution of Original Depression as a Binary')
+    plt.title('Distribution of Balanced Depression as a Binary')
     
     #set the x-axis title
     plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
@@ -598,6 +598,27 @@ if selected_category == "Clean The Data":
 
     #reset index just in case
     cleaned_data.reset_index(drop=True, inplace=True)
+
+
+
+    ###########see that I should stop balancing now
+
+    st.markdown("Here, I decided not to balance OCD and insomnia because balancing depression made anxiety imbalanced again. (Please see the plot below.) This happened because undersampling deletes observations, so each time I use undersampling, the class balance is affected. So, I'll stop balancing here.")
+
+    #create the Anxiety_category column 
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    
+    #create the plot
+    fig, ax = plt.subplots(figsize=(10, 6))  
+    sns.histplot(data=cleaned_data, x='Anxiety_category', ax=ax)
+    
+    #set title and labels
+    ax.set_title('Distribution of Anxiety After Balancing Depression')
+    ax.set_xlabel('Anxiety Category')
+    ax.set_ylabel('Count')
+    
+    #display the plot 
+    st.pyplot(fig)
 
 
 
