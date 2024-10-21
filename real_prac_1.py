@@ -10,11 +10,12 @@ import plotly.figure_factory as ff
 categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
 selected_category = st.selectbox("Choose a section of this project to explore:", categories)
 
-#title of the app
-st.title("Welcome To My Music Therapy App")
-st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
-
 if selected_category == "Data Overview":
+    
+    #title of the app
+    st.title("Welcome To My Music Therapy App")
+    st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+
     
     #display the selected category
     st.write(f"You selected: {selected_category}")
@@ -42,7 +43,7 @@ if selected_category == "Data Overview":
     st.markdown("Feature description:")
     st.write("* Valence: positivity of the track (0 to 1)")
     st.write("* Danceability: considers tempo, beat strength, and rhythm stability")
-    st.write("* Energy: intensity of song, (0 to 1)")
+    st.write("* Energy: intensity of song (0 to 1)")
     st.write("* All feature descriptions are on the link above")
 
     
@@ -53,6 +54,8 @@ if selected_category == "Data Overview":
     st.write(songs.head())  
 
 if selected_category == "Investigate The Data":
+    
+    st.title("Investigate The Data")
 
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
@@ -185,6 +188,8 @@ if selected_category == "Investigate The Data":
 
 if selected_category == "Clean The Data":
 
+    st.title("Clean The Data")
+
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
     
@@ -300,6 +305,8 @@ if selected_category == "Clean The Data":
     st.write(cleaned_data.head())  
 
 if selected_category == "Explore The Data":
+    
+    st.title("Explore The Data")
 
     ##########repeating the filtering so I can use the filtered_dataset here
     
@@ -1023,8 +1030,10 @@ if selected_category == "Explore The Data":
 
 if selected_category == "Get Recommendations":
 
+    st.title("Get Recommendations")
 
-    ########################repeating so this dropdown option can use the same updated data
+
+    ########################repeating data edits so this dropdown option can use the same updated data
 
     
     #load the Data
