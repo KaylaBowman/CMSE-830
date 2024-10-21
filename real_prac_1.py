@@ -22,7 +22,7 @@ if selected_category == "Data Overview":
     #markdown section
     st.subheader("What does the first dataset look like?")
     st.markdown("* found this dataset on [Kaggle](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results)")
-     st.markdown("* this one will build our recommendation system by providing info on the relationships between listening habits and mental health")
+    st.markdown("* this one will build our recommendation system by providing info on the relationships between listening habits and mental health")
     
     #load the Data
     mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
