@@ -90,7 +90,7 @@ if selected_category == "Investigate The Data":
     #age 
     fig = px.histogram(mxmh_survey_results, x="Age", title="Age Distribution")
     st.plotly_chart(fig)
-    st.markdown("Most participants are in their 20s and 30s.")
+    st.markdown("Most participants are between late teens and late 20s.")
     
     st.subheader("Streaming Service")
     #streaming service
