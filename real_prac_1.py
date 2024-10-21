@@ -483,7 +483,7 @@ if selected_category == "Clean The Data":
     cleaned_data.reset_index(drop=True, inplace=True)
 
 
-    st.markdown("Binary Anxiety after handling imbalance:)
+    st.markdown("Binary Anxiety after handling imbalance:")
     #plot of binary after
 
     plt.figure(figsize=(10, 6))
