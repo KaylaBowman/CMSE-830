@@ -417,7 +417,7 @@ if selected_category == "Clean The Data":
     #drop the selected indices from the DataFrame
     cleaned_data = cleaned_data.drop(random_idx)
 
-    st.write("Less imbalanced distribution after reducing outlier frequencies to the median frequency:")
+    st.write("Less imbalanced distribution after reducing outlier frequencies to the median frequency. Keeping the same y-axis range so the difference can be compared:")
 
     #count the occurrences of each genre
     genre_counts = cleaned_data["Fav genre"].value_counts()
