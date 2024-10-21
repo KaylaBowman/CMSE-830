@@ -370,18 +370,51 @@ if selected_category == "Clean The Data":
 
     st.subheader("Handle Imbalance")
     st.markdown("Fav Genre")
-    st.write("When deleting Age outliers, one Fav Genre was deleted (Latin). Now the remaining participants represent 15 favorite genres. I made Fav Genre more balanced by reducing the three outliers (rock, metal, pop) to have the mean count of Fav Genre (21). Please see these changes below.")
+    st.write("* When deleting Age outliers, one Fav Genre was deleted (Latin). Now the remaining participants represent 15 favorite genres. I made Fav Genre more balanced by reducing the three outliers (rock, metal, pop) to have the mean count of Fav Genre (21). Please see these changes below.")
     st.write("Imbalanced distribution before reducing outlier frequencies to the median frequency:")
-    plt.hist(cleaned_data["Fav genre"], bins=15, edgecolor='black')
-
-    #set the title of the plot
-    plt.title('Distribution of Fav Genre')
     
-    #set the x-axis title
-    plt.xlabel('Fav Genre')
-    plt.xticks(rotation=45)
+    # plt.hist(cleaned_data["Fav genre"], bins=15, edgecolor='black')
 
+    # #set the title of the plot
+    # plt.title('Distribution of Fav Genre')
+    
+    # #set the x-axis title
+    # plt.xlabel('Fav Genre')
+    # plt.xticks(rotation=45)
+
+    # st.pyplot(plt)
+
+
+
+
+    
+    #count the occurrences of each genre
+    genre_counts = cleaned_data["Fav genre"].value_counts()
+    
+    #create the bar chart
+    plt.bar(genre_counts.index, genre_counts.values, color='skyblue', edgecolor='black')
+    
+    #set the title and labels
+    plt.title('Distribution of Fav Genre')
+    plt.xlabel('Fav Genre')
+    plt.ylabel('Count')
+    plt.xticks(rotation=45)
+    
+    #display the plot 
     st.pyplot(plt)
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
     #get the median frequency
