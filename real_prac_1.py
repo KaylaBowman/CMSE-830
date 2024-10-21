@@ -516,6 +516,89 @@ if selected_category == "Clean The Data":
     #drop that column again
     cleaned_data = cleaned_data.drop(["Anxiety_category"], axis=1) 
 
+    #reset index just incase
+    cleaned_data.reset_index(drop=True, inplace=True)
+
+    ######now balance depression
+    st.subheader("Handle imbalance of Depression")
+    st.write("I balanced depression by undersampling, considering two classes: values below 5 and above 5")
+    st.write("Before:")
+    
+
+
+    #original before plot
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Depression"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Depression')
+    
+    #set the x-axis title
+    plt.xlabel('Depression Score')
+    st.pyplot(plt)
+
+    #plot of binary before
+    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Depression_category"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Depression as a Binary')
+    
+    #set the x-axis title
+    plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
+    ##############balance depression
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+
+    X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
+    y = cleaned_data["Depression_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    resampled_indices = rus.sample_indices_
+
+    depression_resampled = cleaned_data.loc[resampled_indices, "Depression"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Depression"] = depression_resampled.values  
+
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+
+
+    st.markdown("Binary Depression after handling imbalance:")
+
+    #remake this column so we can plot it
+    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
+
+    
+    #plot of binary after
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(cleaned_data["Depression_category"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Original Depression as a Binary')
+    
+    #set the x-axis title
+    plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
+    #drop that column again
+    cleaned_data = cleaned_data.drop(["Depression_category"], axis=1) 
+
+    #reset index just in case
+    cleaned_data.reset_index(drop=True, inplace=True)
+
 
 
 
