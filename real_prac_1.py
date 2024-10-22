@@ -985,6 +985,89 @@ if selected_category == "Explore The Data":
 
 
 
+    songs = pd.read_csv("songs_normalize.csv")
+
+    songs = songs[songs["explicit"] == False]
+    st.write(songs.head())  
+
+    st.markdown("Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
+    songs["genre"] = songs["genre"].str.split(",")
+
+    #explode the dataset so each genre gets its own row
+    ######explode() expands the list of genres so each genre has its own row, duplicating other information about the song.
+    #####reset_index(drop=True)  resets the index to keep things neat after exploding.
+    songs_expanded = songs.explode("genre").reset_index(drop=True)
+    
+    
+
+    #make sure genres are consistent
+    #songs_expanded["genre"]==[" Folk/Acoustic"].replace("Folk/Acoustic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" Folk/Acoustic", "Folk/Acoustic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" Dance/Electronic", "Dance/Electronic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" pop", "pop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" hip hop", "hip hop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" country", "country")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" metal", "metal")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" R&B", "R&B")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" rock", "rock")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" easy listening", "easy listening")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" latin", "latin")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" classical", "classical")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" blues", "blues")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" jazz", "Jazz")
+
+    #changing capitalization and wording
+    songs_expanded["genre"] = songs_expanded["genre"].replace("pop", "Pop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("rock", "Rock")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("country", "Country")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("metal", "Metal")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("hip hop", "Hip hop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("Dance/Electronic", "EDM")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("Folk/Acoustic", "Folk")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("latin", "Latin")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("jazz", "Jazz")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("classical", "Classical")
+
+  
+
+    
+    songs_expanded.reset_index(drop=True, inplace=True)
+    songs_expanded["valence_category"] = np.where(songs_expanded["valence"] >= 0.5, 1, 0)
+    #separate features (X) and target (y)
+    #drop the continuous feature and the categorical version we just made
+    X = songs_expanded.drop(["valence", "valence_category"], axis=1)  # Keep only non-target features
+    #look at the categorical version as the target 
+    y = songs_expanded["valence_category"]  # Target variable
+    
+    #apply RandomUnderSampler
+    #initialize it
+    rus = RandomUnderSampler(random_state=42)
+    #apply it to X and y and store the changed versions
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    #print the differences so we can see that the package did its job
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    #get the indices of the resampled data
+    resampled_indices = rus.sample_indices_
+    
+    #use the indices to retrieve the original continuous valence values
+    valence_resampled = songs_expanded.loc[resampled_indices, "valence"]
+    
+    #create the final resampled dataset with original continuous valence values
+    songs_balanced = X_resampled.copy()  #start with resampled features
+    songs_balanced["valence"] = valence_resampled.values  #add back continuous valence
+
+    songs_balanced["valence_category"] = np.where(songs_balanced["valence"] >= 0.5, 1, 0)
+
+
+
+
+
+
+
+
     ########################### done repeating the filtering
     
     st.subheader("Any correlations between frequency and mental health?")
@@ -2229,6 +2312,92 @@ if selected_category == "Get Recommendations":
 
     mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
+    #This dataframe will be used to connect this analysis with the second dataset.
+    effect_df = mh_by_genre.reset_index(names='Genre')
+    effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
+
+
+    cleaned_data = cleaned_data.copy()
+    #I will say the max they could realistically listen to is 16 hrs
+    cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
+    #deleted 6 rows
+
+    #take away age outliers 
+    cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+    
+    #get the median frequency
+    values = cleaned_data["Fav genre"].value_counts()
+    #values.median()
+
+    #make the changes to rock
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Rock"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Rock"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+    
+    #make the changes to metal
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Metal"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Metal"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+
+    #make the changes to pop
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Pop"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Pop"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+
+
+    ##############balance anxiety 
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
+    y = cleaned_data["Anxiety_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    resampled_indices = rus.sample_indices_
+
+    anxiety_resampled = cleaned_data.loc[resampled_indices, "Anxiety"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Anxiety"] = anxiety_resampled.values  
+
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+
+
+    ######now balance depression
+    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
+    X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
+    y = cleaned_data["Depression_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    resampled_indices = rus.sample_indices_
+
+    depression_resampled = cleaned_data.loc[resampled_indices, "Depression"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Depression"] = depression_resampled.values  
+
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
 
 
     ####################### done replicating the filtering done above
