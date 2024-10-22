@@ -317,8 +317,8 @@ if selected_category == "Investigate The Data":
     sns.histplot(data=songs, x='energy', ax=ax)
     
     # Set title and labels
-    ax.set_title('Distribution of Valence')
-    ax.set_xlabel('Valence')
+    ax.set_title('Distribution of Energy')
+    ax.set_xlabel('Energy')
     ax.set_ylabel('Count')
     
     # Display the plot in Streamlit
@@ -330,8 +330,8 @@ if selected_category == "Investigate The Data":
     sns.histplot(data=songs, x='danceability', ax=ax)
     
     # Set title and labels
-    ax.set_title('Distribution of Valence')
-    ax.set_xlabel('Valence')
+    ax.set_title('Distribution of Danceability')
+    ax.set_xlabel('Danceability')
     ax.set_ylabel('Count')
     
     # Display the plot in Streamlit
@@ -342,8 +342,8 @@ if selected_category == "Investigate The Data":
     sns.histplot(data=songs, x='duration_ms', ax=ax)
     
     # Set title and labels
-    ax.set_title('Distribution of Valence')
-    ax.set_xlabel('Valence')
+    ax.set_title('Distribution of Duration')
+    ax.set_xlabel('Duration')
     ax.set_ylabel('Count')
     
     # Display the plot in Streamlit
