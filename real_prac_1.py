@@ -43,7 +43,7 @@ if selected_category == "Data Overview":
 
     #markdown section
     st.subheader("What does the second [dataset](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019) look like?")
-    st.markdown("* Purpose: this dataset will provide a libary to pull songs from based on user input")
+    st.markdown("* Purpose: this dataset will provide a libary to pull songs from based on user input. Since it also includes a genre column, the two datasets will be joined on genre.")
     st.markdown("* Mixture of data types (ex: Artist: Nominal, Duration_ms: Ratio, Popularity: Ordinal, Explicit: Binary)")
     st.markdown("Feature description:")
     st.write("* Valence: positivity of the track (0 to 1)")
@@ -1715,6 +1715,7 @@ if selected_category == "Explore The Data":
     #This dataframe will be used to connect this analysis with the second dataset.
     effect_df = mh_by_genre.reset_index(names='Genre')
     effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
+
 
 if selected_category == "Get Recommendations":
 
