@@ -292,6 +292,7 @@ if selected_category == "Investigate The Data":
     plt.xticks(np.linspace(0, num_songs-1, min(10, num_songs)).astype(int))
     
     plt.grid(True, axis='y', linestyle='--', alpha=0.7)
+    st.pyplot(plt)
 
     #investigating columns 
 
@@ -299,7 +300,7 @@ if selected_category == "Investigate The Data":
     
     # Create the plot
     fig, ax = plt.subplots(figsize=(8, 6))  # Set figure size
-    sns.histplot(data=songs_expanded, x='valence', ax=ax)
+    sns.histplot(data=songs, x='valence', ax=ax)
     
     # Set title and labels
     ax.set_title('Distribution of Valence')
@@ -313,7 +314,7 @@ if selected_category == "Investigate The Data":
     
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
-    sns.histplot(data=songs_expanded, x='energy', ax=ax)
+    sns.histplot(data=songs, x='energy', ax=ax)
     
     # Set title and labels
     ax.set_title('Distribution of Valence')
@@ -326,7 +327,7 @@ if selected_category == "Investigate The Data":
 
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
-    sns.histplot(data=songs_expanded, x='danceability', ax=ax)
+    sns.histplot(data=songs, x='danceability', ax=ax)
     
     # Set title and labels
     ax.set_title('Distribution of Valence')
@@ -338,7 +339,7 @@ if selected_category == "Investigate The Data":
 
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
-    sns.histplot(data=songs_expanded, x='duration_ms', ax=ax)
+    sns.histplot(data=songs, x='duration_ms', ax=ax)
     
     # Set title and labels
     ax.set_title('Distribution of Valence')
