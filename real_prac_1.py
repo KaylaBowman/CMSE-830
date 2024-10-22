@@ -192,7 +192,7 @@ if selected_category == "Investigate The Data":
                       #this will give me 16 sets of 4 bars instead of 4 overlaid sets of bars
                        barmode='group', 
                        category_orders={
-                           'Frequency': ['never', 'rarely', 'sometimes', 'very frequently']  # Custom order
+                           'Frequency': ['Never', 'Rarely', 'Sometimes', 'Very Frequently']  # Custom order
                        },
                        title='Frequency Distribution of Music Genres')
     
