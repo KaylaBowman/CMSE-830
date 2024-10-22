@@ -247,7 +247,7 @@ if selected_category == "Investigate The Data":
     st.write(f"Number of participants younger than 18 or older than 70: {age_outliers}")
 
 
-    st.subheader("Investigate Second Dataset)
+    st.subheader("Investigate Second Dataset")
 
     #load the Data
     songs = pd.read_csv("songs_normalize.csv")
