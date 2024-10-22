@@ -297,6 +297,7 @@ if selected_category == "Investigate The Data":
     #investigating columns 
 
     st.markdown("Distribution of features")
+    st.write("The features are imbalanced. Most songs have a mid-high valence, high energy, mid-high danceability, and duration of 200 seconds.")
     
     # Create the plot
     fig, ax = plt.subplots(figsize=(8, 6))  # Set figure size
