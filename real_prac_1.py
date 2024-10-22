@@ -705,7 +705,7 @@ if selected_category == "Explore The Data":
     cleaned_data["Frequency [Gospel]"] = cleaned_data["Frequency [Gospel]"].replace(frequency_mapping)
 
 
-    cleaned_data = mxmh_survey_results.copy()
+    cleaned_data = cleaned_data.copy()
     #I will say the max they could realistically listen to is 16 hrs
     cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
     #deleted 6 rows
@@ -794,7 +794,7 @@ if selected_category == "Explore The Data":
     st.subheader("Any correlations between frequency and mental health?")
 
     selected_features = ['Frequency [Classical]', "Frequency [Country]", "Frequency [EDM]", "Frequency [Folk]", 
-                     "Frequency [Gospel]", "Frequency [Hip hop]", "Frequency [Jazz]", "Frequency [K pop]", "Frequency [Latin]", "Frequency [Lofi]",
+                     "Frequency [Gospel]", "Frequency [Hip hop]", "Frequency [Jazz]", "Frequency [K pop]", "Frequency [Lofi]",
                      "Frequency [Metal]", "Frequency [Pop]", "Frequency [R&B]", "Frequency [Rap]", "Frequency [Rock]",  "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
 
     # Correlation Heatmap (Interactive)
