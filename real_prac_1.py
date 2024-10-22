@@ -745,7 +745,7 @@ if selected_category == "Explore The Data":
     ##############balance anxiety 
     #reset index
     cleaned_data.reset_index(drop=True, inplace=True)
-
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
     X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
     y = cleaned_data["Anxiety_category"] 
     
