@@ -767,7 +767,7 @@ if selected_category == "Explore The Data":
 
 
     ######now balance depression
-
+    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
     X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
     y = cleaned_data["Depression_category"] 
     
