@@ -181,8 +181,8 @@ if selected_category == "Investigate The Data":
     long_format_df = frequency_subset.melt(var_name='Genre', value_name='Frequency')
 
     #order 'Frequency' column chronologically 
-    order = ['Anxiety', 'Depression', 'OCD', 'Insomnia']
-    long_format_df['Score'] = pd.Categorical(long_format_df['Score'], categories=order, ordered=True)
+    order = ['Never', 'Rarely', 'Sometimes', 'Very Frequently']
+    long_format_df['Genre'] = pd.Categorical(long_format_df['Genre'], categories=order, ordered=True)
 
     
     #create the histogram
