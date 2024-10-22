@@ -812,8 +812,7 @@ if selected_category == "Clean The Data":
     fig, ax = plt.subplots()  # Initialize a Matplotlib figure and axis
     sns.histplot(data=songs_balanced, x='valence_category', ax=ax)
     
-    # Add labels or titles if needed
-    ax.set_title('Distribution of Valence Categories')
+    ax.set_title('Distribution of Binary Valence')
     ax.set_xlabel('Valence Category')
     ax.set_ylabel('Count')
     
