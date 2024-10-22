@@ -1706,7 +1706,7 @@ if selected_category == "Explore The Data":
 
 
     st.markdown("I used mh_by_genre.describe() to identify the MH category with the highest variability (SD) so I could capture more unique responses. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
-    st.markdown("I then created a binary feature that expressed whether the avergae depression score for a given genre was above or below 5. This is how I will recommend genres to users.")
+    st.markdown("I then created a binary feature that expressed whether the average depression score for a given genre was above or below 5. This is how I will recommend genres to users.")
 
     mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
@@ -1717,6 +1717,8 @@ if selected_category == "Explore The Data":
     effect_df = mh_by_genre.reset_index(names='Genre')
     effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
 
+
+    st.markdown("This is where I join the two datasets by their mutual column (genre), to result in a merged dataset with song titles, artist, valence, energy, danceability, duration, average anxiety score, average depression score, average, average OCD score, average insomnia score, and effect (whether depression is above 5 or below 5.")
 
 if selected_category == "Get Recommendations":
 
