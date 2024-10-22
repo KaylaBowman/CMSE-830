@@ -246,6 +246,109 @@ if selected_category == "Investigate The Data":
     age_outliers = sum((mxmh_survey_results['Age'] > 70) | (mxmh_survey_results['Age'] < 18))
     st.write(f"Number of participants younger than 18 or older than 70: {age_outliers}")
 
+
+    st.subheader("Investigate Second Dataset)
+
+    #load the Data
+    songs = pd.read_csv("songs_normalize.csv")
+    
+    st.markdown("No Missing Vals")
+
+    #make a heatmap of the missing data
+    
+    #import numpy and nickname it np
+    import numpy as np 
+    
+    #import matplotlib as plt
+    import matplotlib.pyplot as plt
+    
+    # create a boolean mask: True for NaN, False for finite values
+    nan_mask = songs.isna()
+    
+    # convert boolean mask to integer (False becomes 0, True becomes 1)
+    nan_array = nan_mask.astype(int).to_numpy()
+    
+    # size the plot 12 x 6 
+    plt.figure(figsize=(12, 6))
+    
+    # imshow with interpolation set to 'nearest' and aspect to 'auto'
+    # interpoltation is finding the best fit of data 
+    im = plt.imshow(nan_array.T, interpolation='nearest', aspect='auto', cmap='viridis')
+    
+    # label the x axis Planet Index
+    plt.xlabel('Songs Index')
+    # label the y axis Features
+    plt.ylabel('Features')
+    # title the whole plot Visualizing Missing Values in a Dataset 
+    plt.title('Visualizing Missing Values in Songs Dataset')
+    
+    # y-axis tick labels to feature names
+    # make the y-axis go from 0 to 4 and label them the names of the subset columns
+    plt.yticks(range(len(songs.columns)), songs.columns)
+    
+    # x-axis ticks
+    #
+    num_songs = nan_array.shape[0]
+    plt.xticks(np.linspace(0, num_songs-1, min(10, num_songs)).astype(int))
+    
+    plt.grid(True, axis='y', linestyle='--', alpha=0.7)
+
+    #investigating columns 
+
+    st.markdown("Distribution of features")
+    
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(8, 6))  # Set figure size
+    sns.histplot(data=songs_expanded, x='valence', ax=ax)
+    
+    # Set title and labels
+    ax.set_title('Distribution of Valence')
+    ax.set_xlabel('Valence')
+    ax.set_ylabel('Count')
+    
+    # Display the plot in Streamlit
+    st.pyplot(fig)
+
+    
+    
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
+    sns.histplot(data=songs_expanded, x='energy', ax=ax)
+    
+    # Set title and labels
+    ax.set_title('Distribution of Valence')
+    ax.set_xlabel('Valence')
+    ax.set_ylabel('Count')
+    
+    # Display the plot in Streamlit
+    st.pyplot(fig)
+    
+
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
+    sns.histplot(data=songs_expanded, x='danceability', ax=ax)
+    
+    # Set title and labels
+    ax.set_title('Distribution of Valence')
+    ax.set_xlabel('Valence')
+    ax.set_ylabel('Count')
+    
+    # Display the plot in Streamlit
+    st.pyplot(fig)
+
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(10, 6))  # Set figure size
+    sns.histplot(data=songs_expanded, x='duration_ms', ax=ax)
+    
+    # Set title and labels
+    ax.set_title('Distribution of Valence')
+    ax.set_xlabel('Valence')
+    ax.set_ylabel('Count')
+    
+    # Display the plot in Streamlit
+    st.pyplot(fig)
+
+
 if selected_category == "Clean The Data":
 
     st.title("Clean The Data")
@@ -622,6 +725,99 @@ if selected_category == "Clean The Data":
     # #display the plot 
     # st.pyplot(fig)
 
+
+    st.markdown("Clean the second dataset")
+    songs = pd.read_csv("songs_normalize.csv")
+
+    st.write("Filter out all explicit songs so the app is appropriate for all users.")
+    songs = songs[songs["explicit"] == False]
+    st.write(songs.head())  
+
+    st.markdown("Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
+    songs["genre"] = songs["genre"].str.split(",")
+
+    #explode the dataset so each genre gets its own row
+    ######explode() expands the list of genres so each genre has its own row, duplicating other information about the song.
+    #####reset_index(drop=True)  resets the index to keep things neat after exploding.
+    songs_expanded = songs.explode("genre").reset_index(drop=True)
+    
+    #what does the dataset look like now
+    st.write(songs_expanded["genre"].head())  
+
+    #make sure genres are consistent
+    #songs_expanded["genre"]==[" Folk/Acoustic"].replace("Folk/Acoustic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" Folk/Acoustic", "Folk/Acoustic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" Dance/Electronic", "Dance/Electronic")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" pop", "pop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" hip hop", "hip hop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" country", "country")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" metal", "metal")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" R&B", "R&B")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" rock", "rock")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" easy listening", "easy listening")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" latin", "latin")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" classical", "classical")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" blues", "blues")
+    songs_expanded["genre"] = songs_expanded["genre"].replace(" jazz", "Jazz")
+
+    #changing capitalization and wording
+    songs_expanded["genre"] = songs_expanded["genre"].replace("pop", "Pop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("rock", "Rock")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("country", "Country")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("metal", "Metal")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("hip hop", "Hip hop")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("Dance/Electronic", "EDM")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("Folk/Acoustic", "Folk")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("latin", "Latin")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("jazz", "Jazz")
+    songs_expanded["genre"] = songs_expanded["genre"].replace("classical", "Classical")
+
+    st.markdown("I also edited the genre names to match the names in the first dataset.")
+    st.write(songs_expanded["genre"].head())  
+            
+
+    st.markdown("Handle imbalance")
+    songs_expanded.reset_index(drop=True, inplace=True)
+    songs_expanded["valence_category"] = np.where(songs_expanded["valence"] >= 0.5, 1, 0)
+    #separate features (X) and target (y)
+    #drop the continuous feature and the categorical version we just made
+    X = songs_expanded.drop(["valence", "valence_category"], axis=1)  # Keep only non-target features
+    #look at the categorical version as the target 
+    y = songs_expanded["valence_category"]  # Target variable
+    
+    #apply RandomUnderSampler
+    #initialize it
+    rus = RandomUnderSampler(random_state=42)
+    #apply it to X and y and store the changed versions
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    #print the differences so we can see that the package did its job
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+
+    #get the indices of the resampled data
+    resampled_indices = rus.sample_indices_
+    
+    #use the indices to retrieve the original continuous valence values
+    valence_resampled = songs_expanded.loc[resampled_indices, "valence"]
+    
+    #create the final resampled dataset with original continuous valence values
+    songs_balanced = X_resampled.copy()  #start with resampled features
+    songs_balanced["valence"] = valence_resampled.values  #add back continuous valence
+
+    songs_balanced["valence_category"] = np.where(songs_balanced["valence"] >= 0.5, 1, 0)
+
+    # Create the plot
+    fig, ax = plt.subplots()  # Initialize a Matplotlib figure and axis
+    sns.histplot(data=songs_balanced, x='valence_category', ax=ax)
+    
+    # Add labels or titles if needed
+    ax.set_title('Distribution of Valence Categories')
+    ax.set_xlabel('Valence Category')
+    ax.set_ylabel('Count')
+    
+    # display the plot in Streamlit
+    st.pyplot(fig)
 
 
 if selected_category == "Explore The Data":
@@ -1432,6 +1628,10 @@ if selected_category == "Explore The Data":
 
     mh_by_genre
 
+
+    #This dataframe will be used to connect this analysis with the second dataset.
+    effect_df = mh_by_genre.reset_index(names='Genre')
+    effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
 
 if selected_category == "Get Recommendations":
 
