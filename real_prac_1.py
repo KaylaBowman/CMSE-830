@@ -11,6 +11,21 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 #import the undersampling package
 from imblearn.under_sampling import RandomUnderSampler
 
+
+#title of the app
+st.title("Welcome To My Music Therapy App")
+st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+
+
+
+option = st.sidebar.selectbox(
+    "Choose an option:",
+    ["Overview", "Investigate Data", "Clean Data", "Explore Data"]
+)
+
+
+
+
 #dropdown menu
 categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Get Recommendations"]
 selected_category = st.selectbox("Choose a section of this project to explore:", categories)
