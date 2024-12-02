@@ -2562,13 +2562,19 @@ if option == "Behind The Scenes: See Project Steps":
 
         feel_happy = merged_df[merged_df["Dep Effect"] == 0]
         feel_sad = merged_df[merged_df["Dep Effect"] == 1]
+        #select only rows where Anxiety score is less than 5/10
+        feel_calm = merged_df[merged_df["Anx Effect"] == 0]
+        #get average dance score 
+        feel_dancey = merged_df[merged_df["Anx Effect"] == 0]
 
         feel_happy_recs = feel_happy[["artist", "song", "year"]]
         feel_sad_recs = feel_sad[["artist", "song", "year"]]
+        feel_calm_recs = 
+        feel_dancey_recs
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
-        categories = ["Happy", "Sad"]
+        categories = ["Happy", "Sad", "Calm", "Dance"]
         selected_category = st.selectbox("Choose a listening goal:", categories)
     
         if selected_category == "Happy":
