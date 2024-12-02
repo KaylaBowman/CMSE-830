@@ -24,7 +24,7 @@ option = st.sidebar.selectbox(
 )
 
 
-if selected_category == "Behind The Scenes: See Project Steps":
+if option == "Behind The Scenes: See Project Steps":
     
 
 
