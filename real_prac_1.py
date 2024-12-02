@@ -2546,12 +2546,6 @@ if option == "Behind The Scenes: See Project Steps":
        
         ####################### done replicating the filtering done above
 
-
-
-        
-
-        st.subheader("Lets see what the merged dataset looks like")
-        st.write(merged_df)
     
 
         #I'm editing the code below so that it uses merged_df and not mh_by_genre
