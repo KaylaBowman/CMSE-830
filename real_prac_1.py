@@ -2446,10 +2446,90 @@ if option == "Behind The Scenes: See Project Steps":
 
 
 
+
+        ###### adding dataset #2 edits from the Explore Data section so we can use dataset #2 in Get Recommendations
+
+        songs = pd.read_csv("songs_normalize.csv")
+    
+        songs = songs[songs["explicit"] == False]
+        st.write(songs.head())  
+    
+        st.markdown("Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
+        songs["genre"] = songs["genre"].str.split(",")
+    
+        #explode the dataset so each genre gets its own row
+        ######explode() expands the list of genres so each genre has its own row, duplicating other information about the song.
+        #####reset_index(drop=True)  resets the index to keep things neat after exploding.
+        songs_expanded = songs.explode("genre").reset_index(drop=True)
+        
+        
+    
+        #make sure genres are consistent
+        #songs_expanded["genre"]==[" Folk/Acoustic"].replace("Folk/Acoustic")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" Folk/Acoustic", "Folk/Acoustic")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" Dance/Electronic", "Dance/Electronic")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" pop", "pop")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" hip hop", "hip hop")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" country", "country")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" metal", "metal")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" R&B", "R&B")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" rock", "rock")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" easy listening", "easy listening")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" latin", "latin")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" classical", "classical")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" blues", "blues")
+        songs_expanded["genre"] = songs_expanded["genre"].replace(" jazz", "Jazz")
+    
+        #changing capitalization and wording
+        songs_expanded["genre"] = songs_expanded["genre"].replace("pop", "Pop")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("rock", "Rock")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("country", "Country")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("metal", "Metal")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("hip hop", "Hip hop")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("Dance/Electronic", "EDM")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("Folk/Acoustic", "Folk")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("latin", "Latin")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("jazz", "Jazz")
+        songs_expanded["genre"] = songs_expanded["genre"].replace("classical", "Classical")
+    
+      
+    
+        
+        songs_expanded.reset_index(drop=True, inplace=True)
+        songs_expanded["valence_category"] = np.where(songs_expanded["valence"] >= 0.5, 1, 0)
+        #separate features (X) and target (y)
+        #drop the continuous feature and the categorical version we just made
+        X = songs_expanded.drop(["valence", "valence_category"], axis=1)  # Keep only non-target features
+        #look at the categorical version as the target 
+        y = songs_expanded["valence_category"]  # Target variable
+        
+        #apply RandomUnderSampler
+        #initialize it
+        rus = RandomUnderSampler(random_state=42)
+        #apply it to X and y and store the changed versions
+        X_resampled, y_resampled = rus.fit_resample(X, y)
+        
+        #print the differences so we can see that the package did its job
+        print(f"Before Undersampling: \n{y.value_counts()}")
+        print(f"After Undersampling: \n{y_resampled.value_counts()}")
+    
+        #get the indices of the resampled data
+        resampled_indices = rus.sample_indices_
+        
+        #use the indices to retrieve the original continuous valence values
+        valence_resampled = songs_expanded.loc[resampled_indices, "valence"]
+        
+        #create the final resampled dataset with original continuous valence values
+        songs_balanced = X_resampled.copy()  #start with resampled features
+        songs_balanced["valence"] = valence_resampled.values  #add back continuous valence
+    
+        songs_balanced["valence_category"] = np.where(songs_balanced["valence"] >= 0.5, 1, 0)
+    
+    
         ####### adding code where I merge the datasets
 
-        #delete valence_category
-        songs_balanced = songs_balanced.drop("valence_category", axis = 1)
+        #delete valence_category 
+        #songs_balanced = songs_balanced.drop("valence_category", axis = 1)
         
 
         #First I have to make sure the genre columns are capitalized the same
