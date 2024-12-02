@@ -1749,6 +1749,11 @@ if option == "Behind The Scenes: See Project Steps":
         st.markdown("Let's see the cleaned and balanced second dataset again:")
         st.write(songs_balanced)
 
+        #First I have to make sure the genre columns are capitalized the same
+        st.write("First, let's make sure the capitalization of the genre column matches in both datasets before we merge on Genre.")
+        songs_balanced.rename(columns={'genre': 'Genre'}, inplace=True)
+        st.write(songs_balanced)
+
         st.markdown("Let's see the merged dataset:")
         merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
         st.write(merged_df)
