@@ -2540,18 +2540,31 @@ if option == "Behind The Scenes: See Project Steps":
       
         #merge them
         merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
+
+
+        
        
         ####################### done replicating the filtering done above
+
+
+
+        
 
         st.subheader("Lets see what the merged dataset looks like")
         st.write(merged_df)
     
-    
-        mood_increase_genres = mh_by_genre[mh_by_genre["Effect"] == 0]
-        mood_decrease_genres = mh_by_genre[mh_by_genre["Effect"] == 1]
-    
-        increase_recommendations = mood_increase_genres.index
-        decrease_recommendations = mood_decrease_genres.index
+
+        #I'm editing the code below so that it uses merged_df and not mh_by_genre
+        ###mood_increase_genres = mh_by_genre[mh_by_genre["Dep Effect"] == 0]
+        ###mood_decrease_genres = mh_by_genre[mh_by_genre["Dep Effect"] == 1]
+        ###increase_recommendations = mood_increase_genres.index
+        ###decrease_recommendations = mood_decrease_genres.index
+
+        feel_happy = merged_df[merged_df["Dep Effect"] == 0]
+        feel_sad = merged_df[merged_df["Dep Effect"] == 1]
+
+        feel_happy_recs = feel_happy["artist", "song", "year"]
+        feel_sad_recs = feel_sad["artist", "song", "year"]
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
@@ -2564,7 +2577,7 @@ if option == "Behind The Scenes: See Project Steps":
             st.write(f"You selected: {selected_category}")
     
             st.markdown("Here are your recommended genres:")
-            st.write(increase_recommendations)
+            st.write(feel_happy_recs)
     
             #include a visualization
             # Set the plot style
@@ -2606,7 +2619,7 @@ if option == "Behind The Scenes: See Project Steps":
             st.write(f"You selected: {selected_category}")
     
             st.markdown("Here are your recommended genres:")
-            st.write(decrease_recommendations)
+            st.write(feel_sad_recs)
     
             #include a visualization
             # Set the plot style
