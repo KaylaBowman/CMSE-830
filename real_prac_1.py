@@ -2455,9 +2455,9 @@ if option == "Behind The Scenes: See Project Steps":
         songs = pd.read_csv("songs_normalize.csv")
     
         songs = songs[songs["explicit"] == False]
-        st.write(songs.head())  
-    
-        st.markdown("Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
+        
+
+        #Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
         songs["genre"] = songs["genre"].str.split(",")
     
         #explode the dataset so each genre gets its own row
