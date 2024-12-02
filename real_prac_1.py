@@ -1747,6 +1747,7 @@ if option == "Behind The Scenes: See Project Steps":
         st.markdown("This is where I join the two datasets by their mutual column (genre), to result in a merged dataset with song titles, artist, valence, energy, danceability, duration, average anxiety score, average depression score, average, average OCD score, average insomnia score, and effect (whether depression is above 5 or below 5.")
 
         st.markdown("Let's see the cleaned and balanced second dataset again:")
+        songs_balanced = songs_balanced.drop("valence_category")
         st.write(songs_balanced)
 
         #First I have to make sure the genre columns are capitalized the same
