@@ -2565,12 +2565,14 @@ if option == "Behind The Scenes: See Project Steps":
         #select only rows where Anxiety score is less than 5/10
         feel_calm = merged_df[merged_df["Anx Effect"] == 0]
         #get average dance score 
-        feel_dancey = merged_df[merged_df["Anx Effect"] == 0]
-
+        avg_danceability = merged_df["danceability"].mean()
+        high_danceability_df = merged_df[merged_df["danceability"] >= avg_danceability]
+        low_danceability_df =  merged_df[merged_df["danceability"] < avg_danceability]
+        
         feel_happy_recs = feel_happy[["artist", "song", "year"]]
         feel_sad_recs = feel_sad[["artist", "song", "year"]]
-        feel_calm_recs = 
-        feel_dancey_recs
+        feel_calm_recs = feel_calm[["artist", "song", "year"]]
+        feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
@@ -2659,5 +2661,90 @@ if option == "Behind The Scenes: See Project Steps":
                 
             #show the plot
             st.pyplot(plt)
+
+
+        if selected_category == "Calm":
+        
+            #display the selected category
+            st.write(f"You selected: {selected_category}")
+    
+            st.markdown("Here are your recommended genres:")
+            st.write(feel_calm_recs)
+    
+            #include a visualization
+            # Set the plot style
+            sns.set(style="whitegrid")
+    
+            # Create a figure and axis
+            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+                
+            # Create a bar plot for each mental health measure
+            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
+            axes[0, 0].set_title('Anxiety Levels by Genre')
+            axes[0, 0].set_ylabel('Anxiety Level')
+            axes[0, 0].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
+            axes[0, 1].set_title('Depression Levels by Genre')
+            axes[0, 1].set_ylabel('Depression Level')
+            axes[0, 1].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
+            axes[1, 0].set_title('Insomnia Levels by Genre')
+            axes[1, 0].set_ylabel('Insomnia Level')
+            axes[1, 0].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
+            axes[1, 1].set_title('OCD Levels by Genre')
+            axes[1, 1].set_ylabel('OCD Level')
+            axes[1, 1].tick_params(axis='x', rotation=45)
+    
+            plt.tight_layout()
+                
+            #show the plot
+            st.pyplot(plt)
+
+
+        if selected_category == "Dance":
+        
+            #display the selected category
+            st.write(f"You selected: {selected_category}")
+    
+            st.markdown("Here are your recommended genres:")
+            st.write(feel_dancey_recs)
+    
+            #include a visualization
+            # Set the plot style
+            sns.set(style="whitegrid")
+    
+            # Create a figure and axis
+            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+                
+            # Create a bar plot for each mental health measure
+            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
+            axes[0, 0].set_title('Anxiety Levels by Genre')
+            axes[0, 0].set_ylabel('Anxiety Level')
+            axes[0, 0].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
+            axes[0, 1].set_title('Depression Levels by Genre')
+            axes[0, 1].set_ylabel('Depression Level')
+            axes[0, 1].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
+            axes[1, 0].set_title('Insomnia Levels by Genre')
+            axes[1, 0].set_ylabel('Insomnia Level')
+            axes[1, 0].tick_params(axis='x', rotation=45)
+                
+            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
+            axes[1, 1].set_title('OCD Levels by Genre')
+            axes[1, 1].set_ylabel('OCD Level')
+            axes[1, 1].tick_params(axis='x', rotation=45)
+    
+            plt.tight_layout()
+                
+            #show the plot
+            st.pyplot(plt)
+    
         
             
