@@ -20,7 +20,7 @@ st.markdown("Please be advised that all recommendations are based on self-report
 
 option = st.sidebar.selectbox(
     "Choose an option:",
-    ["Overview", "Investigate Data", "Clean Data", "Explore Data"]
+    ["Get Recommendations", "Behind The Scenes: Project Steps]
 )
 
 
