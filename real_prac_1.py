@@ -745,7 +745,7 @@ if option == "Behind The Scenes: See Project Steps":
         # st.pyplot(fig)
     
     
-        st.markdown("Clean the second dataset")
+        st.subheader("Clean the second dataset")
         songs = pd.read_csv("songs_normalize.csv")
     
         st.write("Filter out all explicit songs so the app is appropriate for all users.")
