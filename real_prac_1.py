@@ -2355,7 +2355,10 @@ if option == "Behind The Scenes: See Project Steps":
         mh_by_genre["Insomnia"] = average_insomnia
         mh_by_genre["OCD"] = average_ocd
     
-        mh_by_genre["Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
+        mh_by_genre["Dep Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
+        mh_by_genre["Anx Effect"] = np.where(mh_by_genre["Anxiety"] >= 5, 1, 0)
+        mh_by_genre["Ins Effect"] = np.where(mh_by_genre["Insomnia"] >= 5, 1, 0)
+        mh_by_genre["OCD Effect"] = np.where(mh_by_genre["OCD"] >= 5, 1, 0)
     
         #This dataframe will be used to connect this analysis with the second dataset.
         effect_df = mh_by_genre.reset_index(names='Genre')
