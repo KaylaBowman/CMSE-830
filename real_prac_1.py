@@ -2443,9 +2443,25 @@ if option == "Behind The Scenes: See Project Steps":
     
         #reset index
         cleaned_data.reset_index(drop=True, inplace=True)
-    
-    
+
+
+
+        ####### adding code where I merge the datasets
+
+        #delete valence_category
+        songs_balanced = songs_balanced.drop("valence_category", axis = 1)
+        
+
+        #First I have to make sure the genre columns are capitalized the same
+        songs_balanced.rename(columns={'genre': 'Genre'}, inplace=True)
+      
+        #merge them
+        merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
+       
         ####################### done replicating the filtering done above
+
+        st.subheader("Lets see what the merged dataset looks like")
+        st.write(merged_df)
     
     
         mood_increase_genres = mh_by_genre[mh_by_genre["Effect"] == 0]
