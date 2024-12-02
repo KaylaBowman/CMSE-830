@@ -2563,10 +2563,14 @@ if option == "Behind The Scenes: See Project Steps":
         high_danceability_df = merged_df[merged_df["danceability"] >= avg_danceability]
         low_danceability_df =  merged_df[merged_df["danceability"] < avg_danceability]
         
-        feel_happy_recs = feel_happy[["artist", "song", "year"]]
-        feel_sad_recs = feel_sad[["artist", "song", "year"]]
-        feel_calm_recs = feel_calm[["artist", "song", "year"]]
-        feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
+        #feel_happy_recs = feel_happy[["artist", "song", "year"]]
+        feel_happy_recs = feel_happy
+        #feel_sad_recs = feel_sad[["artist", "song", "year"]]
+        feel_sad_recs = feel_sad
+        #feel_calm_recs = feel_calm[["artist", "song", "year"]]
+        feel_calm_recs = feel_calm
+        #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
+        feel_dancey_recs = high_danceability_df
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
