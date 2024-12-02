@@ -1741,7 +1741,7 @@ if option == "Behind The Scenes: See Project Steps":
         #This dataframe will be used to connect this analysis with the second dataset.
         effect_df = mh_by_genre.reset_index(names='Genre')
         effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
-        st.write("reset the index as genres and drop MH categories. this is effect_df")
+        st.write("Make Genre a column instead of the index so we can merge the datasets on that column.")
         st.write(effect_df)
     
         st.markdown("This is where I join the two datasets by their mutual column (genre), to result in a merged dataset with song titles, artist, valence, energy, danceability, duration, average anxiety score, average depression score, average, average OCD score, average insomnia score, and effect (whether depression is above 5 or below 5.")
