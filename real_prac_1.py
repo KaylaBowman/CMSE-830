@@ -1727,6 +1727,8 @@ if option == "Behind The Scenes: See Project Steps":
     
         mh_by_genre["Dep Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
+        mh_by_genre
+
         st.markdown("Adding Effect columns for the other MH categories:")
         
         mh_by_genre["Anx Effect"] = np.where(mh_by_genre["Anxiety"] >= 5, 1, 0)
