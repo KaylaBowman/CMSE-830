@@ -2568,10 +2568,10 @@ if option == "Behind The Scenes: See Project Steps":
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
-        categories = ["Mood Increase", "Mood Decrease"]
+        categories = ["Happy", "Sad"]
         selected_category = st.selectbox("Choose a listening goal:", categories)
     
-        if selected_category == "Mood Increase":
+        if selected_category == "Happy":
         
             #display the selected category
             st.write(f"You selected: {selected_category}")
@@ -2613,7 +2613,7 @@ if option == "Behind The Scenes: See Project Steps":
             st.pyplot(plt)
     
     
-        if selected_category == "Mood Decrease":
+        if selected_category == "Sad":
         
             #display the selected category
             st.write(f"You selected: {selected_category}")
