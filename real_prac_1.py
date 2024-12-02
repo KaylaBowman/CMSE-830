@@ -1754,7 +1754,7 @@ if option == "Behind The Scenes: See Project Steps":
         songs_balanced.rename(columns={'genre': 'Genre'}, inplace=True)
         st.write(songs_balanced)
 
-        st.markdown("Let's see the merged dataset:")
+        st.markdown("Let's see the merged dataset. Each song will have an average MH score based on Dataset #1 and an MH effect (above or below 5).")
         merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
         st.write(merged_df)
 
