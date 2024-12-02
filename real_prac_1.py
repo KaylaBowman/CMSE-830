@@ -2582,7 +2582,7 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
     
-            st.markdown("Here are your recommended genres:")
+            st.markdown("Here are your recommended songs:")
             st.write(feel_happy_recs)
     
             #include a visualization
@@ -2624,7 +2624,7 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
     
-            st.markdown("Here are your recommended genres:")
+            st.markdown("Here are your recommended songs:")
             st.write(feel_sad_recs)
     
             #include a visualization
@@ -2666,7 +2666,7 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
     
-            st.markdown("Here are your recommended genres:")
+            st.markdown("Here are your recommended songs:")
             st.write(feel_calm_recs)
     
             #include a visualization
@@ -2708,7 +2708,7 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
     
-            st.markdown("Here are your recommended genres:")
+            st.markdown("Here are your recommended songs:")
             st.write(feel_dancey_recs)
     
             #include a visualization
