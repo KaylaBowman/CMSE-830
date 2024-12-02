@@ -2563,8 +2563,8 @@ if option == "Behind The Scenes: See Project Steps":
         feel_happy = merged_df[merged_df["Dep Effect"] == 0]
         feel_sad = merged_df[merged_df["Dep Effect"] == 1]
 
-        feel_happy_recs = feel_happy["artist", "song", "year"]
-        feel_sad_recs = feel_sad["artist", "song", "year"]
+        feel_happy_recs = feel_happy[["artist", "song", "year"]]
+        feel_sad_recs = feel_sad[["artist", "song", "year"]]
     
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
