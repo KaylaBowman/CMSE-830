@@ -2680,6 +2680,9 @@ if option == "Behind The Scenes: See Project Steps":
                 title="Scatterplot of Features",
                 labels={"index": "Row Index", "Value": "Feature Value"}
             )
+
+            # Update the y-axis range and ticks
+            fig.update_yaxes(range=[0, 1], tick0=0, dtick=0.2)
             
             # Display the plot in Streamlit
             import streamlit as st
