@@ -2665,7 +2665,7 @@ if option == "Behind The Scenes: See Project Steps":
             st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
 
 
-            plt.close(fig)
+            #plt.close(fig)
             
             # Melt the DataFrame to a long format
             df_long = above_avg_valence[["valence", "danceability", "energy"]]
