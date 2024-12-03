@@ -13,7 +13,7 @@ from imblearn.under_sampling import RandomUnderSampler
 
 
 #title of the app
-st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
+#st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
 #st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
 
 
@@ -1765,6 +1765,8 @@ if option == "Behind The Scenes: See Project Steps":
 #if selected_category == "Get Recommendations":
 if option == "Get Recommendations":
 
+    #title of the app
+    st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
     st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
     st.subheader("Get Recommendations")
     
