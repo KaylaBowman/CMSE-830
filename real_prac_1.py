@@ -2593,8 +2593,11 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
         
-            st.markdown("Here are your recommended songs:")
-            st.write(feel_happy_recs)
+            st.markdown("Here are your recommended genres based on the stats demonstrated in the plots below:")
+            #st.write(feel_happy_recs)
+            st.write(feel_happy["Genre"].unique())
+            st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I feel I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
+            st.writre(feel_happy)
         
             #include a visualization
             # Set the plot style
@@ -2628,6 +2631,13 @@ if option == "Behind The Scenes: See Project Steps":
                 
             #show the plot
             st.pyplot(plt)
+
+            st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
+            #st.write(feel_happy_recs)
+            avg_valence = merged_df["valence"].mean()
+            st.write(feel_happy[feel_happy["valence"] >= avg_valence])
+
+            st.subheader("Include a plot")
         
         
         if selected_category == "Sad":
