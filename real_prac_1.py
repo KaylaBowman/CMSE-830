@@ -1768,6 +1768,7 @@ if option == "Behind The Scenes: See Project Steps":
     
         #title of the app
         st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
+        st.markdown("I created this practice page to explore and improve the app's performance. I found that recommending songs based on genre alone is not enough. Since every genre includes a mix of sad, happy, and calm songs, I will need to consider other features in my dataset to accurately recommend songs that align with the user's listening goals. This page is a mixture of EDA and App Performance.")
         st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
         st.subheader("Get Recommendations")
         
@@ -2580,7 +2581,8 @@ if option == "Behind The Scenes: See Project Steps":
         feel_calm_recs = feel_calm
         #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
         feel_dancey_recs = high_danceability_df
-        
+
+        st.markdown("Here, I noticed the app listing sad songs even when the user chooses "Happy." This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
         categories = ["Happy", "Sad", "Calm", "Dance"]
