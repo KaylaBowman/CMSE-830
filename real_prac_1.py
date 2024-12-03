@@ -2597,7 +2597,7 @@ if option == "Behind The Scenes: See Project Steps":
             #st.write(feel_happy_recs)
             st.write(feel_happy["Genre"].unique())
             st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I feel I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
-            st.writre(feel_happy)
+            st.write(feel_happy)
         
             #include a visualization
             # Set the plot style
