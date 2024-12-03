@@ -2593,10 +2593,10 @@ if option == "Behind The Scenes: See Project Steps":
             #display the selected category
             st.write(f"You selected: {selected_category}")
         
-            st.markdown("Here are your recommended genres based on the stats demonstrated in the plots below:")
+            st.markdown("Here are your recommended genres based averge mental health metrics by genre, demonstrated in the plots below:")
             #st.write(feel_happy_recs)
             st.write(feel_happy["Genre"].unique())
-            st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I feel I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
+            st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
             st.write(feel_happy)
         
             #include a visualization
@@ -2631,6 +2631,29 @@ if option == "Behind The Scenes: See Project Steps":
                 
             #show the plot
             st.pyplot(plt)
+
+            st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
+
+
+            # Melt the DataFrame to a long format
+            happy_features = feel_happy[["valence", "danceability", "energy", "tempo"]]
+            df_long = happy_features.melt(var_name="Feature", value_name="Value")
+            
+            # Create the scatterplot
+            fig = px.scatter(
+                df_long, 
+                x=df_long.index,  # The index as x-axis
+                y="Value", 
+                color="Feature",
+                title="Scatterplot of Features",
+                labels={"index": "Row Index", "Value": "Feature Value"}
+            )
+            
+            # Display the plot in Streamlit
+            import streamlit as st
+            st.plotly_chart(fig)
+
+
 
             st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
             #st.write(feel_happy_recs)
