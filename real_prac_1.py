@@ -2582,7 +2582,7 @@ if option == "Behind The Scenes: See Project Steps":
         #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
         feel_dancey_recs = high_danceability_df
 
-        st.markdown("Here, I noticed the app listing sad songs even when the user chooses "Happy." This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
+        st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
         categories = ["Happy", "Sad", "Calm", "Dance"]
