@@ -2659,7 +2659,7 @@ if option == "Behind The Scenes: See Project Steps":
             st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
             #st.write(feel_happy_recs)
             avg_valence = merged_df["valence"].mean()
-            above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence])
+            above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
             st.write(above_avg_valence)
 
             st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
