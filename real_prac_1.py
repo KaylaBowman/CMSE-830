@@ -2659,9 +2659,32 @@ if option == "Behind The Scenes: See Project Steps":
             st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
             #st.write(feel_happy_recs)
             avg_valence = merged_df["valence"].mean()
-            st.write(feel_happy[feel_happy["valence"] >= avg_valence])
+            above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence])
+            st.write(above_avg_valence)
 
-            st.subheader("Include a plot")
+            st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
+
+
+            plt.close(fig)
+            
+            # Melt the DataFrame to a long format
+            df_long = above_avg_valence[["valence", "danceability", "energy"]]
+            df_long = above_avg_valence.melt(var_name="Feature", value_name="Value")
+            
+            # Create the scatterplot
+            fig = px.scatter(
+                df_long, 
+                x=df_long.index,  # The index as x-axis
+                y="Value", 
+                color="Feature",
+                title="Scatterplot of Features",
+                labels={"index": "Row Index", "Value": "Feature Value"}
+            )
+            
+            # Display the plot in Streamlit
+            import streamlit as st
+            st.plotly_chart(fig)
+
         
         
         if selected_category == "Sad":
