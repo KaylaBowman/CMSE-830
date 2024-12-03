@@ -2690,132 +2690,7 @@ if option == "Behind The Scenes: See Project Steps":
 
         
         
-        if selected_category == "Sad":
         
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
-        
-            st.markdown("Here are your recommended songs:")
-            st.write(feel_sad_recs)
-        
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
-        
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-                
-            # Create a bar plot for each mental health measure
-            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
-        
-            plt.tight_layout()
-                
-            #show the plot
-            st.pyplot(plt)
-        
-        
-        if selected_category == "Calm":
-        
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
-        
-            st.markdown("Here are your recommended songs:")
-            st.write(feel_calm_recs)
-        
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
-        
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-                
-            # Create a bar plot for each mental health measure
-            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
-        
-            plt.tight_layout()
-                
-            #show the plot
-            st.pyplot(plt)
-        
-        
-        if selected_category == "Dance":
-        
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
-        
-            st.markdown("Here are your recommended songs:")
-            st.write(feel_dancey_recs)
-        
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
-        
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-                
-            # Create a bar plot for each mental health measure
-            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
-        
-            plt.tight_layout()
-                
-            #show the plot
-            st.pyplot(plt)
-        
-
 
 ################################################################################# this begins the Final Get Recommendations Page     
 #if selected_category == "Get Recommendations":
@@ -3606,6 +3481,8 @@ if option == "Get Recommendations":
     
     
     ####################### done replicating the filtering done above
+
+    st.markdown("Recommendations are made based on genre first. For example, if a user's goal is to feel happy, genres associated with lower depression scores are recommended. Then, songs from those genres are chosen based on valence (perceived positivity) scores Please see the Practice: Get Recommendations page under Behind The Scenes to get more info on how recommendations are made.")
     
     
     
