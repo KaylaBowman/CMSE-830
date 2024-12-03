@@ -2669,7 +2669,7 @@ if option == "Behind The Scenes: See Project Steps":
             
             # Melt the DataFrame to a long format
             df_long = above_avg_valence[["valence", "danceability", "energy"]]
-            df_long = above_avg_valence.melt(var_name="Feature", value_name="Value")
+            df_long = df_long.melt(var_name="Feature", value_name="Value")
             
             # Create the scatterplot
             fig = px.scatter(
