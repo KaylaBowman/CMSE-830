@@ -2585,7 +2585,7 @@ if option == "Behind The Scenes: See Project Steps":
         st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
-        categories = ["Happy", "Sad", "Calm", "Dance"]
+        categories = ["Happy"]
         selected_category = st.selectbox("Choose a listening goal:", categories)
         
         if selected_category == "Happy":
