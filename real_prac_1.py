@@ -2634,9 +2634,10 @@ if option == "Behind The Scenes: See Project Steps":
 
             st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
 
-
+            plt.close(fig)
+            
             # Melt the DataFrame to a long format
-            happy_features = feel_happy[["valence", "danceability", "energy", "tempo"]]
+            happy_features = feel_happy[["valence", "danceability", "energy"]]
             df_long = happy_features.melt(var_name="Feature", value_name="Value")
             
             # Create the scatterplot
