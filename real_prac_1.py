@@ -48,10 +48,10 @@ if option == "Behind The Scenes: See Project Steps":
         st.markdown("* Purpose: this dataset will build our recommendation system by providing info on the relationships between listening habits and mental health")
         st.markdown("* Mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary)")
         st.markdown("Feature description:")
-        st.write("* All observations are self-reported")
+        st.write("* All observations are self-reported. Mental health stats are on a scale of 1-10")
         st.write("* 16 unique genres are considered")
         st.write("* BMP = Beats per minute of favorite genre")
-        st.write("* All feature descriptions are on the link above")
+        st.write("* All feature descriptions are included in the link above")
         
         #load the Data
         mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
