@@ -1,3 +1,5 @@
+#import packages
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -12,11 +14,11 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
-#title of the app
-#st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
-#st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+##title of the app
+##st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
+##st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
 
-
+#Have a tab on the left side of the app that leads to the second page (steps behind the data science). This page will have a drop down menu.
 
 option = st.sidebar.selectbox(
     "Choose an option:",
@@ -26,7 +28,7 @@ option = st.sidebar.selectbox(
 
 if option == "Behind The Scenes: See Project Steps":
     
-    st.title("Here is an exclusive look into all the steps taken to build Tunes by Mood.")
+    st.title("Steps taken to build Tunes by Mood:")
 
     #dropdown menu
     categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Practice: Get Recommendations"]
