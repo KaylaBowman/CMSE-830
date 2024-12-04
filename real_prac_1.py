@@ -3531,7 +3531,7 @@ if option == "Get Recommendations":
 
     st.markdown("Please choose a listening goal to recieve aligned recommendations based on genre and song features.")
     #dropdown menu
-    categories = ["Happy"]
+    categories = ["Happy", "Sad", "Calm", "Dance"]
     selected_category = st.selectbox("Choose a listening goal:", categories)
     
     if selected_category == "Happy":
