@@ -102,9 +102,9 @@ if option == "App Development":
     
         #plans for missing vals
         st.markdown("Plans To Handle Missing Data")
-        st.write("* Age will not be included in main analysis (listening habits and mental health). Age outliers will be handled below, but missing age values will not be since they're not incorporated in downstream analysis.")
+        st.write("* Age will not be included in main analysis, which focuses on listening habits and mental health. Age outliers will be handled below, but missing age values will not be since they're not incorporated in downstream analysis.")
         st.write("* Missing BPM vals will be replaced by the median of the genre each missing BMP belongs to. Please choose the Clean The Data tab to see how this is done.")
-        st. write("* As for Primary Streaming Serive, While Working, Music Effects, Instrumentalist, and Foreign Language, these missing vals will not be handled because they don't impact the main analysis. The purpose of this is to retain the important info of those observations (mental health scores and listening frequencies).")
+        st. write("* As for Primary Streaming Service, While Working, Music Effects, Instrumentalist, and Foreign Language, these missing vals will not be handled because they don't impact the main analysis. The purpose of this is to retain the important info of those observations (mental health scores and listening frequencies). Dropping these missing values would result in loss of important observed data.")
     
         #distribution 
         st.header("Distribution of Features")
@@ -147,7 +147,7 @@ if option == "App Development":
         
         st.pyplot(plt)
     
-        st.markdown("Most participants are fans of rock.")
+        st.markdown("Most participants are fans of rock. Few are fans of Gospel, Latin, and Lofi.")
         
         st.subheader("Mental Health Stats")
     
