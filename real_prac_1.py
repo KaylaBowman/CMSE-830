@@ -3520,14 +3520,14 @@ if option == "Get Recommendations":
     high_danceability_df = merged_df[merged_df["danceability"] >= avg_danceability]
     low_danceability_df =  merged_df[merged_df["danceability"] < avg_danceability]
     
-    #feel_happy_recs = feel_happy[["artist", "song", "year"]]
-    feel_happy_recs = feel_happy
-    #feel_sad_recs = feel_sad[["artist", "song", "year"]]
-    feel_sad_recs = feel_sad
-    #feel_calm_recs = feel_calm[["artist", "song", "year"]]
-    feel_calm_recs = feel_calm
-    #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
-    feel_dancey_recs = high_danceability_df
+    feel_happy_recs = feel_happy[["artist", "song", "year"]]
+    #feel_happy_recs = feel_happy
+    feel_sad_recs = feel_sad[["artist", "song", "year"]]
+    #feel_sad_recs = feel_sad
+    feel_calm_recs = feel_calm[["artist", "song", "year"]]
+    #feel_calm_recs = feel_calm
+    feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
+    #feel_dancey_recs = high_danceability_df
 
     st.markdown("Please choose a listening goal to recieve aligned recommendations based on genre and song features.")
     #dropdown menu
@@ -3543,7 +3543,7 @@ if option == "Get Recommendations":
         #st.write(feel_happy_recs)
         st.write(feel_happy["Genre"].unique())
         #st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
-        #st.write(feel_happy)
+        #st.write(feel_happy_recs)
     
         
         #st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
