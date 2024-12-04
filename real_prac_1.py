@@ -21,7 +21,7 @@ from imblearn.under_sampling import RandomUnderSampler
 #Have a tab on the left side of the app that leads to the second page (steps behind the data science). This page will have a drop down menu.
 
 option = st.sidebar.selectbox(
-    "Choose an option:",
+    "Dropdown Menu:",
     ["Get Recommendations", "App Development"]
 )
 
