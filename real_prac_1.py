@@ -21,7 +21,7 @@ from imblearn.under_sampling import RandomUnderSampler
 #Have a tab on the left side of the app that leads to the second page (steps behind the data science). This page will have a drop down menu.
 
 option = st.sidebar.selectbox(
-    "Dropdown Menu:",
+    "Navigation:",
     ["Get Recommendations", "App Development"]
 )
 
@@ -3639,9 +3639,16 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended songs:")
-        st.write(feel_sad_recs)
-    
+        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.write(feel_sad["Genre"].unique())
+        
+
+        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        avg_valence = merged_df["valence"].mean()
+        below_avg_valence = feel_sad[feel_sad["valence"] < avg_valence]
+        st.write(below_avg_valence[["artist", "song", "year"]])
+
+
         #include a visualization
         # Set the plot style
         sns.set(style="whitegrid")
@@ -3674,7 +3681,32 @@ if option == "Get Recommendations":
             
         #show the plot
         st.pyplot(plt)
-    
+
+
+        
+        #plt.close(fig)
+        
+        # Melt the DataFrame to a long format
+        df_long = above_avg_valence[["valence", "danceability", "energy"]]
+        df_long = df_long.melt(var_name="Feature", value_name="Value")
+        
+        # Create the scatterplot
+        fig = px.scatter(
+            df_long, 
+            x=df_long.index,  # The index as x-axis
+            y="Value", 
+            color="Feature",
+            title="Scatterplot of Features",
+            labels={"index": "Row Index", "Value": "Feature Value"}
+        )
+
+        # Update the y-axis range and ticks
+        fig.update_yaxes(range=[0, 1], tick0=0, dtick=0.2)
+        
+        # Display the plot in Streamlit
+        import streamlit as st
+        st.plotly_chart(fig)
+
     
     if selected_category == "Calm":
     
