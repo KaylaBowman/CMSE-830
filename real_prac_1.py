@@ -187,23 +187,28 @@ if option == "App Development":
         mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
         
         # Convert wide format to long format
-        long_format_df = mh_subset.melt(var_name="Metric", value_name="Frequency")
+        long_format_df = mh_subset.melt(var_name="Metric", value_name="Score")
         
-        # Aggregate frequencies (optional: you can skip this if raw data works better)
-        aggregated_df = long_format_df.groupby("Metric", as_index=False).sum()
-        
-        # Create a bar plot
-        fig = px.bar(
-            aggregated_df,
-            x="Metric",
-            y="Frequency",
-            title="Frequency Distribution of Mental Health Scores",
-            labels={"Metric": "Mental Health Metric", "Frequency": "Frequency"},
-            color="Metric",  # Different color for each group
-            text="Frequency",  # Show frequency values on the bars
+        # Bin the scores into intervals of 1 (0–1, 1–2, ..., 9–10)
+        long_format_df["Score Bin"] = pd.cut(
+            long_format_df["Score"], bins=range(0, 12), labels=range(1, 11), right=False
         )
         
-        # Update layout (optional: clean up gridlines and background)
+        # Count occurrences of each bin for each metric
+        binned_counts = long_format_df.groupby(["Metric", "Score Bin"]).size().reset_index(name="Count")
+        
+        # Create a grouped bar plot
+        fig = px.bar(
+            binned_counts,
+            x="Score Bin",
+            y="Count",
+            color="Metric",
+            barmode="group",
+            title="Frequency Distribution of Mental Health Scores (Binned)",
+            labels={"Score Bin": "Score (Binned)", "Count": "Frequency"},
+        )
+        
+        # Customize plot layout
         fig.update_layout(
             plot_bgcolor="white",
             xaxis=dict(showgrid=False),
@@ -213,8 +218,7 @@ if option == "App Development":
         # Show the chart in Streamlit
         st.subheader("Mental Health Stats")
         st.plotly_chart(fig)
-
-
+        
 
 
 
