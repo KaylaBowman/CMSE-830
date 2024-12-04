@@ -815,7 +815,7 @@ if option == "App Development":
                 
     
         st.subheader("Handle imbalance")
-        st.markdown("Even distribution after balancing valence:")
+        st.markdown("Even distribution after balancing valence based on two classes: above 0.5 (1) and below 0.5 (0):")
         songs_expanded.reset_index(drop=True, inplace=True)
         songs_expanded["valence_category"] = np.where(songs_expanded["valence"] >= 0.5, 1, 0)
         #separate features (X) and target (y)
