@@ -810,11 +810,12 @@ if option == "App Development":
         songs_expanded["genre"] = songs_expanded["genre"].replace("jazz", "Jazz")
         songs_expanded["genre"] = songs_expanded["genre"].replace("classical", "Classical")
     
-        st.markdown("I also edited the genre names to match the names in the first dataset.")
+        st.markdown("I also capitalized the genre names to match the names in the first dataset so we join the two successfully later on.")
         st.write(songs_expanded["genre"].head())  
                 
     
-        st.markdown("Handle imbalance: Even distribution after balancing valence")
+        st.subheader("Handle imbalance")
+        st.markdown("Even distribution after balancing valence:")
         songs_expanded.reset_index(drop=True, inplace=True)
         songs_expanded["valence_category"] = np.where(songs_expanded["valence"] >= 0.5, 1, 0)
         #separate features (X) and target (y)
