@@ -22,17 +22,17 @@ from imblearn.under_sampling import RandomUnderSampler
 
 option = st.sidebar.selectbox(
     "Choose an option:",
-    ["Get Recommendations", "Behind The Scenes: See Project Steps"]
+    ["Get Recommendations", "App Development"]
 )
 
 
-if option == "Behind The Scenes: See Project Steps":
+if option == "App Development":
     
-    st.title("Steps taken to build Tunes by Mood:")
+    st.title("Tunes by Mood: App Development")
 
     #dropdown menu
     categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Practice: Get Recommendations"]
-    selected_category = st.selectbox("Choose a section of this project to explore:", categories)
+    selected_category = st.selectbox("Choose a section of the app development process to explore:", categories)
     
     if selected_category == "Data Overview":
         
