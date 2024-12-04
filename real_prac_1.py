@@ -267,7 +267,8 @@ if option == "App Development":
         ax.legend()
         ax.set_title("Hours Per Day")
         st.pyplot(fig)
-    
+
+        st.markdown("Most of the participants listen to music between 0 and 5 hours per day.")
         #look at outliers
         st.subheader("Any Outliers?")
         
