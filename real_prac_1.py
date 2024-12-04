@@ -84,7 +84,7 @@ if option == "App Development":
         mxmh_survey_results = pd.read_csv("mxmh_survey_results.csv")
         
         #missing vals
-        st.subheader("Any missing vals?")
+        st.subheader("Handle missing values:")
         #make a heatmap of the missing data
         nan_mask = mxmh_survey_results.isna()
         nan_array = nan_mask.astype(int).to_numpy()
@@ -102,7 +102,7 @@ if option == "App Development":
     
         #plans for missing vals
         st.markdown("Plans To Handle Missing Data")
-        st.write("* Age will not be included in main analysis (listening habits and mental health), so outliers will be handled, but missing age values will not be.")
+        st.write("* Age will not be included in main analysis (listening habits and mental health). Age outliers will be handled below, but missing age values will not be since they're not incorporated in downstream analysis.")
         st.write("* Missing BPM vals will be replaced by the median of the genre each missing BMP belongs to. Please choose the Clean The Data tab to see how this is done.")
         st. write("* As for Primary Streaming Serive, While Working, Music Effects, Instrumentalist, and Foreign Language, these missing vals will not be handled because they don't impact the main analysis. The purpose of this is to retain the important info of those observations (mental health scores and listening frequencies).")
     
