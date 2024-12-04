@@ -3512,128 +3512,128 @@ if option == "Get Recommendations":
     
     
     feel_happy = merged_df[merged_df["Dep Effect"] == 0]
-        feel_sad = merged_df[merged_df["Dep Effect"] == 1]
-        #select only rows where Anxiety score is less 5/10
-        feel_calm = merged_df[merged_df["Anx Effect"] == 0]
-        #get average dance score 
-        avg_danceability = merged_df["danceability"].mean()
-        high_danceability_df = merged_df[merged_df["danceability"] >= avg_danceability]
-        low_danceability_df =  merged_df[merged_df["danceability"] < avg_danceability]
-        
-        #feel_happy_recs = feel_happy[["artist", "song", "year"]]
-        feel_happy_recs = feel_happy
-        #feel_sad_recs = feel_sad[["artist", "song", "year"]]
-        feel_sad_recs = feel_sad
-        #feel_calm_recs = feel_calm[["artist", "song", "year"]]
-        feel_calm_recs = feel_calm
-        #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
-        feel_dancey_recs = high_danceability_df
+    feel_sad = merged_df[merged_df["Dep Effect"] == 1]
+    #select only rows where Anxiety score is less 5/10
+    feel_calm = merged_df[merged_df["Anx Effect"] == 0]
+    #get average dance score 
+    avg_danceability = merged_df["danceability"].mean()
+    high_danceability_df = merged_df[merged_df["danceability"] >= avg_danceability]
+    low_danceability_df =  merged_df[merged_df["danceability"] < avg_danceability]
+    
+    #feel_happy_recs = feel_happy[["artist", "song", "year"]]
+    feel_happy_recs = feel_happy
+    #feel_sad_recs = feel_sad[["artist", "song", "year"]]
+    feel_sad_recs = feel_sad
+    #feel_calm_recs = feel_calm[["artist", "song", "year"]]
+    feel_calm_recs = feel_calm
+    #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
+    feel_dancey_recs = high_danceability_df
 
-        st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
-        st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
-        #dropdown menu
-        categories = ["Happy"]
-        selected_category = st.selectbox("Choose a listening goal:", categories)
-        
-        if selected_category == "Happy":
-        
-            #display the selected category
-            st.write(f"You selected: {selected_category}")
-        
-            st.markdown("Here are your recommended genres based averge mental health metrics by genre, demonstrated in the plots below:")
-            #st.write(feel_happy_recs)
-            st.write(feel_happy["Genre"].unique())
-            st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
-            st.write(feel_happy)
-        
-            #include a visualization
-            # Set the plot style
-            sns.set(style="whitegrid")
-        
-            # Create a figure and axis
-            fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-                
-            # Create a bar plot for each mental health measure
-            sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
-            axes[0, 0].set_title('Anxiety Levels by Genre')
-            axes[0, 0].set_ylabel('Anxiety Level')
-            axes[0, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
-            axes[0, 1].set_title('Depression Levels by Genre')
-            axes[0, 1].set_ylabel('Depression Level')
-            axes[0, 1].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
-            axes[1, 0].set_title('Insomnia Levels by Genre')
-            axes[1, 0].set_ylabel('Insomnia Level')
-            axes[1, 0].tick_params(axis='x', rotation=45)
-                
-            sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
-            axes[1, 1].set_title('OCD Levels by Genre')
-            axes[1, 1].set_ylabel('OCD Level')
-            axes[1, 1].tick_params(axis='x', rotation=45)
-        
-            plt.tight_layout()
-                
-            #show the plot
-            st.pyplot(plt)
-
-            st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
-
-            plt.close(fig)
+    st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
+    st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
+    #dropdown menu
+    categories = ["Happy"]
+    selected_category = st.selectbox("Choose a listening goal:", categories)
+    
+    if selected_category == "Happy":
+    
+        #display the selected category
+        st.write(f"You selected: {selected_category}")
+    
+        st.markdown("Here are your recommended genres based averge mental health metrics by genre, demonstrated in the plots below:")
+        #st.write(feel_happy_recs)
+        st.write(feel_happy["Genre"].unique())
+        st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
+        st.write(feel_happy)
+    
+        #include a visualization
+        # Set the plot style
+        sns.set(style="whitegrid")
+    
+        # Create a figure and axis
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
             
-            # Melt the DataFrame to a long format
-            happy_features = feel_happy[["valence", "danceability", "energy"]]
-            df_long = happy_features.melt(var_name="Feature", value_name="Value")
+        # Create a bar plot for each mental health measure
+        sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
+        axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 0].set_ylabel('Anxiety Level')
+        axes[0, 0].tick_params(axis='x', rotation=45)
             
-            # Create the scatterplot
-            fig = px.scatter(
-                df_long, 
-                x=df_long.index,  # The index as x-axis
-                y="Value", 
-                color="Feature",
-                title="Scatterplot of Features",
-                labels={"index": "Row Index", "Value": "Feature Value"}
-            )
+        sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
+        axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_ylabel('Depression Level')
+        axes[0, 1].tick_params(axis='x', rotation=45)
             
-            # Display the plot in Streamlit
-            import streamlit as st
-            st.plotly_chart(fig)
-
-
-
-            st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
-            #st.write(feel_happy_recs)
-            avg_valence = merged_df["valence"].mean()
-            above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
-            st.write(above_avg_valence)
-
-            st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
-
-
-            #plt.close(fig)
+        sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
+        axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_ylabel('Insomnia Level')
+        axes[1, 0].tick_params(axis='x', rotation=45)
             
-            # Melt the DataFrame to a long format
-            df_long = above_avg_valence[["valence", "danceability", "energy"]]
-            df_long = df_long.melt(var_name="Feature", value_name="Value")
+        sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
+        axes[1, 1].set_title('OCD Levels by Genre')
+        axes[1, 1].set_ylabel('OCD Level')
+        axes[1, 1].tick_params(axis='x', rotation=45)
+    
+        plt.tight_layout()
             
-            # Create the scatterplot
-            fig = px.scatter(
-                df_long, 
-                x=df_long.index,  # The index as x-axis
-                y="Value", 
-                color="Feature",
-                title="Scatterplot of Features",
-                labels={"index": "Row Index", "Value": "Feature Value"}
-            )
+        #show the plot
+        st.pyplot(plt)
 
-            # Update the y-axis range and ticks
-            fig.update_yaxes(range=[0, 1], tick0=0, dtick=0.2)
-            
-            # Display the plot in Streamlit
-            import streamlit as st
-            st.plotly_chart(fig)
+        st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
+
+        plt.close(fig)
+        
+        # Melt the DataFrame to a long format
+        happy_features = feel_happy[["valence", "danceability", "energy"]]
+        df_long = happy_features.melt(var_name="Feature", value_name="Value")
+        
+        # Create the scatterplot
+        fig = px.scatter(
+            df_long, 
+            x=df_long.index,  # The index as x-axis
+            y="Value", 
+            color="Feature",
+            title="Scatterplot of Features",
+            labels={"index": "Row Index", "Value": "Feature Value"}
+        )
+        
+        # Display the plot in Streamlit
+        import streamlit as st
+        st.plotly_chart(fig)
+
+
+
+        st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
+        #st.write(feel_happy_recs)
+        avg_valence = merged_df["valence"].mean()
+        above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
+        st.write(above_avg_valence)
+
+        st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
+
+
+        #plt.close(fig)
+        
+        # Melt the DataFrame to a long format
+        df_long = above_avg_valence[["valence", "danceability", "energy"]]
+        df_long = df_long.melt(var_name="Feature", value_name="Value")
+        
+        # Create the scatterplot
+        fig = px.scatter(
+            df_long, 
+            x=df_long.index,  # The index as x-axis
+            y="Value", 
+            color="Feature",
+            title="Scatterplot of Features",
+            labels={"index": "Row Index", "Value": "Feature Value"}
+        )
+
+        # Update the y-axis range and ticks
+        fig.update_yaxes(range=[0, 1], tick0=0, dtick=0.2)
+        
+        # Display the plot in Streamlit
+        import streamlit as st
+        st.plotly_chart(fig)
 
     
     if selected_category == "Sad":
