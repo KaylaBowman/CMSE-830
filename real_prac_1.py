@@ -3529,8 +3529,7 @@ if option == "Get Recommendations":
     #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
     feel_dancey_recs = high_danceability_df
 
-    st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
-    st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
+    st.markdown("Please choose a listening goal to recieve aligned recommendations based on genre and song features.")
     #dropdown menu
     categories = ["Happy"]
     selected_category = st.selectbox("Choose a listening goal:", categories)
@@ -3540,11 +3539,11 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based averge mental health metrics by genre, demonstrated in the plots below:")
+        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the plot below:")
         #st.write(feel_happy_recs)
         st.write(feel_happy["Genre"].unique())
-        st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
-        st.write(feel_happy)
+        #st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
+        #st.write(feel_happy)
     
         #include a visualization
         # Set the plot style
@@ -3579,38 +3578,33 @@ if option == "Get Recommendations":
         #show the plot
         st.pyplot(plt)
 
-        st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
+        #st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
 
-        plt.close(fig)
+        #plt.close(fig)
         
-        # Melt the DataFrame to a long format
-        happy_features = feel_happy[["valence", "danceability", "energy"]]
-        df_long = happy_features.melt(var_name="Feature", value_name="Value")
+        ## Melt the DataFrame to a long format
+        #happy_features = feel_happy[["valence", "danceability", "energy"]]
+        #df_long = happy_features.melt(var_name="Feature", value_name="Value")
         
-        # Create the scatterplot
-        fig = px.scatter(
-            df_long, 
-            x=df_long.index,  # The index as x-axis
-            y="Value", 
-            color="Feature",
-            title="Scatterplot of Features",
-            labels={"index": "Row Index", "Value": "Feature Value"}
-        )
+        ## Create the scatterplot
+        #fig = px.scatter(
+            #df_long, 
+            #x=df_long.index,  # The index as x-axis
+            #y="Value", 
+            #color="Feature",
+            #title="Scatterplot of Features",
+            #labels={"index": "Row Index", "Value": "Feature Value"}
+        #)
         
-        # Display the plot in Streamlit
-        import streamlit as st
-        st.plotly_chart(fig)
+        ## Display the plot in Streamlit
+        #import streamlit as st
+        #st.plotly_chart(fig)
 
-
-
-        st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
+        st.markdown("Here are your recommended songs within those genres based on your listening goal. The plot below provides info on those song features, which demonstrates why they fit your goal.")
         #st.write(feel_happy_recs)
         avg_valence = merged_df["valence"].mean()
         above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
         st.write(above_avg_valence)
-
-        st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
-
 
         #plt.close(fig)
         
