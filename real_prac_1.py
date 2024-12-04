@@ -155,34 +155,7 @@ if option == "App Development":
         import pandas as pd
         import plotly.express as px
 
-        '''
-        #make a subset so we're only focused on the frequency columns
-        mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
         
-        #convert the dataset from wide to long format
-        long_format_df = mh_subset.melt(var_name='Score', value_name='Frequency')
-    
-        #create the histogram
-        fig = px.histogram(
-            long_format_df, 
-            x='Score', 
-            color='Frequency', 
-            barmode='group', 
-            title='Frequency Distribution of Mental Health Scores'
-        )
-    
-        #trying to get rid of the gridlines to follow Tufte's rules
-        #remove x-axis gridlines
-        fig.update_layout(plot_bgcolor='white')
-        
-        #show the plot 
-        st.plotly_chart(fig)
-        '''
-
-
-
-
-
         # Subset to include only mental health metrics
         mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
         
@@ -218,20 +191,7 @@ if option == "App Development":
         # Show the chart in Streamlit
         st.subheader("Mental Health Stats")
         st.plotly_chart(fig)
-        
 
-
-
-
-
-
-
-
-
-
-
-        
-    
         st.markdown("Most participants experience anxiety and depression but not OCD or insomnia as much.")
         
         #frequency
