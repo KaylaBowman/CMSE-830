@@ -764,10 +764,10 @@ if option == "App Development":
         songs = pd.read_csv("songs_normalize.csv")
     
         st.write("Filter out all explicit songs so the app is appropriate for all users.")
-        num_before = (songs["explicit"] == False).sum()
+        num_before = (songs["explicit"] == True).sum()
         st.write(f"Number of explicit songs before filtering: {num_before}")
         songs = songs[songs["explicit"] == False]
-        num_after = (songs["explicit"] == False).sum()
+        num_after = (songs["explicit"] == True).sum()
         st.write(f"Number of explicit songs after filtering: {num_after}")
         #st.write(songs["explicit"].head())  
     
