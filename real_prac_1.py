@@ -270,7 +270,7 @@ if option == "App Development":
 
         st.markdown("Most of the participants listen to music between 0 and 5 hours per day.")
         #look at outliers
-        st.subheader("Any Outliers?")
+        st.subheader("Consider Outliers:")
         
         #hour outliers
         num_24_hours = sum(mxmh_survey_results['Hours per day'] == 24)
@@ -281,7 +281,7 @@ if option == "App Development":
         st.write(f"Number of participants younger than 18 or older than 70: {age_outliers}")
     
     
-        st.subheader("Investigate Second Dataset")
+        st.subheader("Investigating Second Dataset")
     
         #load the Data
         songs = pd.read_csv("songs_normalize.csv")
