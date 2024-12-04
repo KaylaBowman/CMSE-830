@@ -3644,9 +3644,10 @@ if option == "Get Recommendations":
         
 
         st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        #changing from mean to median because upbeat songs are being recommended 
         avg_valence = merged_df["valence"].mean()
-        avg_danceability = merged_df["danceability"].mean()
-        avg_energy = merged_df["energy"].mean()
+        avg_danceability = merged_df["danceability"].median()
+        avg_energy = merged_df["energy"].median()
         # Filter rows where valence, danceability, and energy are below their respective averages
         below_avg_val_dan_ener = feel_sad[
             (feel_sad["valence"] < avg_valence) &
