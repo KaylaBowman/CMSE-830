@@ -582,7 +582,7 @@ if option == "App Development":
     
         #######now anxiety balance
         st.subheader("Handle imbalance of Anxiety")
-        st.write("I balanced anxiety by undersampling, considering two classes: values below 5 and above 5")
+        st.write("Anxiety was balanced by undersampling, considering two classes: values below 5 and above 5")
         st.write("Before:")
     
         #original before plot
@@ -660,7 +660,7 @@ if option == "App Development":
     
         ######now balance depression
         st.subheader("Handle imbalance of Depression")
-        st.write("I balanced depression by undersampling, considering two classes: values below 5 and above 5")
+        st.write("Depression was also balanced by undersampling, considering two classes: values below 5 and above 5")
         st.write("Before:")
         
     
@@ -742,24 +742,22 @@ if option == "App Development":
     
         ###########see that I should stop balancing now
     
-        # st.markdown("Here, I decided not to balance OCD and insomnia because balancing depression made anxiety imbalanced again. (Please see the plot below.) This happened because undersampling deletes observations, so each time I use undersampling, the class balance is affected. So, I'll stop balancing here.")
+        st.markdown("OCD and insomnia were purposefully left imbalanced. Balancing depression made anxiety imbalanced again. (Please see the plot below.) This happened because undersampling deletes observations, so each time undersampling was done, the class balance is affected. So, balancing by undersampling was only done for the two most prominent mental health metrics among participants, anxiety and depression, to preserve balancing efforts.")
     
-        st.markdown("For the final, I will balance OCD and insomnia.")
-    
-        # #create the Anxiety_category column 
-        # cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+        #create the Anxiety_category column 
+        cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
         
-        # #create the plot
-        # fig, ax = plt.subplots(figsize=(10, 6))  
-        # sns.histplot(data=cleaned_data, x='Anxiety_category', ax=ax)
+        #create the plot
+        fig, ax = plt.subplots(figsize=(10, 6))  
+        sns.histplot(data=cleaned_data, x='Anxiety_category', ax=ax)
         
-        # #set title and labels
-        # ax.set_title('Distribution of Anxiety After Balancing Depression')
-        # ax.set_xlabel('Anxiety Category')
-        # ax.set_ylabel('Count')
+        #set title and labels
+        ax.set_title('Distribution of Anxiety After Balancing Depression')
+        ax.set_xlabel('Anxiety Category')
+        ax.set_ylabel('Count')
         
-        # #display the plot 
-        # st.pyplot(fig)
+        #display the plot 
+        st.pyplot(fig)
     
     
         st.subheader("Clean the second dataset")
