@@ -742,7 +742,7 @@ if option == "App Development":
     
         ###########see that I should stop balancing now
     
-        st.markdown("OCD and insomnia were purposefully left imbalanced. Balancing depression made anxiety imbalanced again. (Please see the plot below.) This happened because undersampling deletes observations, so each time undersampling was done, the class balance is affected. So, balancing by undersampling was only done for the two most prominent mental health metrics among participants, anxiety and depression, to preserve balancing efforts.")
+        st.markdown("OCD and insomnia were purposefully left imbalanced. Balancing depression made anxiety slightly imbalanced again. (Please see the plot below.) This happened because undersampling deletes observations, so each time undersampling was done, the class balance is affected. So, balancing by undersampling was only done for the two most prominent mental health metrics among participants, anxiety and depression, to preserve balancing efforts.")
     
         #create the Anxiety_category column 
         cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
