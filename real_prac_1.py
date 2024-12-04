@@ -154,7 +154,8 @@ if option == "App Development":
         import streamlit as st
         import pandas as pd
         import plotly.express as px
-        
+
+        '''
         #make a subset so we're only focused on the frequency columns
         mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
         
@@ -176,6 +177,56 @@ if option == "App Development":
         
         #show the plot 
         st.plotly_chart(fig)
+        '''
+
+
+
+
+
+        # Subset to include only mental health metrics
+        mh_subset = mxmh_survey_results[["Anxiety", "Depression", "OCD", "Insomnia"]]
+        
+        # Convert wide format to long format
+        long_format_df = mh_subset.melt(var_name="Metric", value_name="Frequency")
+        
+        # Aggregate frequencies (optional: you can skip this if raw data works better)
+        aggregated_df = long_format_df.groupby("Metric", as_index=False).sum()
+        
+        # Create a bar plot
+        fig = px.bar(
+            aggregated_df,
+            x="Metric",
+            y="Frequency",
+            title="Frequency Distribution of Mental Health Scores",
+            labels={"Metric": "Mental Health Metric", "Frequency": "Frequency"},
+            color="Metric",  # Different color for each group
+            text="Frequency",  # Show frequency values on the bars
+        )
+        
+        # Update layout (optional: clean up gridlines and background)
+        fig.update_layout(
+            plot_bgcolor="white",
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=True),
+        )
+        
+        # Show the chart in Streamlit
+        st.subheader("Mental Health Stats")
+        st.plotly_chart(fig)
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
         st.markdown("Most participants experience anxiety and depression but not OCD or insomnia as much.")
         
