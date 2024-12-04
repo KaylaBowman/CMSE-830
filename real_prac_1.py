@@ -67,7 +67,7 @@ if option == "Behind The Scenes: See Project Steps":
         st.write("* Valence: positivity of the track (0 to 1)")
         st.write("* Danceability: considers tempo, beat strength, and rhythm stability")
         st.write("* Energy: intensity of song (0 to 1)")
-        st.write("* All feature descriptions are on the link above")
+        st.write("* All feature descriptions are included in the link above")
     
         
         #load the Data
