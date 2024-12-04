@@ -482,7 +482,7 @@ if option == "App Development":
         "Sometimes": 3,
         "Very frequently": 4 }
     
-        # Replace the values in the "Frequency [Country]" column
+        # Replace the values in the "Frequency [Genre]" columns
         cleaned_data["Frequency [Latin]"] = cleaned_data["Frequency [Latin]"].replace(frequency_mapping)
         cleaned_data["Frequency [Rock]"] = cleaned_data["Frequency [Rock]"].replace(frequency_mapping)
         cleaned_data["Frequency [Video game music]"] = cleaned_data["Frequency [Video game music]"].replace(frequency_mapping)
@@ -513,8 +513,8 @@ if option == "App Development":
         st.write(frequency_subset.head())  
     
         st.subheader("Handle Imbalance")
-        st.markdown("Fav Genre")
-        st.write("* When deleting Age outliers, one Fav Genre was deleted (Latin). Now the remaining participants represent 15 favorite genres. I made Fav Genre more balanced by reducing the three outliers (rock, metal, pop) to have the mean count of Fav Genre (21). Please see these changes below.")
+        st.markdown("Fav Genre:")
+        st.write("* When deleting Age outliers above, one Fav Genre was removed (Latin). (0 participants list Latin as their favorite genre in the remaining observations.) Now, the remaining participants represent 15 favorite genres. The Fav Genre feature was made more balanced by reducing the three genres with outlier frequencies (rock, metal, pop) to instead have the overall mean frequency of Fav Genre (21). Please see these changes below.")
         st.write("Imbalanced distribution before reducing outlier frequencies to the median frequency:")
         
         #count the occurrences of each genre
