@@ -3539,12 +3539,42 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the plot below:")
+        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
         #st.write(feel_happy_recs)
         st.write(feel_happy["Genre"].unique())
         #st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
         #st.write(feel_happy)
     
+        
+        #st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
+
+        #plt.close(fig)
+        
+        ## Melt the DataFrame to a long format
+        #happy_features = feel_happy[["valence", "danceability", "energy"]]
+        #df_long = happy_features.melt(var_name="Feature", value_name="Value")
+        
+        ## Create the scatterplot
+        #fig = px.scatter(
+            #df_long, 
+            #x=df_long.index,  # The index as x-axis
+            #y="Value", 
+            #color="Feature",
+            #title="Scatterplot of Features",
+            #labels={"index": "Row Index", "Value": "Feature Value"}
+        #)
+        
+        ## Display the plot in Streamlit
+        #import streamlit as st
+        #st.plotly_chart(fig)
+
+        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        #st.write(feel_happy_recs)
+        avg_valence = merged_df["valence"].mean()
+        above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
+        st.write(above_avg_valence)
+
+
         #include a visualization
         # Set the plot style
         sns.set(style="whitegrid")
@@ -3578,34 +3608,8 @@ if option == "Get Recommendations":
         #show the plot
         st.pyplot(plt)
 
-        #st.markdown("This plot demonstrates the need to enhance recommendations further. There's too much variety in each genre to base recs off genre alone.")
 
-        #plt.close(fig)
         
-        ## Melt the DataFrame to a long format
-        #happy_features = feel_happy[["valence", "danceability", "energy"]]
-        #df_long = happy_features.melt(var_name="Feature", value_name="Value")
-        
-        ## Create the scatterplot
-        #fig = px.scatter(
-            #df_long, 
-            #x=df_long.index,  # The index as x-axis
-            #y="Value", 
-            #color="Feature",
-            #title="Scatterplot of Features",
-            #labels={"index": "Row Index", "Value": "Feature Value"}
-        #)
-        
-        ## Display the plot in Streamlit
-        #import streamlit as st
-        #st.plotly_chart(fig)
-
-        st.markdown("Here are your recommended songs within those genres based on your listening goal. The plot below provides info on those song features, which demonstrates why they fit your goal.")
-        #st.write(feel_happy_recs)
-        avg_valence = merged_df["valence"].mean()
-        above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
-        st.write(above_avg_valence)
-
         #plt.close(fig)
         
         # Melt the DataFrame to a long format
