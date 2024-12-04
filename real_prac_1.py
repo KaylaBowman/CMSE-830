@@ -36,8 +36,6 @@ if option == "Behind The Scenes: See Project Steps":
     
     if selected_category == "Data Overview":
         
-        #title of the app
-        #st.title("Welcome To My Music Therapy App")
         st.title("Data Overview:")
         #st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
     
@@ -48,7 +46,7 @@ if option == "Behind The Scenes: See Project Steps":
         #markdown section
         st.subheader("What does the first [dataset](https://www.kaggle.com/datasets/catherinerasgaitis/mxmh-survey-results) look like?")
         st.markdown("* Purpose: this dataset will build our recommendation system by providing info on the relationships between listening habits and mental health")
-        st.markdown("* Mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary")
+        st.markdown("* Mixture of data types (ex: Primary streaming service: Nominal, Hours per day: Ratio, Anxiety: Ordinal, Composer: Binary)")
         st.markdown("Feature description:")
         st.write("* All observations are self-reported")
         st.write("* 16 unique genres are considered")
