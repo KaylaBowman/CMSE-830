@@ -394,11 +394,11 @@ if option == "App Development":
         
         #handle missing vals 
         st.subheader("Handle BPM Missing Values")
-        st.markdown("Group by genre, then replace with median of genre")
+        st.markdown("Group all BPM values by genre, then replace missing vals with median BPM of respective genre.")
     
         #get pop median so we can test our replacement worked
         pop_median = mxmh_survey_results[mxmh_survey_results["Fav genre"] == "Pop"]["BPM"].median()
-        st.write(f"The median BPM of Pop: {pop_median}")
+        st.write(f"Examine songs in the Pop genre to ensure missing vals are replaced with median Pop BPM. The median BPM of Pop: {pop_median}")
     
         #group and replace
         for i, val in enumerate(mxmh_survey_results["BPM"].isna()):
@@ -442,7 +442,7 @@ if option == "App Development":
     
         #see that BPM has no missing values
         #missing vals
-        st.subheader("No More Missing BPM Vals")
+        st.subheader("0 Missing BPM Vals Remaining")
         #make a heatmap of the missing data
         nan_mask = mxmh_survey_results.isna()
         nan_array = nan_mask.astype(int).to_numpy()
@@ -464,17 +464,17 @@ if option == "App Development":
         #I will say the max they could realistically listen to is 16 hrs
         cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
         #deleted 6 rows
-        st.markdown("Deleted all instances of Hours Per Day above 16. This deleted 6 rows of observations.")
+        st.markdown("Deleted all instances of self-reported Hours Per Day above 16 to ensure realistic data. This deleted 6 rows of observations. The shape of the dataset is now:")
         cleaned_data.shape
     
         #take away age outliers 
         cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
-        st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile). This deleted 50 rows of observations.")
+        st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile). This deleted 50 rows of observations. The shape of the dataset is now:")
         cleaned_data.shape
         
         #recode frequency genre
         st.subheader("Recode Categorical Data")
-        st.markdown("Genre Frequencies")
+        st.markdown("Genre Frequencies | 'Never': 1, 'Rarely': 2, 'Sometimes': 3, 'Very frequently': 4")
     
         frequency_mapping = {
         "Never": 1,
