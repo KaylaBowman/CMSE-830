@@ -270,7 +270,7 @@ if option == "App Development":
 
         st.markdown("Most of the participants listen to music between 0 and 5 hours per day.")
         #look at outliers
-        st.subheader("Consider Outliers:")
+        st.subheader("Consider Outliers")
         
         #hour outliers
         num_24_hours = sum(mxmh_survey_results['Hours per day'] == 24)
