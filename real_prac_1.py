@@ -3721,9 +3721,24 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended songs:")
-        st.write(feel_calm_recs)
-    
+        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.write(feel_calm["Genre"].unique())
+        
+
+        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        #changing from mean to median because upbeat songs are being recommended 
+        avg_valence = merged_df["valence"].mean()
+        avg_danceability = merged_df["danceability"].median()
+        avg_energy = merged_df["energy"].median()
+        # Filter rows where valence, danceability, and energy are their respective averages
+        avg_val_dan_ener = feel_calm[
+            (feel_sad["valence"] == avg_valence) &
+            (feel_sad["danceability"] == avg_danceability) &
+            (feel_sad["energy"] == avg_energy)
+        ]
+        st.write(avg_val_dan_ener[["artist", "song", "year"]])
+
+
         #include a visualization
         # Set the plot style
         sns.set(style="whitegrid")
@@ -3756,8 +3771,33 @@ if option == "Get Recommendations":
             
         #show the plot
         st.pyplot(plt)
-    
-    
+
+
+        
+        #plt.close(fig)
+        
+        # Melt the DataFrame to a long format
+        df_long = avg_val_dan_ener[["valence", "danceability", "energy"]]
+        df_long = df_long.melt(var_name="Feature", value_name="Value")
+        
+        # Create the scatterplot
+        fig = px.scatter(
+            df_long, 
+            x=df_long.index,  # The index as x-axis
+            y="Value", 
+            color="Feature",
+            title="Scatterplot of Features",
+            labels={"index": "Row Index", "Value": "Feature Value"}
+        )
+
+        # Update the y-axis range and ticks
+        fig.update_yaxes(range=[0, 1], tick0=0, dtick=0.2)
+        
+        # Display the plot in Streamlit
+        import streamlit as st
+        st.plotly_chart(fig)
+
+
     if selected_category == "Dance":
     
         #display the selected category
