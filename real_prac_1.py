@@ -1108,7 +1108,7 @@ if option == "App Development":
     
         ########################### done repeating the filtering
         
-        st.subheader("Any correlations between frequency and mental health?")
+        st.subheader("Investigate correlations between listening frequency and mental health stats:")
     
         selected_features = ['Frequency [Classical]', "Frequency [Country]", "Frequency [EDM]", "Frequency [Folk]", 
                          "Frequency [Gospel]", "Frequency [Hip hop]", "Frequency [Jazz]", "Frequency [K pop]", "Frequency [Lofi]",
