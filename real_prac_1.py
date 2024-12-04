@@ -191,7 +191,7 @@ if option == "App Development":
         
         # Bin the scores into intervals of 1 (0–1, 1–2, ..., 9–10)
         long_format_df["Score Bin"] = pd.cut(
-            long_format_df["Score"], bins=range(0, 12), labels=range(1, 11), right=False
+            long_format_df["Score"], bins=range(0, 12), labels=range(0, 11), right=False
         )
         
         # Count occurrences of each bin for each metric
