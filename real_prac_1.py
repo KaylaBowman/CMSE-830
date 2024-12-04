@@ -764,8 +764,12 @@ if option == "App Development":
         songs = pd.read_csv("songs_normalize.csv")
     
         st.write("Filter out all explicit songs so the app is appropriate for all users.")
+        num_before = (songs["explicit"] == False).sum()
+        st.write(f"Number of explicit songs before filtering: {num_before}")
         songs = songs[songs["explicit"] == False]
-        st.write(songs["explicit"].head())  
+        num_after = (songs["explicit"] == False).sum()
+        st.write(f"Number of explicit songs after filtering: {num_after}")
+        #st.write(songs["explicit"].head())  
     
         st.markdown("Some songs are categorized as multiple genres. Let's split that up so each song is listed once per genre that it classifies as. This will create duplicates. For example, I want a pop-rock song to be recommened for pop and rock recommedations.")
         songs["genre"] = songs["genre"].str.split(",")
