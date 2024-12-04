@@ -3645,8 +3645,15 @@ if option == "Get Recommendations":
 
         st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
         avg_valence = merged_df["valence"].mean()
-        below_avg_valence = feel_sad[feel_sad["valence"] < avg_valence]
-        st.write(below_avg_valence[["artist", "song", "year"]])
+        avg_danceability = merged_df["danceability"].mean()
+        avg_energy = merged_df["energy"].mean()
+        # Filter rows where valence, danceability, and energy are below their respective averages
+        below_avg_val_dan_ener = feel_sad[
+            (feel_sad["valence"] < avg_valence) &
+            (feel_sad["danceability"] < avg_danceability) &
+            (feel_sad["energy"] < avg_energy)
+        ]
+        st.write(below_avg_val_dan_ener[["artist", "song", "year"]])
 
 
         #include a visualization
@@ -3687,7 +3694,7 @@ if option == "Get Recommendations":
         #plt.close(fig)
         
         # Melt the DataFrame to a long format
-        df_long = below_avg_valence[["valence", "danceability", "energy"]]
+        df_long = below_avg_val_dan_ener[["valence", "danceability", "energy"]]
         df_long = df_long.melt(var_name="Feature", value_name="Value")
         
         # Create the scatterplot
