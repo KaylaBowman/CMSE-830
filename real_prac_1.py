@@ -3571,7 +3571,7 @@ if option == "Get Recommendations":
         st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
         #st.write(feel_happy_recs)
         avg_valence = merged_df["valence"].mean()
-        above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
+        above_avg_valence = feel_happy_recs[feel_happy_recs["valence"] >= avg_valence]
         st.write(above_avg_valence)
 
 
