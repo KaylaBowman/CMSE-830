@@ -20,39 +20,13 @@ st.markdown(
     <style>
         /* Set the background color for the entire page */
         body, .block-container {
-            background-color: #fff0fa !important;  /* Light pink background */
+            background-color: #1662cc !important;  /* blue background */
         }
 
-        /* Optional: Style for the sidebar */
-        .sidebar-content {
-            background-color: #fff0fa !important;
-        }
     </style>
     """,
     unsafe_allow_html=True
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ##title of the app
