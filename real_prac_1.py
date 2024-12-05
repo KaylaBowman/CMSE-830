@@ -1846,7 +1846,7 @@ if option == "App Development":
         merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
         st.write(merged_df)
 
-        st.subheader("What's the balance between classes?")
+        st.subheader("Investigate balance between classes:")
 
         #plot of Dep Effect
     
