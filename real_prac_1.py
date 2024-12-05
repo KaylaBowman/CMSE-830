@@ -2885,7 +2885,15 @@ if option == "Get Recommendations":
 
 
     #title of the app
-    st.title("A Music Therapy App Designed For You")
+    #st.title("A Music Therapy App Designed For You")
+    #customize the font size so it fits in one line
+    st.markdown(
+    """
+    <h2 style="font-size: 24px; text-align: center;">A Music Therapy App Designed For You</h2>
+    """,
+    unsafe_allow_html=True
+)
+
     st.markdown("These recommendations are grounded in research exploring the connection between music listening and mood changes, providing personalized suggestions tailored to support your well-being.")
     st.subheader("Find Your Tunes Now")
     
