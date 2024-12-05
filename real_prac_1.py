@@ -31,7 +31,7 @@ if option == "App Development":
     st.title("Tunes by Mood: App Development")
 
     #dropdown menu
-    categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Practice: Get Recommendations"]
+    categories = ["Data Overview", "Investigate The Data", "Clean The Data", "Explore The Data", "Improving App Performance"]
     selected_category = st.selectbox("Choose a section of the app development process to explore:", categories)
     
     if selected_category == "Data Overview":
@@ -1903,16 +1903,23 @@ if option == "App Development":
         st.write("These plots demonstrate the balance of mental health effect within the app's library. This library could be augmented with more songs to balance these features.")
         st.write("OCD and Insomnia have all 0s. As discussed above, this could be changed by changing the threshold.")
         st.write("Many 0s in Dep Effect, and not many 0s in Anx Effect.")
+
+        st.subheader("Final feature combinations used to filter song recommendations:")
+        st.write("As discussed on the Improving App Performance page, all final recommendations will go through two stages of filtering as described below.")
+        st.write("Happy | Genres with a Dep Effect of 0 filtered by above average valence (over the whole dataset).")
+        st.write("Sad | Genres with a Dep Effect of 1 filtered by below average valence, danceability, and energy (over the whole dataset).")
+        st.write("Calm | Genres with an Anx Effect of 0 filtered by valence, energy, and danceability scores below or equal to 0.6 (over the whole dataset) to identify the most neutral songs. Filtering by the average feature scores resulted in high feature distributions.")
+        st.write("Dance| Genres with a Dep Effect of 0 filtered by above average danceability (over the whole dataset).")
         
         #################################### this begins the practice Get Recommendations Page 
 
 
         #if selected_category == "Get Recommendations":
-    if selected_category == "Practice: Get Recommendations":
+    if selected_category == "Improving App Performance":
     
         #title of the app
         st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
-        st.markdown("I created this practice page to explore and improve the app's performance. I found that recommending songs based on genre alone is not enough. Since every genre includes a mix of sad, happy, and calm songs, I will need to consider other features in my dataset to accurately recommend songs that align with the user's listening goals. This page is a mixture of EDA and App Performance.")
+        st.markdown("Here, app performance is tested and improved.)
         st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
         st.subheader("Get Recommendations")
         
@@ -2734,7 +2741,7 @@ if option == "App Development":
         #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
         feel_dancey_recs = high_danceability_df
 
-        st.markdown("Here, I noticed the app listing sad songs even when the user chooses 'Happy.' This is because the recommendations were initially based on genre alone. I will also consider Energy, Danceability, Tempo, and Valence below to improve the recommendations.")
+        st.markdown("Because there is variety within any given genre, it's not enough to meet the user's goals by recommending songs based on genre alone. For example, in the Pop genre, there exists happy, sad, and calm songs. To fill this gap, the app will also consider Energy, Danceability, and Valence to improve its recommendations. The app will recommend genres associated with mental health scores and then select songs from those genres based on features levels that meet the user's goals. (For example, high energy if the goal is to feel happy and average energy if the goal is to feel calm.")
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
         categories = ["Happy"]
@@ -2748,7 +2755,8 @@ if option == "App Development":
             st.markdown("Here are your recommended genres based averge mental health metrics by genre, demonstrated in the plots below:")
             #st.write(feel_happy_recs)
             st.write(feel_happy["Genre"].unique())
-            st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
+            st.markdown("Here are song suggestions from those genres.")
+            st.markdown("App performance tip: Sad songs are included in this list based on lyrics - for example, What Hurts The Most by Rascal Flatts. This is where feature selection is important. Valence may be more reliable than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats has high danceability and energy, but low valence. With this, a combination of these features will be used to improve these recommendations, with a focus placed on valence.")
             st.write(feel_happy)
         
             #include a visualization
@@ -2808,13 +2816,13 @@ if option == "App Development":
 
 
 
-            st.markdown("Here are your improved recommendations (songs with above average valence). Songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
+            st.markdown("Here are your improved recommendations (songs with above average valence); songs within the recommended genres that best fit your listening goals based on the stats demonstrated in the plots below:")
             #st.write(feel_happy_recs)
             avg_valence = merged_df["valence"].mean()
             above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
             st.write(above_avg_valence)
 
-            st.markdown("Now, see how the variability has changed. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
+            st.markdown("Variability has decreased. These recommendations will include less sad songs since they are limited to those songs in the recommended genres with above average valence.")
 
 
             #plt.close(fig)
@@ -2840,6 +2848,12 @@ if option == "App Development":
             import streamlit as st
             st.plotly_chart(fig)
 
+
+            st.subheader("Final feature combinations used to filter song recommendations:")
+            st. write("Happy | Genres with a Dep Effect of 0 filtered by above average valence (over the whole dataset).")
+            st. write("Sad | Genres with a Dep Effect of 1 filtered by below average valence, danceability, and energy (over the whole dataset).")
+            st. write("Calm | Genres with an Anx Effect of 0 filtered by valence, energy, and danceability scores below or equal to 0.6 (over the whole dataset) to identify the most neutral songs. Filtering by the average feature scores resulted in high feature distributions.")
+            st. write("Dance| Genres with a Dep Effect of 0 filtered by above average danceability (over the whole dataset).")
         
         
         
