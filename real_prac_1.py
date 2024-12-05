@@ -3867,15 +3867,49 @@ if option == "Get Recommendations":
     feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
     #feel_dancey_recs = high_danceability_df
 
-    st.markdown("Please choose a listening goal to recieve aligned recommendations based on genre and song features.")
-    #dropdown menu
-    categories = ["Happy", "Sad", "Calm", "Dance"]
-    selected_category = st.selectbox("Choose a listening goal:", categories)
+    # st.markdown("Please choose a listening goal to recieve aligned recommendations based on genre and song features.")
+    # #dropdown menu
+    # categories = ["Happy", "Sad", "Calm", "Dance"]
+    # selected_category = st.selectbox("Choose a listening goal:", categories)
+
     
-    if selected_category == "Happy":
+
+    #making the drop down menu look like a button
+    st.markdown(
+        """
+        <style>
+            .dropdown-button {
+                background-color: #4CAF50; /* Green background */
+                color: white; /* White text */
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+                text-align: center;
+                display: inline-block;
+                width: 100%; /* Adjust width as needed */
+            }
+            .dropdown-button:hover {
+                background-color: #45a049; /* Darker green when hovering */
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    #create a dropdown menu (Selectbox) with the button-like style
+    dropdown_option = st.selectbox(
+        "Please choose a listening goal to recieve aligned recommendations based on genre and song features.", 
+        options=["Happy", "Sad", "Calm", "Dance"],
+        key="dropdown", 
+        index=0
+    )
+    
+    if dropdown_option == "Happy":
     
         #display the selected category
-        st.write(f"You selected: {selected_category}")
+        st.write(f"You selected: {dropdown_option}")
     
         st.markdown("Here are your recommended genres:")
         #st.write(feel_happy_recs)
@@ -3978,10 +4012,10 @@ if option == "Get Recommendations":
         st.write("Song recommendations are based on the above features.")
 
     
-    if selected_category == "Sad":
+    if dropdown_option == "Sad":
     
         #display the selected category
-        st.write(f"You selected: {selected_category}")
+        st.write(f"You selected: {dropdown_option}")
     
         st.markdown("Here are your recommended genres:")
         st.write(feel_sad["Genre"].unique())
@@ -4066,10 +4100,10 @@ if option == "Get Recommendations":
         st.write("Song recommendations are based on the above features.")
 
     
-    if selected_category == "Calm":
+    if dropdown_option == "Calm":
     
         #display the selected category
-        st.write(f"You selected: {selected_category}")
+        st.write(f"You selected: {dropdown_option}")
     
         st.markdown("Here are your recommended genres:")
         st.write(feel_calm["Genre"].unique())
@@ -4156,10 +4190,10 @@ if option == "Get Recommendations":
         st.write("Song recommendations are based on the above features.")
 
 
-    if selected_category == "Dance":
+    if dropdown_option == "Dance":
     
         #display the selected category
-        st.write(f"You selected: {selected_category}")
+        st.write(f"You selected: {dropdown_option}")
     
         st.markdown("Here are your recommended genres:")
         st.write(feel_happy["Genre"].unique())
