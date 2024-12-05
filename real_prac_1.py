@@ -1247,14 +1247,14 @@ if option == "App Development":
                                title="Interactive Violin Plot of Fav Genre vs Insomnia")
         st.plotly_chart(fig_violin)
 
-        st.write("High variability among Gospel listeners. Insomnia must have a neutral association with Gospel listening.")
-        st.write("Country listeners tend to have lower Insomnia scores.")
+        #st.write("High variability among Gospel listeners. Insomnia must have a neutral association with Gospel listening.")
+        st.write("Country and Pop listeners tend to have lower Insomnia scores.")
         st.write("Lofi listeners tend to high higher Insomnia scores.")
         
     
         
         #look at mental health stat by genre
-        st.subheader("Anxiety Score by Genre")
+        st.subheader("Anxiety and Depression Scores by Genre")
         #sns.boxplot(data=cleaned_data, x="Frequency [Latin]", y = "Anxiety")
         #plt.title('Anxiety Scores of Latin Listeners')
     
@@ -1275,13 +1275,13 @@ if option == "App Development":
         selected_score = st.selectbox("Choose a mental health category to consider:", score_options)
         
         #dropdown menu for selecting a genre
-        genre_options = ["Frequency [Latin]", "Frequency [Rock]", "Frequency [Classical]", 
-                         "Frequency [Pop]", "Frequency [Jazz]", "Frequency [Hip-Hop]", 
-                         "Frequency [Electronic]", "Frequency [Reggae]", 
+        genre_options = ["Frequency [Rock]", "Frequency [Classical]", 
+                         "Frequency [Pop]", "Frequency [Jazz]", "Frequency [Hip hop]", 
+                         "Frequency [EDM]", "Frequency [Video game music]", 
                          "Frequency [Country]", "Frequency [R&B]", 
-                         "Frequency [Indie]", "Frequency [Folk]", 
-                         "Frequency [Punk]", "Frequency [Blues]", 
-                         "Frequency [Metal]", "Frequency [Soul]"]
+                         "Frequency [K pop]", "Frequency [Folk]", 
+                         "Frequency [Lofi]", "Frequency [Rap]", 
+                         "Frequency [Metal]", "Frequency [Gospel]"]
         
         selected_genre = st.selectbox("Choose a genre to consider:", genre_options)
         
