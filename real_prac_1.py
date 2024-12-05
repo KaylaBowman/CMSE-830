@@ -14,21 +14,6 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
-#add background color
-st.markdown(
-    """
-    <style>
-        /* Set the background color for the entire page */
-        body, .block-container {
-            background: linear-gradient(to right, #f3e6ff, #e6f7ff) !important;  /* Gradient from Powder Blue to Light Lavender */
-        }
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 ##title of the app
 ##st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
 ##st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
@@ -2877,6 +2862,20 @@ if option == "App Development":
 ################################################################################# this begins the Final Get Recommendations Page     
 #if selected_category == "Get Recommendations":
 if option == "Get Recommendations":
+
+    #add background color
+    st.markdown(
+        """
+        <style>
+            /* Set the background color for the entire page */
+            body, .block-container {
+                background: linear-gradient(to right, #f3e6ff, #e6f7ff) !important;  /* Gradient from Powder Blue to Light Lavender */
+            }
+    
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     #add a banner
     st.markdown(
