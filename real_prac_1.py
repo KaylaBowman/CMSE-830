@@ -14,6 +14,26 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
+#add a footer
+st.markdown(
+    """
+    <style>
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+            color: #888888;
+        }
+    </style>
+    <div class="footer">
+        © 2024 Tunes By Mood | Designed by Kayla Bowman
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
 ##title of the app
 ##st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
 ##st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
