@@ -20,7 +20,7 @@ st.markdown(
     <style>
         /* Set the background color for the entire page */
         body, .block-container {
-            background: linear-gradient(to right, #e6f7ff, #f3e6ff) !important;  /* Gradient from Powder Blue to Light Lavender */
+            background: linear-gradient(to right, #f3e6ff, #e6f7ff) !important;  /* Gradient from Powder Blue to Light Lavender */
         }
 
     </style>
