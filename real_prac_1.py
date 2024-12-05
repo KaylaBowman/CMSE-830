@@ -4028,7 +4028,7 @@ if option == "Get Recommendations":
             (feel_calm["valence"] <= 0.6) 
         ]
         
-        st.write(below_avg_energy[["artist", "song", "year"]])
+        st.write(below_point_six[["artist", "song", "year"]])
 
 
         #include a visualization
