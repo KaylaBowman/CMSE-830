@@ -4158,7 +4158,8 @@ if option == "Get Recommendations":
         plt.tight_layout()
             
         #show the plot
-        st.pyplot(plt)
+        #st.pyplot(plt)
+        st.pyplot(fig)
 
 
         
