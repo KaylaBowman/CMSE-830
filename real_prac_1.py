@@ -14,25 +14,6 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
-#add a footer
-st.markdown(
-    """
-    <style>
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            margin-top: 20px;
-            color: #888888;
-        }
-    </style>
-    <div class="footer">
-        © 2024 Tunes By Mood | Designed by Kayla Bowman
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
 
 ##title of the app
 ##st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
@@ -4224,3 +4205,23 @@ if option == "Get Recommendations":
         import streamlit as st
         st.plotly_chart(fig)
         st.write("Song recommendations are based on the above features.")
+
+
+#add a footer
+st.markdown(
+    """
+    <style>
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+            color: #888888;
+        }
+    </style>
+    <div class="footer">
+        © 2024 Tunes By Mood | Designed by Kayla Bowman
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
