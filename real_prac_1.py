@@ -2823,7 +2823,7 @@ if option == "App Development":
                 y="Value", 
                 color="Feature",
                 title="Scatterplot of Features",
-                labels={"index": "Row Index", "Value": "Feature Value"}
+                labels={"index": "Song Index", "Value": "Feature Value"}
             )
             
             # Display the plot in Streamlit
@@ -2854,7 +2854,7 @@ if option == "App Development":
                 y="Value", 
                 color="Feature",
                 title="Scatterplot of Features",
-                labels={"index": "Row Index", "Value": "Feature Value"}
+                labels={"index": "Song Index", "Value": "Feature Value"}
             )
 
             # Update the y-axis range and ticks
@@ -3948,7 +3948,7 @@ if option == "Get Recommendations":
             #y="Value", 
             #color="Feature",
             #title="Scatterplot of Features",
-            #labels={"index": "Row Index", "Value": "Feature Value"}
+            #labels={"index": "Song Index", "Value": "Feature Value"}
         #)
         
         ## Display the plot in Streamlit
@@ -4015,7 +4015,7 @@ if option == "Get Recommendations":
             y="Value", 
             color="Feature",
             title="Features of Recommended Songs",
-            labels={"index": "Row Index", "Value": "Feature Value"}
+            labels={"index": "Song Index", "Value": "Feature Value"}
         )
 
         # Update the y-axis range and ticks
@@ -4103,7 +4103,7 @@ if option == "Get Recommendations":
             y="Value", 
             color="Feature",
             title="Features of Recommended Songs",
-            labels={"index": "Row Index", "Value": "Feature Value"}
+            labels={"index": "Song Index", "Value": "Feature Value"}
         )
 
         # Update the y-axis range and ticks
@@ -4193,7 +4193,7 @@ if option == "Get Recommendations":
             y="Value", 
             color="Feature",
             title="Features of Recommended Songs",
-            labels={"index": "Row Index", "Value": "Feature Value"}
+            labels={"index": "Song Index", "Value": "Feature Value"}
         )
 
         # Update the y-axis range and ticks
@@ -4279,7 +4279,7 @@ if option == "Get Recommendations":
             y="Value", 
             color="Feature",
             title="Features of Recommended Songs",
-            labels={"index": "Row Index", "Value": "Feature Value"}
+            labels={"index": "Song Index", "Value": "Feature Value"}
         )
 
         # Update the y-axis range and ticks
