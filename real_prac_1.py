@@ -1166,9 +1166,20 @@ if option == "App Development":
         )
     
         #now plot it 
-        fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
-                               labels={'Age':'Age', 'Anxiety':'Anxiety'},
-                               title="Interactive Violin Plot of Age vs Anxiety")
+        # fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
+        #                        labels={'Age':'Age', 'Anxiety':'Anxiety'},
+        #                        title="Interactive Violin Plot of Age vs Anxiety")
+
+        fig_violin = px.violin(
+        cleaned_data, 
+        x='age_binned', 
+        y='Anxiety', 
+        box=True, 
+        points='all',
+        labels={'age_binned': 'Age Group', 'Anxiety': 'Anxiety Level'},
+        title="Interactive Violin Plot of Age vs Anxiety",
+        category_orders={"age_binned": labels}  # Explicitly set order
+        )
     
         st.plotly_chart(fig_violin)
     
