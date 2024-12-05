@@ -1136,7 +1136,7 @@ if option == "App Development":
         st.write("Insomnia is most highly correlated with Metal (r = .16).")
                  
         #hours and mh
-        st.subheader("Is hours spent listening per day correlated with reported mental health scores? Not strongly.")
+        st.subheader("Investigate relationship between hours spent listening per day and reported mental health scores:")
         selected_features = ['Hours per day', "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
     
         # Correlation Heatmap (Interactive)
@@ -1153,6 +1153,8 @@ if option == "App Development":
             yaxis_title="Features"
         )
         st.plotly_chart(fig_heatmap)
+
+        st.write("The two are not strongly correlated. The mental health metric most strongly related to Hours Per Day is Insomnia, with a weak pearson coefficient (r = .22)."
         
     
         st.subheader("How does mental health vary across age?")
