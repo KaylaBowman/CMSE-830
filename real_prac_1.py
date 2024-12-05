@@ -3585,8 +3585,9 @@ if option == "Get Recommendations":
     ####################### done replicating the filtering done above
 
     st.markdown("Recommendations are made based on genre first. For example, if a user's goal is to feel happy, genres associated with lower depression scores are recommended. Then, songs from those genres are chosen based on valence (perceived positivity) scores. Please see the 'Practice: Get Recommendations' page under 'Behind The Scenes' to get more info on how recommendations are made. As you view the graphs below, please know that the Gospel and Kpop genres were removed from consideration since they represented only a few participants. ")
-    
-    
+
+    st.subheader("Observe the df")
+    st.write(merged_df)
     
     #I'm editing the code below so that it uses merged_df and not mh_by_genre
     ###mood_increase_genres = mh_by_genre[mh_by_genre["Dep Effect"] == 0]
