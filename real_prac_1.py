@@ -2866,7 +2866,7 @@ if option == "Get Recommendations":
     #title of the app
     st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
     st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
-    st.subheader("Get Recommendations")
+    st.subheader("Find Your Tunes Now")
     
     
     ########################repeating data edits so this dropdown option can use the same updated data
