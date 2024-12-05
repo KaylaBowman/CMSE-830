@@ -1802,10 +1802,12 @@ if option == "App Development":
         title="Interactive Heatmap of Mental Health Scores by Genre",)
         # Show the heatmap
         st.plotly_chart(fig)
-    
-    
-        st.markdown("I used mh_by_genre.describe() to identify the MH category with the highest variability (SD) so I could capture more unique responses. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
-        st.markdown("I then created a binary feature that expressed whether the average depression score for a given genre was above or below 5. This is how I will recommend genres to users.")
+        st.write("This heatmap plots each average mental health metric among Very Frequent listeners of each genre. For example, the average Anxiety score among participants who report listening to Classical music 'Very Frequently' is 4.29.")
+
+        st.markdown("To identify the mental health metric with the highest variability (SD), observe descriptive statistics of this new dataframe. This metric would provide most variability if only focusing on one. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
+        mh_by_genre.describe()
+        #st.markdown("I used mh_by_genre.describe() to identify the MH category with the highest variability (SD) so I could capture more unique responses. This came out to be Depression (sd = 0.517690; Anxiety SD = 0.502129, Insomnia SD = 0.328233, OCD SD = 0.240497)")
+        st.markdown("Next, create a binary feature that expresses whether the average depression score for a given genre is above or below 5. This is how the app will recommend genres to users based on user input (listening goals.)")
     
         mh_by_genre["Dep Effect"] = np.where(mh_by_genre["Depression"] >= 5, 1, 0)
 
