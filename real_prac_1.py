@@ -3729,64 +3729,64 @@ if option == "Get Recommendations":
     
     ####################### done replicating the filtering done above
 
-    st.markdown("Recommendations are made based on genre first. For example, if a user's goal is to feel happy, genres associated with lower depression scores are recommended. Then, songs from those genres are chosen based on valence (perceived positivity) scores. Please see the 'Practice: Get Recommendations' page under 'Behind The Scenes' to get more info on how recommendations are made. As you view the graphs below, please know that the Gospel and Kpop genres were removed from consideration since they represented only a few participants. ")
+    # st.markdown("Recommendations are made based on genre first. For example, if a user's goal is to feel happy, genres associated with lower depression scores are recommended. Then, songs from those genres are chosen based on valence (perceived positivity) scores. Please see the 'Practice: Get Recommendations' page under 'Behind The Scenes' to get more info on how recommendations are made. As you view the graphs below, please know that the Gospel and Kpop genres were removed from consideration since they represented only a few participants. ")
 
-    st.subheader("Observe the df")
-    st.write(merged_df)
+    # st.subheader("Observe the df")
+    # st.write(merged_df)
 
-    st.subheader("What's the balance between classes?")
+    # st.subheader("What's the balance between classes?")
 
-    #plot of Dep Effect
+    # #plot of Dep Effect
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(merged_df["Dep Effect"], bins=11, edgecolor='black')
+    # plt.figure(figsize=(10, 6))
+    # plt.hist(merged_df["Dep Effect"], bins=11, edgecolor='black')
     
-    #set the title of the plot
-    plt.title('Distribution of Dep Effect')
+    # #set the title of the plot
+    # plt.title('Distribution of Dep Effect')
     
-    #set the x-axis title
-    plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
-    plt.xticks([0, 1])
-    st.pyplot(plt)
+    # #set the x-axis title
+    # plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
+    # plt.xticks([0, 1])
+    # st.pyplot(plt)
 
-    #plot of Anx Effect
+    # #plot of Anx Effect
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(merged_df["Anx Effect"], bins=11, edgecolor='black')
+    # plt.figure(figsize=(10, 6))
+    # plt.hist(merged_df["Anx Effect"], bins=11, edgecolor='black')
     
-    #set the title of the plot
-    plt.title('Distribution of Anx Effect')
+    # #set the title of the plot
+    # plt.title('Distribution of Anx Effect')
     
-    #set the x-axis title
-    plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
-    plt.xticks([0, 1])
-    st.pyplot(plt)
+    # #set the x-axis title
+    # plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    # plt.xticks([0, 1])
+    # st.pyplot(plt)
 
-    #plot of OCD Effect
+    # #plot of OCD Effect
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(merged_df["OCD Effect"], bins=11, edgecolor='black')
+    # plt.figure(figsize=(10, 6))
+    # plt.hist(merged_df["OCD Effect"], bins=11, edgecolor='black')
     
-    #set the title of the plot
-    plt.title('Distribution of OCD Effect')
+    # #set the title of the plot
+    # plt.title('Distribution of OCD Effect')
     
-    #set the x-axis title
-    plt.xlabel('OCD Below 5 (0) and Above 5 (1)')
-    plt.xticks([0, 1])
-    st.pyplot(plt)
+    # #set the x-axis title
+    # plt.xlabel('OCD Below 5 (0) and Above 5 (1)')
+    # plt.xticks([0, 1])
+    # st.pyplot(plt)
 
-    #plot of Ins Effect
+    # #plot of Ins Effect
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(merged_df["Ins Effect"], bins=11, edgecolor='black')
+    # plt.figure(figsize=(10, 6))
+    # plt.hist(merged_df["Ins Effect"], bins=11, edgecolor='black')
     
-    #set the title of the plot
-    plt.title('Distribution of Ins Effect')
+    # #set the title of the plot
+    # plt.title('Distribution of Ins Effect')
     
-    #set the x-axis title
-    plt.xlabel('Insomnia Below 5 (0) and Above 5 (1)')
-    plt.xticks([0, 1])
-    st.pyplot(plt)
+    # #set the x-axis title
+    # plt.xlabel('Insomnia Below 5 (0) and Above 5 (1)')
+    # plt.xticks([0, 1])
+    # st.pyplot(plt)
 
     
     #I'm editing the code below so that it uses merged_df and not mh_by_genre
