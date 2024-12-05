@@ -1128,8 +1128,9 @@ if option == "App Development":
             yaxis_title="Features"
         )
         st.plotly_chart(fig_heatmap)
-        
-    
+
+        st.write("All correlations between mental health metrics and listening frequencies are weak. Anxiety is most highly correlated with Rock (r = .24). Depression is most highly correlated with Rock (r = .26). OCD is most highly correlated with Folk (r = .12). Insomnia is most highly correlated with Metal (r = .16).")
+                 
         #hours and mh
         st.subheader("Is hours spent listening per day correlated with reported mental health scores? Not strongly.")
         selected_features = ['Hours per day', "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
