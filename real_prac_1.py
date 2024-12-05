@@ -1189,30 +1189,48 @@ if option == "App Development":
         )
     
         st.plotly_chart(fig_violin)
+
+        st.write("Least variability among 41-45 year olds. This group may include less participants.")
+        st.write("Most variability among 46-50 year olds.)
+        st.write("Lowest three median Anxiety levels among oldest three age groups.")
     
         #fav genre and MH
-        st.subheader("Is Fav Genre associated with mental health scores?")
+        st.subheader("Investigate how Fav Genre is associated with mental health scores:")
         fig_violin = px.violin(cleaned_data, x='Fav genre', y='Anxiety', box=True, points='all',
                                labels={'Fav genre':'Favorite Genre', 'Anxiety':'Anxiety'},
                                title="Interactive Violin Plot of Fav Genre vs Anxiety")
         
         st.plotly_chart(fig_violin)
+
+        st.write("Lofi listeners tend to have high Anxiety scores.")
+        
     
         fig_violin = px.violin(cleaned_data, x='Fav genre', y='Depression', box=True, points='all',
                                labels={'Fav genre':'Favorite Genre', 'Depression':'Depression'},
                                title="Interactive Violin Plot of Fav Genre vs Depression ")
     
         st.plotly_chart(fig_violin)
+
+        st.write("Lofi listeners also tend to have high Depression scores.")
+        st.write("Rap listeners tend to have lower Depression scores.")
     
         fig_violin = px.violin(cleaned_data, x='Fav genre', y='OCD', box=True, points='all',
                                labels={'Fav genre':'Favorite Genre', 'OCD':'OCD'},
                                title="Interactive Violin Plot of Fav Genre vs OCD")
         st.plotly_chart(fig_violin)
+
+        st.write("Very low data on OCD among Gospel listeners.")
+        st.write("High variability among Lofi listeners. OCD must have a neutral association with Lofi listening.")
+        st.write("Classical and Jazz listeners tend to have lower OCD scores than other listeners.")
     
         fig_violin = px.violin(cleaned_data, x='Fav genre', y='Insomnia', box=True, points='all',
                                labels={'Fav genre':'Favorite Genre', 'Insomnia':'Insomnia'},
                                title="Interactive Violin Plot of Fav Genre vs Insomnia")
         st.plotly_chart(fig_violin)
+
+        st.write("High variability among Gospel listeners. Insomnia must have a neutral association with Gospel listening.")
+        st.write("Rap listeners tend to have lower Insomnia scores.")
+        
     
         
         #look at mental health stat by genre
