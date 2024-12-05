@@ -1909,7 +1909,7 @@ if option == "App Development":
         st.write("Happy | Genres with a Dep Effect of 0 filtered by above average valence (over the whole dataset).")
         st.write("Sad | Genres with a Dep Effect of 1 filtered by below average valence, danceability, and energy (over the whole dataset).")
         st.write("Calm | Genres with an Anx Effect of 0 filtered by valence, energy, and danceability scores below or equal to 0.6 (over the whole dataset) to identify the most neutral songs. Filtering by the average feature scores resulted in high feature distributions.")
-        st.write("Dance| Genres with a Dep Effect of 0 filtered by above average danceability (over the whole dataset).")
+        st.write("Dance | Genres with a Dep Effect of 0 filtered by above average danceability (over the whole dataset).")
         
         #################################### this begins the practice Get Recommendations Page 
 
