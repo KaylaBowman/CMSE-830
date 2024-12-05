@@ -1900,8 +1900,9 @@ if option == "App Development":
         plt.xticks([0, 1])
         st.pyplot(plt)
     
-        
-        
+        st.write("These plots demonstrate the balance of mental health effect within the app's library. This library could be augmented with more songs to balance these features.")
+        st.write("OCD and Insomnia have all 0s. As discussed above, this could be changed by changing the threshold.")
+        st.write("Many 0s in Dep Effect, and not many 0s in Anx Effect."
         
         #################################### this begins the practice Get Recommendations Page 
 
