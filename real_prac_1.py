@@ -3889,6 +3889,8 @@ if option == "Get Recommendations":
         axes[1, 1].set_title('OCD Levels by Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
+
+        plt.suptitle('Mental Health Levels Associated With Music Genres', fontsize=16, y=1.02)
     
         plt.tight_layout()
             
@@ -3909,7 +3911,7 @@ if option == "Get Recommendations":
             x=df_long.index,  # The index as x-axis
             y="Value", 
             color="Feature",
-            title="Scatterplot of Features",
+            title="Features of Recommended Songs",
             labels={"index": "Row Index", "Value": "Feature Value"}
         )
 
@@ -3971,6 +3973,8 @@ if option == "Get Recommendations":
         axes[1, 1].set_title('OCD Levels by Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
+
+        plt.suptitle('Mental Health Levels Associated With Music Genres', fontsize=16, y=1.02)
     
         plt.tight_layout()
             
@@ -3991,7 +3995,7 @@ if option == "Get Recommendations":
             x=df_long.index,  # The index as x-axis
             y="Value", 
             color="Feature",
-            title="Scatterplot of Features",
+            title="Features of Recommended Songs",
             labels={"index": "Row Index", "Value": "Feature Value"}
         )
 
@@ -4018,12 +4022,8 @@ if option == "Get Recommendations":
         avg_danceability = merged_df["danceability"].median()
         avg_energy = merged_df["energy"].median()
         # Filter rows where valence, danceability are their respective averages and energy is low
-        avg_val_dan_ener = feel_calm[
-            (feel_calm["valence"] == avg_valence) &
-            (feel_calm["danceability"] == avg_danceability) &
-            (feel_calm["energy"] < avg_energy)
-        ]
-        st.write(avg_val_dan_ener[["artist", "song", "year"]])
+        below_avg_energy = feel_calm[feel_calm["energy"] < avg_energy]
+        st.write(below_avg_energy[["artist", "song", "year"]])
 
 
         #include a visualization
@@ -4053,7 +4053,9 @@ if option == "Get Recommendations":
         axes[1, 1].set_title('OCD Levels by Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
-    
+
+        plt.suptitle('Mental Health Levels Associated With Music Genres', fontsize=16, y=1.02)
+        
         plt.tight_layout()
             
         #show the plot
@@ -4073,7 +4075,7 @@ if option == "Get Recommendations":
             x=df_long.index,  # The index as x-axis
             y="Value", 
             color="Feature",
-            title="Scatterplot of Features",
+            title="Features of Recommended Songs",
             labels={"index": "Row Index", "Value": "Feature Value"}
         )
 
@@ -4130,6 +4132,8 @@ if option == "Get Recommendations":
         axes[1, 1].set_title('OCD Levels by Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
+
+        plt.suptitle('Mental Health Levels Associated With Music Genres', fontsize=16, y=1.02)
     
         plt.tight_layout()
             
@@ -4150,7 +4154,7 @@ if option == "Get Recommendations":
             x=df_long.index,  # The index as x-axis
             y="Value", 
             color="Feature",
-            title="Scatterplot of Features",
+            title="Features of Recommended Songs",
             labels={"index": "Row Index", "Value": "Feature Value"}
         )
 
