@@ -2877,14 +2877,14 @@ if option == "Get Recommendations":
             }
         </style>
         <div class="banner">
-            🎵 <b>Tunes By Mood</b> 🎶 <br> <i>Feel Better, One Song at a Time</i>
+            🎵 <b>Tunes By Mood</b> 🎶 <br> <i>A Music Therapy App Designed For You</i>
         </div>
         """,
         unsafe_allow_html=True
     )
 
     #title of the app
-    st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
+    #st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
     st.markdown("These recommendations are based on insights into how music listening correlates with mood changes, offering supportive suggestions tailored to you.")
     st.subheader("Find Your Tunes Now")
     
