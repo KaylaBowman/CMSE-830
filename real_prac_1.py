@@ -1920,7 +1920,8 @@ if option == "App Development":
         #title of the app
         st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
         st.markdown("Here, app performance is tested and improved.")
-        st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+        #st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+        st.markdown("Because there is variety within any given genre, it's not enough to meet the user's goals by recommending songs based on genre alone. For example, in the Pop genre, there exists happy, sad, and calm songs. To fill this gap, the app will also consider Energy, Danceability, and Valence to improve its recommendations. The app will recommend genres associated with mental health scores and then select songs from those genres based on features levels that meet the user's goals. (For example, high energy if the goal is to feel happy and average energy if the goal is to feel calm.")
         st.subheader("Get Recommendations")
         
         
@@ -2741,7 +2742,7 @@ if option == "App Development":
         #feel_dancey_recs = high_danceability_df[["artist", "song", "year"]]
         feel_dancey_recs = high_danceability_df
 
-        st.markdown("Because there is variety within any given genre, it's not enough to meet the user's goals by recommending songs based on genre alone. For example, in the Pop genre, there exists happy, sad, and calm songs. To fill this gap, the app will also consider Energy, Danceability, and Valence to improve its recommendations. The app will recommend genres associated with mental health scores and then select songs from those genres based on features levels that meet the user's goals. (For example, high energy if the goal is to feel happy and average energy if the goal is to feel calm.")
+        st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
         st.markdown("Please choose a listening goal to recieve aligned genre recommendations.")
         #dropdown menu
         categories = ["Happy"]
