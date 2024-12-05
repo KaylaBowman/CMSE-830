@@ -1845,6 +1845,63 @@ if option == "App Development":
         st.markdown("The merged dataset is shown below. Each song will have an average mental health score and a mental health effect (above or below 5), both based on Dataset #1.")
         merged_df = pd.merge(songs_balanced, effect_df, on='Genre', how='left')
         st.write(merged_df)
+
+        st.subheader("What's the balance between classes?")
+
+        #plot of Dep Effect
+    
+        plt.figure(figsize=(10, 6))
+        plt.hist(merged_df["Dep Effect"], bins=11, edgecolor='black')
+        
+        #set the title of the plot
+        plt.title('Distribution of Dep Effect')
+        
+        #set the x-axis title
+        plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
+        plt.xticks([0, 1])
+        st.pyplot(plt)
+
+        #plot of Anx Effect
+    
+        plt.figure(figsize=(10, 6))
+        plt.hist(merged_df["Anx Effect"], bins=11, edgecolor='black')
+        
+        #set the title of the plot
+        plt.title('Distribution of Anx Effect')
+        
+        #set the x-axis title
+        plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+        plt.xticks([0, 1])
+        st.pyplot(plt)
+
+        #plot of OCD Effect
+    
+        plt.figure(figsize=(10, 6))
+        plt.hist(merged_df["OCD Effect"], bins=11, edgecolor='black')
+        
+        #set the title of the plot
+        plt.title('Distribution of OCD Effect')
+        
+        #set the x-axis title
+        plt.xlabel('OCD Below 5 (0) and Above 5 (1)')
+        plt.xticks([0, 1])
+        st.pyplot(plt)
+
+        #plot of Ins Effect
+    
+        plt.figure(figsize=(10, 6))
+        plt.hist(merged_df["Ins Effect"], bins=11, edgecolor='black')
+        
+        #set the title of the plot
+        plt.title('Distribution of Ins Effect')
+        
+        #set the x-axis title
+        plt.xlabel('Insomnia Below 5 (0) and Above 5 (1)')
+        plt.xticks([0, 1])
+        st.pyplot(plt)
+    
+        
+        
         
         #################################### this begins the practice Get Recommendations Page 
 
@@ -3588,6 +3645,61 @@ if option == "Get Recommendations":
 
     st.subheader("Observe the df")
     st.write(merged_df)
+
+    st.subheader("What's the balance between classes?")
+
+    #plot of Dep Effect
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(merged_df["Dep Effect"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Dep Effect')
+    
+    #set the x-axis title
+    plt.xlabel('Depression Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
+    #plot of Anx Effect
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(merged_df["Anx Effect"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Anx Effect')
+    
+    #set the x-axis title
+    plt.xlabel('Anxiety Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
+    #plot of OCD Effect
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(merged_df["OCD Effect"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of OCD Effect')
+    
+    #set the x-axis title
+    plt.xlabel('OCD Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
+    #plot of Ins Effect
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(merged_df["Ins Effect"], bins=11, edgecolor='black')
+    
+    #set the title of the plot
+    plt.title('Distribution of Ins Effect')
+    
+    #set the x-axis title
+    plt.xlabel('Insomnia Below 5 (0) and Above 5 (1)')
+    plt.xticks([0, 1])
+    st.pyplot(plt)
+
     
     #I'm editing the code below so that it uses merged_df and not mh_by_genre
     ###mood_increase_genres = mh_by_genre[mh_by_genre["Dep Effect"] == 0]
