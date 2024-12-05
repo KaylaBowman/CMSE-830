@@ -19,16 +19,11 @@ st.markdown(
     """
     <style>
         /* Set the background color for the entire page */
-        body {
+        body, .block-container {
             background-color: #fff0fa !important;  /* Light pink background */
         }
 
-        /* Set the background color for the main content area */
-        .block-container {
-            background-color: #fff0fa !important;  /* Same light pink */
-        }
-
-        /* Optional: Change the background color for other areas (sidebar, etc.) */
+        /* Optional: Style for the sidebar */
         .sidebar-content {
             background-color: #fff0fa !important;
         }
@@ -36,6 +31,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
