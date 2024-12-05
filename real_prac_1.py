@@ -13,6 +13,29 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 #import the undersampling package
 from imblearn.under_sampling import RandomUnderSampler
 
+#add a banner
+st.markdown(
+    """
+    <style>
+        .banner {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            border-radius: 10px;
+        }
+    </style>
+    <div class="banner">
+        🎵 <b>Tunes By Mood</b> 🎶 <br> <i>Feel Better, One Song at a Time</i>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
+
 
 
 ##title of the app
