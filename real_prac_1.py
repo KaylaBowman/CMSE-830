@@ -1154,10 +1154,10 @@ if option == "App Development":
         )
         st.plotly_chart(fig_heatmap)
 
-        st.write("The two are not strongly correlated. The mental health metric most strongly related to Hours Per Day is Insomnia, with a weak pearson coefficient (r = .22)."
+        st.write("The two are not strongly correlated. The mental health metric most strongly related to Hours Per Day is Insomnia, with a weak pearson coefficient (r = .22).")
         
     
-        st.subheader("How does mental health vary across age?")
+        st.subheader("Investigate how mental health varies across age:")
     
         bins = [18, 25, 31, 36, 41, 46, 51, 58, 64]  
         labels = ['18-24', '25-30', '31-35', '36-40', '41-45', '46-50', '51-57', '58-64']  # Labels for the bins
