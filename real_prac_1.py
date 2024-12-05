@@ -4021,10 +4021,11 @@ if option == "Get Recommendations":
         avg_valence = merged_df["valence"].mean()
         avg_danceability = merged_df["danceability"].median()
         avg_energy = merged_df["energy"].median()
-        # Filter rows where valence, danceability are their respective averages and energy is low
-        below_avg_energy = feel_calm[
-            (feel_calm["energy"] < avg_energy) &
-            (feel_calm["danceability"] <= avg_danceability) 
+        # Filter rows where valence, danceability are below 0.6 to recommend songs that are neutral on these features. Average seemed to high and to close to the Happy scatterplot
+        below_point_six = feel_calm[
+            (feel_calm["energy"] <= 0.6) &
+            (feel_calm["danceability"] <= 0.6) &
+            (feel_calm["valence"] <= 0.6) 
         ]
         
         st.write(below_avg_energy[["artist", "song", "year"]])
