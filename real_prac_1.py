@@ -4022,7 +4022,11 @@ if option == "Get Recommendations":
         avg_danceability = merged_df["danceability"].median()
         avg_energy = merged_df["energy"].median()
         # Filter rows where valence, danceability are their respective averages and energy is low
-        below_avg_energy = feel_calm[feel_calm["energy"] < avg_energy]
+        below_avg_energy = feel_calm[
+            (feel_calm["energy"] < avg_energy]) &
+            (feel_calm["danceability"] <= avg_danceability]) 
+        ]
+        
         st.write(below_avg_energy[["artist", "song", "year"]])
 
 
