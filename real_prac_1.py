@@ -2895,7 +2895,14 @@ if option == "Get Recommendations":
 )
 
     st.markdown("These recommendations are grounded in research exploring the connection between music listening and mood changes, providing personalized suggestions tailored to support your well-being.")
-    st.subheader("Find Your Tunes Now")
+    #st.subheader("Find Your Tunes Now")
+    #customize the font size so it fits in one line
+    st.markdown(
+    """
+    <h2 style="font-size: 22px; text-align: center;">Find Your Tunes Now</h2>
+    """,
+    unsafe_allow_html=True
+)
     
     
     ########################repeating data edits so this dropdown option can use the same updated data
