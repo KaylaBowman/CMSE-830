@@ -14,23 +14,18 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
-#add color 
-# Customizing the appearance of the selectbox (dropdown)
+#add background color to the whole page
 st.markdown(
     """
     <style>
-        .stSelectbox select {
-            background-color: #4CAF50;  /* Green background */
-            color: white; /* White text */
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        /* Set the background color for the entire page */
+        body {
+            background-color: #f0f8ff;  /* Light blue background */
         }
 
-        .stSelectbox select:hover {
-            background-color: #45a049; /* Darker green on hover */
+        /* Optional: Change the background color for the main content area */
+        .main {
+            background-color: #f0f8ff !important;  /* Same light blue */
         }
     </style>
     """,
