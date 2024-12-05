@@ -2865,7 +2865,7 @@ if option == "Get Recommendations":
 
     #title of the app
     st.title("Welcome To Tunes By Mood: A Music Therapy App Designed For You")
-    st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
+    st.markdown("These recommendations are based on insights into how music listening correlates with mood changes, offering supportive suggestions tailored to you.")
     st.subheader("Find Your Tunes Now")
     
     
