@@ -1132,7 +1132,7 @@ if option == "App Development":
         st.write("All correlations between mental health metrics and listening frequencies are weak.")
         st.write("Anxiety is most highly correlated with Rock (r = .24).")
         st.write("Depression is most highly correlated with Rock (r = .26).")
-        st.write("OCD is most highly correlated with Folk (r = .12). 
+        st.write("OCD is most highly correlated with Folk (r = .12).")
         st.write("Insomnia is most highly correlated with Metal (r = .16).")
                  
         #hours and mh
