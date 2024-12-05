@@ -4066,7 +4066,7 @@ if option == "Get Recommendations":
         #plt.close(fig)
         
         # Melt the DataFrame to a long format
-        df_long = avg_val_dan_ener[["valence", "danceability", "energy"]]
+        df_long = below_avg_energy[["valence", "danceability", "energy"]]
         df_long = df_long.melt(var_name="Feature", value_name="Value")
         
         # Create the scatterplot
