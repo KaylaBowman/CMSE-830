@@ -1922,7 +1922,7 @@ if option == "App Development":
         st.markdown("Here, app performance is tested and improved.")
         #st.markdown("Please be advised that all recommendations are based on self-reported mental health scores of listeners. Since these recommendations are based on the correlations between listening preferences and mental health, they are not proven to *cause* changes in mood, but rather are *associated* with changes in mood.")
         st.markdown("Because there is variety within any given genre, it's not enough to meet the user's goals by recommending songs based on genre alone. For example, in the Pop genre, there exists happy, sad, and calm songs. To fill this gap, the app will also consider Energy, Danceability, and Valence to improve its recommendations. The app will recommend genres associated with mental health scores and then select songs from those genres based on features levels that meet the user's goals. (For example, high energy if the goal is to feel happy and average energy if the goal is to feel calm.")
-        st.subheader("Get Recommendations")
+        st.subheader("Find Your Tunes Now")
         
         
         ########################repeating data edits so this dropdown option can use the same updated data
