@@ -1248,7 +1248,8 @@ if option == "App Development":
         st.plotly_chart(fig_violin)
 
         st.write("High variability among Gospel listeners. Insomnia must have a neutral association with Gospel listening.")
-        st.write("Rap listeners tend to have lower Insomnia scores.")
+        st.write("Country listeners tend to have lower Insomnia scores.")
+        st.write("Lofi listeners tend to high higher Insomnia scores.")
         
     
         
