@@ -3841,7 +3841,7 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.markdown("Here are your recommended genres:")
         #st.write(feel_happy_recs)
         st.write(feel_happy["Genre"].unique())
         #st.markdown("Here are song suggestions from those genres. (Notice, there are sad songs in this list. I can trust valence more than danceability and energy. For example, 'What's Hurts The Most' by Rascal Flats, a sad song based on the lyrics, has high danceability and energy, but low valence. I'll use valence to improve these recommendations below.)")
@@ -3870,7 +3870,7 @@ if option == "Get Recommendations":
         #import streamlit as st
         #st.plotly_chart(fig)
 
-        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        st.markdown("Here are your recommended songs within those genres based on your listening goal:")
         #st.write(feel_happy_recs)
         avg_valence = merged_df["valence"].mean()
         above_avg_valence = feel_happy[feel_happy["valence"] >= avg_valence]
@@ -3915,10 +3915,9 @@ if option == "Get Recommendations":
             
         #show the plot
         st.pyplot(plt)
-
-
-        
+        st.write("Genre recommendations are based on the above mental health levels.")
         #plt.close(fig)
+        
         
         # Melt the DataFrame to a long format
         df_long = above_avg_valence[["valence", "danceability", "energy"]]
@@ -3940,6 +3939,7 @@ if option == "Get Recommendations":
         # Display the plot in Streamlit
         import streamlit as st
         st.plotly_chart(fig)
+        st.write("Song recommendations are based on the above features.")
 
     
     if selected_category == "Sad":
@@ -3947,11 +3947,11 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.markdown("Here are your recommended genres:")
         st.write(feel_sad["Genre"].unique())
         
 
-        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        st.markdown("Here are your recommended songs within those genres based on your listening goal:")
         #changing from mean to median because upbeat songs are being recommended 
         avg_valence = merged_df["valence"].mean()
         avg_danceability = merged_df["danceability"].median()
@@ -4003,10 +4003,9 @@ if option == "Get Recommendations":
             
         #show the plot
         st.pyplot(plt)
-
-
         
         #plt.close(fig)
+        st.write("Genre recommendations are based on the above mental health levels.")
         
         # Melt the DataFrame to a long format
         df_long = below_avg_val_dan_ener[["valence", "danceability", "energy"]]
@@ -4028,6 +4027,7 @@ if option == "Get Recommendations":
         # Display the plot in Streamlit
         import streamlit as st
         st.plotly_chart(fig)
+        st.write("Song recommendations are based on the above features.")
 
     
     if selected_category == "Calm":
@@ -4035,11 +4035,11 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.markdown("Here are your recommended genres:")
         st.write(feel_calm["Genre"].unique())
         
 
-        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        st.markdown("Here are your recommended songs within those genres based on your listening goal:")
         #changing from mean to median because upbeat songs are being recommended 
         avg_valence = merged_df["valence"].mean()
         avg_danceability = merged_df["danceability"].median()
@@ -4093,9 +4093,9 @@ if option == "Get Recommendations":
         #show the plot
         st.pyplot(plt)
 
-
-        
         #plt.close(fig)
+        st.write("Genre recommendations are based on the above mental health levels.")
+        
         
         # Melt the DataFrame to a long format
         df_long = below_point_six[["valence", "danceability", "energy"]]
@@ -4117,6 +4117,7 @@ if option == "Get Recommendations":
         # Display the plot in Streamlit
         import streamlit as st
         st.plotly_chart(fig)
+        st.write("Song recommendations are based on the above features.")
 
 
     if selected_category == "Dance":
@@ -4124,11 +4125,11 @@ if option == "Get Recommendations":
         #display the selected category
         st.write(f"You selected: {selected_category}")
     
-        st.markdown("Here are your recommended genres based on averge mental health metrics, demonstrated in the first plot below:")
+        st.markdown("Here are your recommended genres:")
         st.write(feel_happy["Genre"].unique())
         
 
-        st.markdown("Here are your recommended songs within those genres based on your listening goal. The second chart below provides info on those song features, which demonstrates why they fit your goal.")
+        st.markdown("Here are your recommended songs within those genres based on your listening goal:")
         #changing from mean to median because upbeat songs are being recommended 
         avg_valence = merged_df["valence"].mean()
         avg_danceability = merged_df["danceability"].median()
@@ -4180,6 +4181,7 @@ if option == "Get Recommendations":
 
         
         #plt.close(fig)
+        st.write("Genre recommendations are based on the above mental health levels.")
         
         # Melt the DataFrame to a long format
         df_long = high_dance[["valence", "danceability", "energy"]]
@@ -4201,3 +4203,4 @@ if option == "Get Recommendations":
         # Display the plot in Streamlit
         import streamlit as st
         st.plotly_chart(fig)
+        st.write("Song recommendations are based on the above features.")
