@@ -473,14 +473,15 @@ if option == "App Development":
         cleaned_data.shape
 
         #take away MH outliers (below 0 and above 10)
-        st.write("All mental health surveys were taken on a scale of 0-10, but negative values are included in these columns. All values in those features below 0 and above 10 will be removed now. This deleted 50 rows of observations. The shape of the dataset is now:")
+        #We actually don't need to do this. I misinterpreted a plot and thought there were outliers for these features
+        #st.write("All mental health surveys were taken on a scale of 0-10, but negative values are included in these columns. All values in those features below 0 and above 10 will be removed now. This deleted 50 rows of observations. The shape of the dataset is now:")
         cleaned_data = cleaned_data[
         (cleaned_data["Anxiety"] >= 0) & (cleaned_data["Anxiety"] <= 10) &
         (cleaned_data["Depression"] >= 0) & (cleaned_data["Depression"] <= 10) &
         (cleaned_data["OCD"] >= 0) & (cleaned_data["OCD"] <= 10) &
         (cleaned_data["Insomnia"] >= 0) & (cleaned_data["Insomnia"] <= 10)
         ]
-        cleaned_data.shape
+        #cleaned_data.shape
         
         #recode frequency genre
         st.subheader("Recode Categorical Data")
