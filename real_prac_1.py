@@ -1131,7 +1131,7 @@ if option == "App Development":
         
     
         #hours and mh
-        st.subheader("Is hours spent listening per day correlated with reported MH scores? Not strongly.")
+        st.subheader("Is hours spent listening per day correlated with reported mental health scores? Not strongly.")
         selected_features = ['Hours per day', "Anxiety", "Depression", "Insomnia", "OCD"] # Focus on these variables
     
         # Correlation Heatmap (Interactive)
@@ -1157,7 +1157,13 @@ if option == "App Development":
     
         # Create the binned column
         cleaned_data['age_binned'] = pd.cut(cleaned_data['Age'], bins=bins, labels=labels, right=False)
-    
+
+        # Convert 'age_binned' to an ordered categorical type
+        cleaned_data['age_binned'] = pd.Categorical(
+        cleaned_data['age_binned'], 
+        categories=labels,  # Use the same order as your labels
+        ordered=True
+        )
     
         #now plot it 
         fig_violin = px.violin(cleaned_data, x='age_binned', y='Anxiety', box=True, points='all',
@@ -1167,7 +1173,7 @@ if option == "App Development":
         st.plotly_chart(fig_violin)
     
         #fav genre and MH
-        st.subheader("Is fav genre associated with MH scores?")
+        st.subheader("Is Fav Genre associated with mental health scores?")
         fig_violin = px.violin(cleaned_data, x='Fav genre', y='Anxiety', box=True, points='all',
                                labels={'Fav genre':'Favorite Genre', 'Anxiety':'Anxiety'},
                                title="Interactive Violin Plot of Fav Genre vs Anxiety")
