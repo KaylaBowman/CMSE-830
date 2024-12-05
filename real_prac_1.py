@@ -20,7 +20,7 @@ st.markdown(
     <style>
         /* Set the background color for the entire page */
         body, .block-container {
-            background-color: #f4e1c1 !important;  /* blue background */
+            background-color: #fef3e2 !important;  /* blue background */
         }
 
     </style>
