@@ -1191,7 +1191,7 @@ if option == "App Development":
         st.plotly_chart(fig_violin)
 
         st.write("Least variability among 41-45 year olds. This group may include less participants.")
-        st.write("Most variability among 46-50 year olds.)"
+        st.write("Most variability among 46-50 year olds.")
         st.write("Lowest three median Anxiety levels among oldest three age groups.")
     
         #fav genre and MH
