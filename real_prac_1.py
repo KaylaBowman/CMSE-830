@@ -3887,22 +3887,26 @@ if option == "Get Recommendations":
         # Create a bar plot for each mental health measure
         sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
         axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 1].set_xlabel('Genre')
         axes[0, 0].set_ylabel('Anxiety Level')
         axes[0, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
         axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_xlabel('Genre')
         axes[0, 1].set_ylabel('Depression Level')
         axes[0, 1].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
         axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_xlabel('Genre')
         axes[1, 0].set_ylabel('Insomnia Level')
         axes[1, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
         axes[1, 1].set_title('OCD Levels by Genre')
         axes[1, 1].set_ylabel('OCD Level')
+        axes[1, 1].set_xlabel('Genre')
         axes[1, 1].tick_params(axis='x', rotation=45)
 
         plt.suptitle('Mental Health Levels Associated With Music Genres', fontsize=16, y=1.02)
@@ -3971,21 +3975,25 @@ if option == "Get Recommendations":
         # Create a bar plot for each mental health measure
         sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
         axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 0].set_xlabel('Genre')
         axes[0, 0].set_ylabel('Anxiety Level')
         axes[0, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
         axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_xlabel('Genre')
         axes[0, 1].set_ylabel('Depression Level')
         axes[0, 1].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
         axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_xlabel('Genre')
         axes[1, 0].set_ylabel('Insomnia Level')
         axes[1, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
         axes[1, 1].set_title('OCD Levels by Genre')
+        axes[1, 1].set_xlabel('Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
 
@@ -4056,21 +4064,25 @@ if option == "Get Recommendations":
         # Create a bar plot for each mental health measure
         sns.barplot(x=mh_by_genre.index, y='Anxiety', data=mh_by_genre, ax=axes[0, 0], palette='viridis')
         axes[0, 0].set_title('Anxiety Levels by Genre')
+        axes[0, 0].set_xlabel('Genre')
         axes[0, 0].set_ylabel('Anxiety Level')
         axes[0, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Depression', data=mh_by_genre, ax=axes[0, 1], palette='viridis')
         axes[0, 1].set_title('Depression Levels by Genre')
+        axes[0, 1].set_xlabel('Genre')
         axes[0, 1].set_ylabel('Depression Level')
         axes[0, 1].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='Insomnia', data=mh_by_genre, ax=axes[1, 0], palette='viridis')
         axes[1, 0].set_title('Insomnia Levels by Genre')
+        axes[1, 0].set_xlabel('Genre')
         axes[1, 0].set_ylabel('Insomnia Level')
         axes[1, 0].tick_params(axis='x', rotation=45)
             
         sns.barplot(x=mh_by_genre.index, y='OCD', data=mh_by_genre, ax=axes[1, 1], palette='viridis')
         axes[1, 1].set_title('OCD Levels by Genre')
+        axes[1, 1].set_xlabel('Genre')
         axes[1, 1].set_ylabel('OCD Level')
         axes[1, 1].tick_params(axis='x', rotation=45)
 
