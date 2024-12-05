@@ -1254,7 +1254,7 @@ if option == "App Development":
     
         
         #look at mental health stat by genre
-        st.subheader("Anxiety and Depression Scores by Genre")
+        st.subheader("Anxiety and Depression Scores by Genre Listening Frequency")
         #sns.boxplot(data=cleaned_data, x="Frequency [Latin]", y = "Anxiety")
         #plt.title('Anxiety Scores of Latin Listeners')
     
@@ -1281,7 +1281,7 @@ if option == "App Development":
                          "Frequency [Country]", "Frequency [R&B]", 
                          "Frequency [K pop]", "Frequency [Folk]", 
                          "Frequency [Lofi]", "Frequency [Rap]", 
-                         "Frequency [Metal]", "Frequency [Gospel]"]
+                         "Frequency [Metal]", "Frequency [Gospel]", "Frequency [Latin]"]
         
         selected_genre = st.selectbox("Choose a genre to consider:", genre_options)
         
@@ -1291,10 +1291,10 @@ if option == "App Development":
     
         #feature engineering
         st.subheader("Feature Engineering:")
-        st.markdown("Create a dataset with final mental health scores based on frequency of genre consumption")
+        st.markdown("Create a dataset with final mental health scores based on genre listening frequency.")
     
         #group average MH scores by highest frequency genre
-        st.markdown("Group average MH scores by all Very Frequent genre responses")
+        st.markdown("Group average mental health scores by all Very Frequent genre responses. That is, for each genre listening frequency, consider only the Very Frequent responses. Then find the average self-reported score for each mental health metric to get an average mental health stat for each metric among those listeners who listen to each genre Very Frequently. Other genre frequencies are not considered to ensure effect power of genre listening on mental health.")
     
         #making latin subsets based on frequency
         cleaned_data_latin1 = cleaned_data[cleaned_data["Frequency [Latin]"] == 1]
