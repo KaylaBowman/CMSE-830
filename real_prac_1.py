@@ -20,12 +20,12 @@ st.markdown(
     <style>
         /* Set the background color for the entire page */
         body {
-            background-color: #f0f8ff;  /* Light blue background */
+            background-color: #fff0fa;  /* Light blue background */
         }
 
         /* Optional: Change the background color for the main content area */
         .main {
-            background-color: #f0f8ff !important;  /* Same light blue */
+            background-color: #fff0fa !important;  /* Same light blue */
         }
     </style>
     """,
