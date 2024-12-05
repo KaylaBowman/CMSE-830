@@ -471,6 +471,15 @@ if option == "App Development":
         cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
         st.markdown("Deleted all instances of Age < 18 and Age > 64 (3 SDs from the 75% percentile). This deleted 50 rows of observations. The shape of the dataset is now:")
         cleaned_data.shape
+
+        #take away MH outliers (below 0 and above 10)
+        st.write("All mental health surveys were taken on a scale of 0-10, but negative values are included in these columns. All values in those features below 0 and above 10 will be removed now. This deleted 50 rows of observations. The shape of the dataset is now:")
+        cleaned_data = cleaned_data[
+        (cleaned_data["Anxiety"] >= 0) & (cleaned_data["Anxiety"] <= 10) &
+        (cleaned_data["Depression"] >= 0) & (cleaned_data["Depression"] <= 10) &
+        (cleaned_data["OCD"] >= 0) & (cleaned_data["OCD"] <= 10) &
+        (cleaned_data["Insomnia"] >= 0) & (cleaned_data["Insomnia"] <= 10)
+        cleaned_data.shape
         
         #recode frequency genre
         st.subheader("Recode Categorical Data")
@@ -911,6 +920,13 @@ if option == "App Development":
     
         #take away age outliers 
         cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+
+        #take away MH outliers             
+        cleaned_data = cleaned_data[
+        (cleaned_data["Anxiety"] >= 0) & (cleaned_data["Anxiety"] <= 10) &
+        (cleaned_data["Depression"] >= 0) & (cleaned_data["Depression"] <= 10) &
+        (cleaned_data["OCD"] >= 0) & (cleaned_data["OCD"] <= 10) &
+        (cleaned_data["Insomnia"] >= 0) & (cleaned_data["Insomnia"] <= 10)
         
         #recode frequency genre
     
@@ -1884,6 +1900,13 @@ if option == "App Development":
         
         #take away age outliers 
         cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+
+        #take away MH outliers             
+        cleaned_data = cleaned_data[
+        (cleaned_data["Anxiety"] >= 0) & (cleaned_data["Anxiety"] <= 10) &
+        (cleaned_data["Depression"] >= 0) & (cleaned_data["Depression"] <= 10) &
+        (cleaned_data["OCD"] >= 0) & (cleaned_data["OCD"] <= 10) &
+        (cleaned_data["Insomnia"] >= 0) & (cleaned_data["Insomnia"] <= 10)
         
         #recode frequency genre
         
@@ -2813,6 +2836,13 @@ if option == "Get Recommendations":
     
     #take away age outliers 
     cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+
+    #take away MH outliers             
+    cleaned_data = cleaned_data[
+    (cleaned_data["Anxiety"] >= 0) & (cleaned_data["Anxiety"] <= 10) &
+    (cleaned_data["Depression"] >= 0) & (cleaned_data["Depression"] <= 10) &
+    (cleaned_data["OCD"] >= 0) & (cleaned_data["OCD"] <= 10) &
+    (cleaned_data["Insomnia"] >= 0) & (cleaned_data["Insomnia"] <= 10)
     
     #recode frequency genre
     
