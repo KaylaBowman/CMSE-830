@@ -2938,6 +2938,93 @@ if option == "Get Recommendations":
     cleaned_data["Frequency [Folk]"] = cleaned_data["Frequency [Folk]"].replace(frequency_mapping)
     cleaned_data["Frequency [Lofi]"] = cleaned_data["Frequency [Lofi]"].replace(frequency_mapping)
     cleaned_data["Frequency [Gospel]"] = cleaned_data["Frequency [Gospel]"].replace(frequency_mapping)
+
+
+
+    #################adding in the edits that were out of place below
+    # cleaned_data = cleaned_data.copy()
+    # #I will say the max they could realistically listen to is 16 hrs
+    # cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
+    # #deleted 6 rows
+    
+    # #take away age outliers 
+    # cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+    
+    # #get the median frequency
+    # values = cleaned_data["Fav genre"].value_counts()
+    # #values.median()
+    
+    #make the changes to rock
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Rock"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Rock"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+    
+    #make the changes to metal
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Metal"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Metal"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+    
+    #make the changes to pop
+    num = 21
+    length = len(cleaned_data[cleaned_data["Fav genre"] == "Pop"])
+    drop_these_many = length - num
+    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Pop"].index, drop_these_many, replace=False)
+    #drop the selected indices from the DataFrame
+    cleaned_data = cleaned_data.drop(random_idx)
+    
+    
+    ##############balance anxiety 
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
+    y = cleaned_data["Anxiety_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+    
+    resampled_indices = rus.sample_indices_
+    
+    anxiety_resampled = cleaned_data.loc[resampled_indices, "Anxiety"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Anxiety"] = anxiety_resampled.values  
+    
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+    
+    
+    ######now balance depression
+    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
+    X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
+    y = cleaned_data["Depression_category"] 
+    
+    rus = RandomUnderSampler(random_state=42)
+    X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    print(f"Before Undersampling: \n{y.value_counts()}")
+    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+    
+    resampled_indices = rus.sample_indices_
+    
+    depression_resampled = cleaned_data.loc[resampled_indices, "Depression"]
+    
+    cleaned_data = X_resampled.copy()  
+    cleaned_data["Depression"] = depression_resampled.values  
+    
+    #reset index
+    cleaned_data.reset_index(drop=True, inplace=True)
+    
+    ############# done moving the edits that were down below
     
     
     #make aged binned
@@ -3461,87 +3548,87 @@ if option == "Get Recommendations":
     effect_df.drop(["Anxiety", "Depression", "OCD", "Insomnia"], axis=1)
     
     
-    cleaned_data = cleaned_data.copy()
-    #I will say the max they could realistically listen to is 16 hrs
-    cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
-    #deleted 6 rows
+    # cleaned_data = cleaned_data.copy()
+    # #I will say the max they could realistically listen to is 16 hrs
+    # cleaned_data = cleaned_data[(cleaned_data["Hours per day"] < 16)]
+    # #deleted 6 rows
     
-    #take away age outliers 
-    cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
+    # #take away age outliers 
+    # cleaned_data = cleaned_data[(cleaned_data["Age"] > 18) & (cleaned_data["Age"] < 64)]
     
-    #get the median frequency
-    values = cleaned_data["Fav genre"].value_counts()
-    #values.median()
+    # #get the median frequency
+    # values = cleaned_data["Fav genre"].value_counts()
+    # #values.median()
     
-    #make the changes to rock
-    num = 21
-    length = len(cleaned_data[cleaned_data["Fav genre"] == "Rock"])
-    drop_these_many = length - num
-    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Rock"].index, drop_these_many, replace=False)
-    #drop the selected indices from the DataFrame
-    cleaned_data = cleaned_data.drop(random_idx)
+    # #make the changes to rock
+    # num = 21
+    # length = len(cleaned_data[cleaned_data["Fav genre"] == "Rock"])
+    # drop_these_many = length - num
+    # random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Rock"].index, drop_these_many, replace=False)
+    # #drop the selected indices from the DataFrame
+    # cleaned_data = cleaned_data.drop(random_idx)
     
-    #make the changes to metal
-    num = 21
-    length = len(cleaned_data[cleaned_data["Fav genre"] == "Metal"])
-    drop_these_many = length - num
-    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Metal"].index, drop_these_many, replace=False)
-    #drop the selected indices from the DataFrame
-    cleaned_data = cleaned_data.drop(random_idx)
+    # #make the changes to metal
+    # num = 21
+    # length = len(cleaned_data[cleaned_data["Fav genre"] == "Metal"])
+    # drop_these_many = length - num
+    # random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Metal"].index, drop_these_many, replace=False)
+    # #drop the selected indices from the DataFrame
+    # cleaned_data = cleaned_data.drop(random_idx)
     
-    #make the changes to pop
-    num = 21
-    length = len(cleaned_data[cleaned_data["Fav genre"] == "Pop"])
-    drop_these_many = length - num
-    random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Pop"].index, drop_these_many, replace=False)
-    #drop the selected indices from the DataFrame
-    cleaned_data = cleaned_data.drop(random_idx)
-    
-    
-    ##############balance anxiety 
-    #reset index
-    cleaned_data.reset_index(drop=True, inplace=True)
-    cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
-    X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
-    y = cleaned_data["Anxiety_category"] 
-    
-    rus = RandomUnderSampler(random_state=42)
-    X_resampled, y_resampled = rus.fit_resample(X, y)
-    
-    print(f"Before Undersampling: \n{y.value_counts()}")
-    print(f"After Undersampling: \n{y_resampled.value_counts()}")
-    
-    resampled_indices = rus.sample_indices_
-    
-    anxiety_resampled = cleaned_data.loc[resampled_indices, "Anxiety"]
-    
-    cleaned_data = X_resampled.copy()  
-    cleaned_data["Anxiety"] = anxiety_resampled.values  
-    
-    #reset index
-    cleaned_data.reset_index(drop=True, inplace=True)
+    # #make the changes to pop
+    # num = 21
+    # length = len(cleaned_data[cleaned_data["Fav genre"] == "Pop"])
+    # drop_these_many = length - num
+    # random_idx = np.random.choice(cleaned_data[cleaned_data["Fav genre"] == "Pop"].index, drop_these_many, replace=False)
+    # #drop the selected indices from the DataFrame
+    # cleaned_data = cleaned_data.drop(random_idx)
     
     
-    ######now balance depression
-    cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
-    X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
-    y = cleaned_data["Depression_category"] 
+    # ##############balance anxiety 
+    # #reset index
+    # cleaned_data.reset_index(drop=True, inplace=True)
+    # cleaned_data["Anxiety_category"] = np.where(cleaned_data["Anxiety"] >= 5, 1, 0)
+    # X = cleaned_data.drop(["Anxiety", "Anxiety_category"], axis=1)  
+    # y = cleaned_data["Anxiety_category"] 
     
-    rus = RandomUnderSampler(random_state=42)
-    X_resampled, y_resampled = rus.fit_resample(X, y)
+    # rus = RandomUnderSampler(random_state=42)
+    # X_resampled, y_resampled = rus.fit_resample(X, y)
     
-    print(f"Before Undersampling: \n{y.value_counts()}")
-    print(f"After Undersampling: \n{y_resampled.value_counts()}")
+    # print(f"Before Undersampling: \n{y.value_counts()}")
+    # print(f"After Undersampling: \n{y_resampled.value_counts()}")
     
-    resampled_indices = rus.sample_indices_
+    # resampled_indices = rus.sample_indices_
     
-    depression_resampled = cleaned_data.loc[resampled_indices, "Depression"]
+    # anxiety_resampled = cleaned_data.loc[resampled_indices, "Anxiety"]
     
-    cleaned_data = X_resampled.copy()  
-    cleaned_data["Depression"] = depression_resampled.values  
+    # cleaned_data = X_resampled.copy()  
+    # cleaned_data["Anxiety"] = anxiety_resampled.values  
     
-    #reset index
-    cleaned_data.reset_index(drop=True, inplace=True)
+    # #reset index
+    # cleaned_data.reset_index(drop=True, inplace=True)
+    
+    
+    # ######now balance depression
+    # cleaned_data["Depression_category"] = np.where(cleaned_data["Depression"] >= 5, 1, 0)
+    # X = cleaned_data.drop(["Depression", "Depression_category"], axis=1)  
+    # y = cleaned_data["Depression_category"] 
+    
+    # rus = RandomUnderSampler(random_state=42)
+    # X_resampled, y_resampled = rus.fit_resample(X, y)
+    
+    # print(f"Before Undersampling: \n{y.value_counts()}")
+    # print(f"After Undersampling: \n{y_resampled.value_counts()}")
+    
+    # resampled_indices = rus.sample_indices_
+    
+    # depression_resampled = cleaned_data.loc[resampled_indices, "Depression"]
+    
+    # cleaned_data = X_resampled.copy()  
+    # cleaned_data["Depression"] = depression_resampled.values  
+    
+    # #reset index
+    # cleaned_data.reset_index(drop=True, inplace=True)
     
     
     
