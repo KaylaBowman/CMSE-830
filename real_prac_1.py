@@ -14,23 +14,29 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from imblearn.under_sampling import RandomUnderSampler
 
 
-#add background color to the whole page
+#add background color
 st.markdown(
     """
     <style>
         /* Set the background color for the entire page */
         body {
-            background-color: #fff0fa;  /* Light blue background */
+            background-color: #fff0fa !important;  /* Light pink background */
         }
 
-        /* Optional: Change the background color for the main content area */
-        .main {
-            background-color: #fff0fa !important;  /* Same light blue */
+        /* Set the background color for the main content area */
+        .block-container {
+            background-color: #fff0fa !important;  /* Same light pink */
+        }
+
+        /* Optional: Change the background color for other areas (sidebar, etc.) */
+        .sidebar-content {
+            background-color: #fff0fa !important;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
